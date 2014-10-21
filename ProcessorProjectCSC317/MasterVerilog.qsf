@@ -160,6 +160,7 @@ set_location_assignment PIN_N2 -to clk_50
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_location_assignment PIN_G26 -to pushBut[0]
+set_global_assignment -name VERILOG_FILE PushButton_Debouncer.v
 set_global_assignment -name VERILOG_FILE memory.v
 set_global_assignment -name VERILOG_FILE reg_32b.v
 set_global_assignment -name VERILOG_FILE InstAddGen.v

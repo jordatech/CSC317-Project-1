@@ -1,6 +1,6 @@
 Flow report for MasterVerilog
-Mon Oct 20 22:47:16 2014
-Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+Tue Oct 21 09:51:13 2014
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -40,8 +40,8 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Mon Oct 20 22:47:16 2014           ;
-; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Flow Status                        ; Successful - Tue Oct 21 09:51:13 2014           ;
+; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; MasterVerilog                                   ;
 ; Top-level Entity Name              ; MasterVerilog                                   ;
 ; Family                             ; Cyclone II                                      ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/20/2014 22:47:03 ;
+; Start date & time ; 10/21/2014 09:50:32 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; MasterVerilog       ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 113549445044.141386322308104          ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 147632081844.141390303215896          ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                  ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                ; <None>        ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --             ;
@@ -93,12 +93,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:01     ; 1.0                     ; 441 MB              ; 00:00:01                           ;
-; Fitter                    ; 00:00:04     ; 2.0                     ; 1033 MB             ; 00:00:04                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 441 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:01     ; 1.0                     ; 424 MB              ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 381 MB              ; 00:00:00                           ;
-; Total                     ; 00:00:08     ; --                      ; --                  ; 00:00:08                           ;
+; Analysis & Synthesis      ; 00:00:03     ; 1.0                     ; 358 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:17     ; 1.0                     ; 482 MB              ; 00:00:13                           ;
+; Assembler                 ; 00:00:07     ; 1.0                     ; 352 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 313 MB              ; 00:00:02                           ;
+; EDA Netlist Writer        ; 00:00:02     ; 1.0                     ; 318 MB              ; 00:00:01                           ;
+; Total                     ; 00:00:32     ; --                      ; --                  ; 00:00:23                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -107,11 +107,11 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; JordaDesk        ; Windows 7 ; 6.1        ; x86_64         ;
-; Fitter                    ; JordaDesk        ; Windows 7 ; 6.1        ; x86_64         ;
-; Assembler                 ; JordaDesk        ; Windows 7 ; 6.1        ; x86_64         ;
-; TimeQuest Timing Analyzer ; JordaDesk        ; Windows 7 ; 6.1        ; x86_64         ;
-; EDA Netlist Writer        ; JordaDesk        ; Windows 7 ; 6.1        ; x86_64         ;
+; Analysis & Synthesis      ; jordalaptop      ; Windows 7 ; 6.1        ; x86_64         ;
+; Fitter                    ; jordalaptop      ; Windows 7 ; 6.1        ; x86_64         ;
+; Assembler                 ; jordalaptop      ; Windows 7 ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; jordalaptop      ; Windows 7 ; 6.1        ; x86_64         ;
+; EDA Netlist Writer        ; jordalaptop      ; Windows 7 ; 6.1        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 

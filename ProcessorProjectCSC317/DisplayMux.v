@@ -8,6 +8,7 @@
 
 module DisplayMux(
 input [10:0] select ,
+input enable, clock,
 output reg[31:0] hexDisplay,
 //Input to Mux:
 	//Register File
@@ -43,19 +44,27 @@ wire [31:0] AddressRF;
 		assign AddressRF[15:8] = 8'h00;
 		assign AddressRF[7:0] = {2'b00,RF_c};//Address (c) In The Register File OUTPUT DATA From Processor
 
-	always @(*)
+	always @(posedge clock)
 		begin 
-			case(select)
-						10'd0:	hexDisplay = AddressRF;//Register File
-		
-						10'd10:	hexDisplay = PC;//Program Counter, Auto Increments Prior To The (Fetch) Stage 
-						10'd11:	hexDisplay = IR;//Instruction Register Written To After The (Fetch) Stage 
-						10'd12:	hexDisplay = RA;//RA = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
-						10'd13:	hexDisplay = RB;//RB = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
-						10'd14:	hexDisplay = RZ;//RZ = Written To After The (Compute) Stage 
-						10'd15:	hexDisplay = RM;//RM = Written To After The (Compute) Stage And Is Used In The Memory Access Stage 
-						10'd16:	hexDisplay = RY;//RY = Written To After The (Memory Access) Stage 
-						default: hexDisplay = 32'hF0F0;//(WARNING)Default Display 00
-			endcase
+			if (!enable) // Drive The Display
+			
+				casex(select)
+							10'd0:	hexDisplay = AddressRF;//Register File
+			
+							10'd10:	hexDisplay = PC;//Program Counter, Auto Increments Prior To The (Fetch) Stage 
+							10'd11:	hexDisplay = IR;//Instruction Register Written To After The (Fetch) Stage 
+							10'd12:	hexDisplay = RA;//RA = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
+							10'd13:	hexDisplay = RB;//RB = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
+							10'd14:	hexDisplay = RZ;//RZ = Written To After The (Compute) Stage 
+							10'd15:	hexDisplay = RM;//RM = Written To After The (Compute) Stage And Is Used In The Memory Access Stage 
+							10'd16:	hexDisplay = RY;//RY = Written To After The (Memory Access) Stage 
+							default: hexDisplay = 32'hF0F0;//(WARNING)Default Display 00
+				endcase
+			
+			
+			else//Do Not Drive The Display
+				hexDisplay = 32'hF0F0; 
+
+			
 		end
 endmodule
