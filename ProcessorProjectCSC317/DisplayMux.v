@@ -7,15 +7,15 @@
 //9:05 PM 10/20/2014
 
 module DisplayMux(
-input [10:0] select ,
-input enable, clock,
-output reg[31:0] hexDisplay,
+input wire[10:0] select ,
+input wire enable, clock,
 //Input to Mux:
 	//Register File
-	input [5:0] RF_a, RF_b, RF_c, 
+	input wire[4:0] RF_a, RF_b, RF_c, 
 	//Main Processor Datapath
-	input [31:0] PC, IR, RA, RB, RZ, RM, RY
-
+	input wire[31:0] PC, IR, RA, RB, RZ, RM, RY,
+	
+output wire[31:0] hexDisplay
 //input [?:0] ReturnAddress,
 //Processor-memory interface and IR control signals
 	//input [?:0] ALU_OP, 
@@ -38,33 +38,39 @@ output reg[31:0] hexDisplay,
 		//input [?:0] IR,
 );
 
-wire [31:0] AddressRF;
-		assign AddressRF[31:24] = {2'b00,RF_a};//Address (a) In The Register File INPUT DATA To Processor
-		assign AddressRF[23:16] = {2'b00,RF_b};//Address (b) In The Register File INPUT DATA To Processor
-		assign AddressRF[15:8] = 8'h00;
-		assign AddressRF[7:0] = {2'b00,RF_c};//Address (c) In The Register File OUTPUT DATA From Processor
+reg [31:0] hexDisplayRegReg;
 
-	always @(posedge clock)
+//wire [31:0] AddressRF;
+//		assign AddressRF[31:27] = RF_a;//Address (a) In The Register File INPUT DATA To Processor
+//		assign AddressRF[26:22] = RF_b;//Address (b) In The Register File INPUT DATA To Processor
+//		assign AddressRF[21:17] = RF_c;//Address (c) In The Register File OUTPUT DATA From Processor
+//		assign AddressRF[16:0] = 17'h00;
+
+	always @(clock)
 		begin 
 			if (!enable) // Drive The Display
+				case(select)
+							//'d0:	hexDisplayReg = AddressRF;//Register File
 			
-				casex(select)
-							10'd0:	hexDisplay = AddressRF;//Register File
-			
-							10'd10:	hexDisplay = PC;//Program Counter, Auto Increments Prior To The (Fetch) Stage 
-							10'd11:	hexDisplay = IR;//Instruction Register Written To After The (Fetch) Stage 
-							10'd12:	hexDisplay = RA;//RA = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
-							10'd13:	hexDisplay = RB;//RB = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
-							10'd14:	hexDisplay = RZ;//RZ = Written To After The (Compute) Stage 
-							10'd15:	hexDisplay = RM;//RM = Written To After The (Compute) Stage And Is Used In The Memory Access Stage 
-							10'd16:	hexDisplay = RY;//RY = Written To After The (Memory Access) Stage 
-							default: hexDisplay = 32'hF0F0;//(WARNING)Default Display 00
+							'd10:	hexDisplayReg = PC;//Program Counter, Auto Increments Prior To The (Fetch) Stage 
+							'd11:	hexDisplayReg = IR;//Instruction Register Written To After The (Fetch) Stage 
+							'd12:	hexDisplayReg = RA;//RA = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
+							'd13:	hexDisplayReg = RB;//RB = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
+							'd14:	hexDisplayReg = RZ;//RZ = Written To After The (Compute) Stage 
+							'd15:	hexDisplayReg = RM;//RM = Written To After The (Compute) Stage And Is Used In The Memory Access Stage 
+							'd16:	hexDisplayReg = RY;//RY = Written To After The (Memory Access) Stage 
+							default: hexDisplayReg = 32'hF0F0;//(WARNING)Default Display 00
 				endcase
 			
 			
 			else//Do Not Drive The Display
-				hexDisplay = 32'hF0F0; 
-
-			
+				hexDisplayReg = 32'hF0F0; 
 		end
+ 
+ assign hexDisplay=hexDisplayReg;
+ 
 endmodule
+
+
+
+

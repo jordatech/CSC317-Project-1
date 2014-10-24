@@ -1,6 +1,6 @@
 EDA Netlist Writer report for MasterVerilog
-Thu Oct 23 19:07:36 2014
-Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+Thu Oct 23 21:39:16 2014
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu Oct 23 19:07:36 2014 ;
+; EDA Netlist Writer Status ; Successful - Thu Oct 23 21:39:16 2014 ;
 ; Revision Name             ; MasterVerilog                         ;
 ; Top-level Entity Name     ; MasterVerilog                         ;
 ; Family                    ; Cyclone II                            ;
@@ -66,31 +66,31 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                                               ;
-+--------------------------------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                                          ;
-+--------------------------------------------------------------------------------------------------------------------------+
-; C:/Users/Patrick/Documents/GitHub/CSC317-Project-1/ProcessorProjectCSC317/simulation/modelsim/MasterVerilog.vho          ;
-; C:/Users/Patrick/Documents/GitHub/CSC317-Project-1/ProcessorProjectCSC317/simulation/modelsim/MasterVerilog_fast.vho     ;
-; C:/Users/Patrick/Documents/GitHub/CSC317-Project-1/ProcessorProjectCSC317/simulation/modelsim/MasterVerilog_vhd.sdo      ;
-; C:/Users/Patrick/Documents/GitHub/CSC317-Project-1/ProcessorProjectCSC317/simulation/modelsim/MasterVerilog_vhd_fast.sdo ;
-+--------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                                                         ;
++------------------------------------------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                                                    ;
++------------------------------------------------------------------------------------------------------------------------------------+
+; C:/Users/jordatech/Downloads/Temp/Comp org/CSC317-Project-1b/ProcessorProjectCSC317/simulation/modelsim/MasterVerilog.vho          ;
+; C:/Users/jordatech/Downloads/Temp/Comp org/CSC317-Project-1b/ProcessorProjectCSC317/simulation/modelsim/MasterVerilog_fast.vho     ;
+; C:/Users/jordatech/Downloads/Temp/Comp org/CSC317-Project-1b/ProcessorProjectCSC317/simulation/modelsim/MasterVerilog_vhd.sdo      ;
+; C:/Users/jordatech/Downloads/Temp/Comp org/CSC317-Project-1b/ProcessorProjectCSC317/simulation/modelsim/MasterVerilog_vhd_fast.sdo ;
++------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
 ; EDA Netlist Writer Messages ;
 +-----------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 64-Bit EDA Netlist Writer
+Info: Running Quartus II 32-bit EDA Netlist Writer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Oct 23 19:07:36 2014
+    Info: Processing started: Thu Oct 23 21:39:14 2014
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off MasterVerilog_FPGA -c MasterVerilog
-Info (204026): Generated files "MasterVerilog.vho", "MasterVerilog_fast.vho", "MasterVerilog_vhd.sdo" and "MasterVerilog_vhd_fast.sdo" in directory "C:/Users/Patrick/Documents/GitHub/CSC317-Project-1/ProcessorProjectCSC317/simulation/modelsim/" for EDA simulation tool
-Info: Quartus II 64-Bit EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 389 megabytes
-    Info: Processing ended: Thu Oct 23 19:07:36 2014
-    Info: Elapsed time: 00:00:00
+Info (204026): Generated files "MasterVerilog.vho", "MasterVerilog_fast.vho", "MasterVerilog_vhd.sdo" and "MasterVerilog_vhd_fast.sdo" in directory "C:/Users/jordatech/Downloads/Temp/Comp org/CSC317-Project-1b/ProcessorProjectCSC317/simulation/modelsim/" for EDA simulation tool
+Info: Quartus II 32-bit EDA Netlist Writer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 319 megabytes
+    Info: Processing ended: Thu Oct 23 21:39:16 2014
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 

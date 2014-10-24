@@ -11,7 +11,11 @@ module MasterVerilog(
 	input [3:0] pushBut,
 	output [6:0] Hex0,Hex1,Hex2,Hex3,Hex4,Hex5,Hex6,Hex7
 );
-wire clk = pushBut[3]; //Clock is connected to a Push Button
+
+wire clk; //Clock is connected to a Push Button
+PushButton_Debouncer debounceit(.clock27MHz(clk_27),.PB(pushBut[3]),.PB_state(clk));
+
+
 		///		///
 	///		///			START		LED Output
 ///		///
@@ -44,6 +48,7 @@ Processor uProcessor(
 		///		///
 	///		///			START		Memory
 ///		///
+
 ROM uROM(
 	.address(), // From MuxMA
 	.clken(),	// MEM_Read
@@ -53,75 +58,70 @@ ROM uROM(
 		///		///
 	///		///			FINISH	Memory
 ///		///
+
+
+//LOAD INSTRUCTION
+
+//reg 
+//InstructionAddressGenerator InstAddGen(.BranchOff(),.RA(),.PC_select(),.PC_enable(),.INC_select(),.Clock(),.PC_temp(),.PC());
+//memory MEM(address, dataIn, dataOut, MFC);
+//RegisterFile RegFile(.Rdst(),.Rsrc1(),.Rsrc2(),.RA(),.RB(),.RY(),.clk(),.RF_WRITE());
+
+
+//DECODE PHASE
+
+
+
+
+
+
+
+//
+//reg_32b RA (.R(), .Enable(), .Clock(), .Q());
+//reg_32b RB (.R(), .Enable(), .Clock(), .Q());
+//reg_32b RZ (.R(), .Enable(), .Clock(), .Q());
+//reg_32b RM (.R(), .Enable(), .Clock(), .Q());
+//reg_32b RY (.R(), .Enable(), .Clock(), .Q());
+
+
 		///		///
 	///		///			START		HEX display
 ///		///	
 
-reg [31:0] RA,RB,RZ,RM,RY;
+Display displayAll (.RA(16'haaaa),.RB(16'hbbbb),.RZ(16'h2626),.RM(16'h1313),.RY(16'h2525),.reg_select(switch),.peekInRegister(pushBut[0]),.clk(clk),.Hex0(Hex0),.Hex1(Hex1),.Hex2(Hex2),.Hex3(Hex3),.Hex4(Hex4),.Hex5(Hex5),.Hex6(Hex6),.Hex7(Hex7));
 
-//reg_32b iRA (data_in,switch[0],clk,RA);
-//reg_32b iRB (data_in,switch[1],clk,RB);
-//reg_32b iRZ (data_in,switch[2],clk,RZ);
-//reg_32b iRM (data_in,switch[3],clk,RM);
-//reg_32b iRY (data_in,switch[4],clk,RY);
-//reg_32b iROM (data_in,switch[5],clk,ROM);
-
-always
-begin
-RA = 8'h3fba;
-end
-
-//	Output to HEX display, Hex Displays 0-7
-// If hexCurrentDisplay is changed then HEX7...3,2,1,0 show (31:28)...(15:12),(11:8),(7:4),(3:0) respectively
-reg [31:0] HexDisplay32Bits;
-
-//Peak In a register
-always @(pushBut[0])//Look in PEAKINTHISREGISTER when pushBut[0] is pressed
-	begin
-		//PEAKINTHISREGISTER <= data_in[2:0];
-		if	(pushBut[0]) //pushbuttons are active low but this is the only way I'll know that it was the clock which triggered this statement
-			begin
-				HexDisplay32Bits<=0;
-			end
-		else if(~pushBut[0])//pushbuttons are active low and I only want
-		begin
-			case(switch)
-				0:HexDisplay32Bits = RA;
-				1:HexDisplay32Bits = RB;
-				2:HexDisplay32Bits = RZ;
-				3:HexDisplay32Bits = RM;
-				4:HexDisplay32Bits = RY;
-				default: HexDisplay32Bits = 0;
-			endcase
-		end
-	end
-	
-//Registers to latch value to be displayed on hex
-reg [3:0] displayAtHex0,displayAtHex1,displayAtHex2,displayAtHex3,displayAtHex4,displayAtHex5,displayAtHex6,displayAtHex7; 
-
-//Display HexDisplay32Bits to SevenSegmentDisplayDecoder module via displayAtHex0-7
-always @(HexDisplay32Bits)
-	begin
-		displayAtHex0 = HexDisplay32Bits[3:0];
-		displayAtHex1 = HexDisplay32Bits[7:4];
-		displayAtHex2 = HexDisplay32Bits[11:8];
-		displayAtHex3 = HexDisplay32Bits[15:12];
-		displayAtHex4 = HexDisplay32Bits[19:16];
-		displayAtHex5 = HexDisplay32Bits[23:20];
-		displayAtHex6 = HexDisplay32Bits[27:24];
-		displayAtHex7 = HexDisplay32Bits[31:28];
-	end
-SevenSegmentDisplayDecoder uHEX0	(.ssOut_L(Hex0[6:0]), .nIn(displayAtHex0[3:0]));
-SevenSegmentDisplayDecoder uHEX1	(.ssOut_L(Hex1[6:0]), .nIn(displayAtHex1[3:0]));
-SevenSegmentDisplayDecoder uHEX2	(.ssOut_L(Hex2[6:0]), .nIn(displayAtHex2[3:0]));
-SevenSegmentDisplayDecoder uHEX3	(.ssOut_L(Hex3[6:0]), .nIn(displayAtHex3[3:0]));
-SevenSegmentDisplayDecoder uHEX4	(.ssOut_L(Hex4[6:0]), .nIn(displayAtHex4[3:0]));
-SevenSegmentDisplayDecoder uHEX5	(.ssOut_L(Hex5[6:0]), .nIn(displayAtHex5[3:0]));
-SevenSegmentDisplayDecoder uHEX6	(.ssOut_L(Hex6[6:0]), .nIn(displayAtHex6[3:0]));
-SevenSegmentDisplayDecoder uHEX7	(.ssOut_L(Hex7[6:0]), .nIn(displayAtHex7[3:0]));
-			///		///
-	///		///			FINISH	 	HEX display
-///		///
+////	Output to HEX display, Hex Displays 0-7
+//// If hexCurrentDisplay is changed then HEX7...3,2,1,0 show (31:28)...(15:12),(11:8),(7:4),(3:0) respectively
+//reg [31:0] HexDisplay32Bits;
+//
+////DisplayMux debugger (.select(switch),.enable(pushBut[0]),.clock(clk),.hexDisplay(HexDisplay32Bits),.RF_a(4'ha),.RF_b(4'hb),.RF_c(4'hc),.PC(4'hd),.IR(4'he),.RA(1),.RB(2),.RZ(3),.RM(4),.RY(5));
+//	
+////Registers to latch value to be displayed on hex
+//reg [3:0] displayAtHex0,displayAtHex1,displayAtHex2,displayAtHex3,displayAtHex4,displayAtHex5,displayAtHex6,displayAtHex7; 
+//
+////Display HexDisplay32Bits to SevenSegmentDisplayDecoder module via displayAtHex0-7
+//always @(HexDisplay32Bits)
+//	begin
+//		displayAtHex0 = HexDisplay32Bits[3:0];
+//		displayAtHex1 = HexDisplay32Bits[7:4];
+//		displayAtHex2 = HexDisplay32Bits[11:8];
+//		displayAtHex3 = HexDisplay32Bits[15:12];
+//		displayAtHex4 = HexDisplay32Bits[19:16];
+//		displayAtHex5 = HexDisplay32Bits[23:20];
+//		displayAtHex6 = HexDisplay32Bits[27:24];
+//		displayAtHex7 = HexDisplay32Bits[31:28];
+//	end
+//SevenSegmentDisplayDecoder uHEX0	(.ssOut_L(Hex0[6:0]), .nIn(displayAtHex0[3:0]));
+//SevenSegmentDisplayDecoder uHEX1	(.ssOut_L(Hex1[6:0]), .nIn(displayAtHex1[3:0]));
+//SevenSegmentDisplayDecoder uHEX2	(.ssOut_L(Hex2[6:0]), .nIn(displayAtHex2[3:0]));
+//SevenSegmentDisplayDecoder uHEX3	(.ssOut_L(Hex3[6:0]), .nIn(displayAtHex3[3:0]));
+//SevenSegmentDisplayDecoder uHEX4	(.ssOut_L(Hex4[6:0]), .nIn(displayAtHex4[3:0]));
+//SevenSegmentDisplayDecoder uHEX5	(.ssOut_L(Hex5[6:0]), .nIn(displayAtHex5[3:0]));
+//SevenSegmentDisplayDecoder uHEX6	(.ssOut_L(Hex6[6:0]), .nIn(displayAtHex6[3:0]));
+//SevenSegmentDisplayDecoder uHEX7	(.ssOut_L(Hex7[6:0]), .nIn(displayAtHex7[3:0]));
+//			///		///
+//	///		///			FINISH	 	HEX display
+/////		///
 endmodule //end MAIN
 
 
