@@ -56,11 +56,48 @@ ROM uROM(
 		///		///
 	///		///			START		HEX display
 ///		///	
-//Output to HEX display, Hex Displays 0-7
-	// If hexCurrentDisplay is changed then HEX7...3,2,1,0 show (31:28)...(15:12),(11:8),(7:4),(3:0) respectively
-wire [31:0] HexDisplay32Bits; 
+
+reg [31:0] RA,RB,RZ,RM,RY;
+
+//reg_32b iRA (data_in,switch[0],clk,RA);
+//reg_32b iRB (data_in,switch[1],clk,RB);
+//reg_32b iRZ (data_in,switch[2],clk,RZ);
+//reg_32b iRM (data_in,switch[3],clk,RM);
+//reg_32b iRY (data_in,switch[4],clk,RY);
+//reg_32b iROM (data_in,switch[5],clk,ROM);
+
+always
+begin
+RA = 8'h3fba;
+end
+
+//	Output to HEX display, Hex Displays 0-7
+// If hexCurrentDisplay is changed then HEX7...3,2,1,0 show (31:28)...(15:12),(11:8),(7:4),(3:0) respectively
+reg [31:0] HexDisplay32Bits;
+
+//Peak In a register
+always @(pushBut[0])//Look in PEAKINTHISREGISTER when pushBut[0] is pressed
+	begin
+		//PEAKINTHISREGISTER <= data_in[2:0];
+		if	(pushBut[0]) //pushbuttons are active low but this is the only way I'll know that it was the clock which triggered this statement
+			begin
+				HexDisplay32Bits<=0;
+			end
+		else if(~pushBut[0])//pushbuttons are active low and I only want
+		begin
+			case(switch)
+				0:HexDisplay32Bits = RA;
+				1:HexDisplay32Bits = RB;
+				2:HexDisplay32Bits = RZ;
+				3:HexDisplay32Bits = RM;
+				4:HexDisplay32Bits = RY;
+				default: HexDisplay32Bits = 0;
+			endcase
+		end
+	end
+	
 //Registers to latch value to be displayed on hex
-reg [3:0] displayAtHex0, displayAtHex1, displayAtHex2, displayAtHex3, displayAtHex4, displayAtHex5,displayAtHex6, displayAtHex7; 
+reg [3:0] displayAtHex0,displayAtHex1,displayAtHex2,displayAtHex3,displayAtHex4,displayAtHex5,displayAtHex6,displayAtHex7; 
 
 //Display HexDisplay32Bits to SevenSegmentDisplayDecoder module via displayAtHex0-7
 always @(HexDisplay32Bits)
