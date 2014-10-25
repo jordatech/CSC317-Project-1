@@ -5,7 +5,7 @@
 //Edited By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
 //9:05 PM 10/20/2014
 
-module InstructionAddressGenerator (BranchOff,RA,PC_select,PC_enable,INC_select,Clock,PC_temp,PC);
+module InstructionAddressGenerator(BranchOff,RA,PC_select,PC_enable,INC_select,Clock,PC_temp,PC);
 	input PC_select,PC_enable,INC_select,Clock;
 	input [31:0]BranchOff, RA;
 	output reg [31:0]PC, PC_temp;

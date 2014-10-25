@@ -12,14 +12,39 @@ module MasterVerilog(
 	output [6:0] Hex0,Hex1,Hex2,Hex3,Hex4,Hex5,Hex6,Hex7
 );
 
-//For Internal Display
-wire [31:0] HexDisplay32Bits_Wire;
-reg [31:0] HexDisplay32Bits;
+
+
+//Prepare Internal Display
+	wire [31:0] HexDisplay32Bits_Wire;
+	reg [31:0] HexDisplay32Bits;
+	
 //Debounce The Clock
-wire clk_Debounced; //Clock is connected to a Push Button
-PushButton_Debouncer debounceit(.clock27MHz(clk_27),.PB(pushBut[0]),.PB_state(clk_Debounced));
+	wire clk_Debounced; //Clock is connected to a Push Button
+	PushButton_Debouncer debounceit(.clock27MHz(clk_27),.PB(pushBut[0]),.PB_state(clk_Debounced));
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/////// 			START		Memory
+
+//Read Only Memory
+ROM ROM1(
+	.address(), // From MuxMA
+	.clken(),	// MEM_Read
+	.clock(),	// Clock
+	.q()			// To IR  // Instruction Out
+	); 		
+	
+	
+/////// 			FINISH	Memory
+//-----------------------------------------------------------------------------------------------------------------------
+
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/////// 			START		Processor
 
 Processor aProcessor(
+	//.ROM1(ROM1),
+	//.MEM
 	.Display_Select(switch),
 	.Display_Enable(pushBut[0]),
    .ProcessorReset(0), 	// Resets the processor to initial state
@@ -28,6 +53,9 @@ Processor aProcessor(
 	.OperationFinished(green[8]),
 	.HexDisplay(HexDisplay32Bits_Wire)
 );
+
+/////// 			FINISH	Processor
+//-----------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -44,19 +72,6 @@ assign green[7] = 0;
 /////// 			FINISH		LED Output
 //-----------------------------------------------------------------------------------------------------------------------
 
-
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-/////// 			START		Memory
-
-ROM uROM(
-	.address(), // From MuxMA
-	.clken(),	// MEM_Read
-	.clock(),	// Clock
-	.q()			// To IR  // Instruction Out
-	); 		
-
-/////// 			FINISH	Memory
-//-----------------------------------------------------------------------------------------------------------------------
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -3,6 +3,7 @@
 //9:05 PM 10/20/2014
 
 module Processor (
+	//input ROM1, //READ ONLY MEMORY, where all our instructions will be stored
 	input wire [31:0] Display_Select,
 	input wire Display_Enable,
    input wire ProcessorReset, 	// Resets the processor to initial state
@@ -16,32 +17,52 @@ module Processor (
 assign OperationFinished=ProcessorEnable;// Just to make sure the processor is working...
 
 
+//NEED TO PASS THESE INTO THE PROCESSOR FROM MasterVerilog.V
+	//ROM ROM1(address,clken,clock,q);	
 
 
-//LOAD INSTRUCTION
+//[Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch][Fetch]
+//STAGE#(1) [Instruction Fetch]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-//reg 
-//InstructionAddressGenerator InstAddGen(.BranchOff(),.RA(),.PC_select(),.PC_enable(),.INC_select(),.Clock(),.PC_temp(),.PC());
-//memory MEM(address, dataIn, dataOut, MFC);
-//RegisterFile RegFile(.Rdst(),.Rsrc1(),.Rsrc2(),.RA(),.RB(),.RY(),.clk(),.RF_WRITE());
+	//InstructionAddressGenerator InstAddGen(.BranchOff(),.RA(),.PC_select(),.PC_enable(),.INC_select(),.Clock(),.PC_temp(),.PC());
 
+//-------------------------------------------------------------------------------------------------------------------------
 
-//DECODE PHASE
-
-
+//[Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode]
+//STAGE#(2) [Source Registers]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+	//RegisterFile RegFile(.Rdst(),.Rsrc1(),.Rsrc2(),.RA(),.RB(),.RY(),.clk(),.RF_WRITE());
+	//reg_32b RA (.R(), .Enable(), .Clock(), .Q());
+	//reg_32b RB (.R(), .Enable(), .Clock(), .Q());
+	//reg_32b RZ (.R(), .Enable(), .Clock(), .Q());
+	//reg_32b RM (.R(), .Enable(), .Clock(), .Q());
+	//reg_32b RY (.R(), .Enable(), .Clock(), .Q());
 
+//-------------------------------------------------------------------------------------------------------------------------
 
+//[Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute]
+//STAGE#(3) [ALU]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-//
-//reg_32b RA (.R(), .Enable(), .Clock(), .Q());
-//reg_32b RB (.R(), .Enable(), .Clock(), .Q());
-//reg_32b RZ (.R(), .Enable(), .Clock(), .Q());
-//reg_32b RM (.R(), .Enable(), .Clock(), .Q());
-//reg_32b RY (.R(), .Enable(), .Clock(), .Q());
+	//ALU
+	//ConditionControlRegister
+	
+//-------------------------------------------------------------------------------------------------------------------------
 
+//[Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory][Memory]
+//STAGE#(4) [Memory Access]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+	//Interface with MEM
+	//memory MEM(.address(), .dataIn(), .dataOut(), .MFC());
 
+//-------------------------------------------------------------------------------------------------------------------------
+
+//[Write Back][Write Back][Write Back][Write Back][Write Back][Write Back][Write Back][Write Back][Write Back][Write Back][Write Back][Write Back]
+//STAGE#(5) [Destination Register]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//-------------------------------------------------------------------------------------------------------------------------
+
+//Display Unit For Debugging And Validation
 DisplayMux displayAll(
 	//INPUT DATA+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		.Display_Select(Display_Select[4:0]),

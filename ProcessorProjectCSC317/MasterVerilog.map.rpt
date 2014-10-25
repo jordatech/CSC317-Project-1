@@ -1,5 +1,5 @@
 Analysis & Synthesis report for MasterVerilog
-Fri Oct 24 18:44:11 2014
+Sat Oct 25 13:02:53 2014
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -14,9 +14,9 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
-  9. Source assignments for ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated
+  9. Source assignments for ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated
  10. Parameter Settings for User Entity Instance: PushButton_Debouncer:debounceit
- 11. Parameter Settings for User Entity Instance: ROM:uROM|altsyncram:altsyncram_component
+ 11. Parameter Settings for User Entity Instance: ROM:ROM1|altsyncram:altsyncram_component
  12. altsyncram Parameter Settings by Entity Instance
  13. Port Connectivity Checks: "SevenSegmentDisplayDecoder:uHEX7"
  14. Port Connectivity Checks: "SevenSegmentDisplayDecoder:uHEX6"
@@ -56,7 +56,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Oct 24 18:44:11 2014           ;
+; Analysis & Synthesis Status        ; Successful - Sat Oct 25 13:02:53 2014           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; MasterVerilog                                   ;
 ; Top-level Entity Name              ; MasterVerilog                                   ;
@@ -158,40 +158,46 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 4      ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-4         ;   0.0%      ;
++----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                  ;
-+----------------------------------+-----------------+----------------------------------------+-------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                                    ; Library ;
-+----------------------------------+-----------------+----------------------------------------+-------------------------------------------------------------------------------------------------+---------+
-; PushButton_Debouncer.v           ; yes             ; User Verilog HDL File                  ; C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/PushButton_Debouncer.v       ;         ;
-; ROM.v                            ; yes             ; User Verilog HDL File                  ; C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/ROM.v                        ;         ;
-; MasterVerilog.v                  ; yes             ; User Verilog HDL File                  ; C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.v              ;         ;
-; SevenSegmentDisplayDecoder.v     ; yes             ; User Verilog HDL File                  ; C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/SevenSegmentDisplayDecoder.v ;         ;
-; Processor.v                      ; yes             ; User Verilog HDL File                  ; C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/Processor.v                  ;         ;
-; DisplayMux.v                     ; yes             ; User Verilog HDL File                  ; C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/DisplayMux.v                 ;         ;
-; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altsyncram.tdf                                ;         ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_ram_block.inc                         ;         ;
-; lpm_mux.inc                      ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_mux.inc                                   ;         ;
-; lpm_decode.inc                   ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_decode.inc                                ;         ;
-; aglobal130.inc                   ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc                                ;         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/a_rdenreg.inc                                 ;         ;
-; altrom.inc                       ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altrom.inc                                    ;         ;
-; altram.inc                       ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altram.inc                                    ;         ;
-; altdpram.inc                     ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altdpram.inc                                  ;         ;
-; db/altsyncram_cp91.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/db/altsyncram_cp91.tdf       ;         ;
-; memoryinitializationfile.mif     ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/memoryinitializationfile.mif ;         ;
-+----------------------------------+-----------------+----------------------------------------+-------------------------------------------------------------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                                                 ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                                                                                                                   ; Library ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; PushButton_Debouncer.v           ; yes             ; User Verilog HDL File                  ; F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/PushButton_Debouncer.v       ;         ;
+; ROM.v                            ; yes             ; User Verilog HDL File                  ; F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/ROM.v                        ;         ;
+; MasterVerilog.v                  ; yes             ; User Verilog HDL File                  ; F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.v              ;         ;
+; SevenSegmentDisplayDecoder.v     ; yes             ; User Verilog HDL File                  ; F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/SevenSegmentDisplayDecoder.v ;         ;
+; Processor.v                      ; yes             ; User Verilog HDL File                  ; F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/Processor.v                  ;         ;
+; DisplayMux.v                     ; yes             ; User Verilog HDL File                  ; F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/DisplayMux.v                 ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altsyncram.tdf                                                                                                               ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_ram_block.inc                                                                                                        ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_mux.inc                                                                                                                  ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_decode.inc                                                                                                               ;         ;
+; aglobal130.inc                   ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc                                                                                                               ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/a_rdenreg.inc                                                                                                                ;         ;
+; altrom.inc                       ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altrom.inc                                                                                                                   ;         ;
+; altram.inc                       ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altram.inc                                                                                                                   ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                           ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altdpram.inc                                                                                                                 ;         ;
+; db/altsyncram_cp91.tdf           ; yes             ; Auto-Generated Megafunction            ; F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/db/altsyncram_cp91.tdf       ;         ;
+; memoryinitializationfile.mif     ; yes             ; Auto-Found Memory Initialization File  ; F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/memoryinitializationfile.mif ;         ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -255,7 +261,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +------------------------------------------------------------------------------------------------+
-; Source assignments for ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated ;
+; Source assignments for ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated ;
 +---------------------------------+--------------------+------+----------------------------------+
 ; Assignment                      ; Value              ; From ; To                               ;
 +---------------------------------+--------------------+------+----------------------------------+
@@ -274,7 +280,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +---------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: ROM:uROM|altsyncram:altsyncram_component ;
+; Parameter Settings for User Entity Instance: ROM:ROM1|altsyncram:altsyncram_component ;
 +------------------------------------+------------------------------+-------------------+
 ; Parameter Name                     ; Value                        ; Type              ;
 +------------------------------------+------------------------------+-------------------+
@@ -340,7 +346,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Name                                      ; Value                                    ;
 +-------------------------------------------+------------------------------------------+
 ; Number of entity instances                ; 1                                        ;
-; Entity Instance                           ; ROM:uROM|altsyncram:altsyncram_component ;
+; Entity Instance                           ; ROM:ROM1|altsyncram:altsyncram_component ;
 ;     -- OPERATION_MODE                     ; ROM                                      ;
 ;     -- WIDTH_A                            ; 32                                       ;
 ;     -- NUMWORDS_A                         ; 64                                       ;
@@ -533,25 +539,23 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Fri Oct 24 18:44:09 2014
+    Info: Processing started: Sat Oct 25 13:02:50 2014
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off MasterVerilog_FPGA -c MasterVerilog
-Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file pushbutton_debouncer.v
     Info (12023): Found entity 1: PushButton_Debouncer
 Info (12021): Found 1 design units, including 1 entities, in source file memory.v
     Info (12023): Found entity 1: memory
 Info (12021): Found 1 design units, including 1 entities, in source file reg_32b.v
     Info (12023): Found entity 1: reg_32b
-Info (12021): Found 1 design units, including 1 entities, in source file instaddgen.v
-    Info (12023): Found entity 1: Project1
+Warning (12019): Can't analyze file -- file InstAddGen.v is missing
 Info (12021): Found 1 design units, including 1 entities, in source file rom.v
     Info (12023): Found entity 1: ROM
 Info (12021): Found 1 design units, including 1 entities, in source file masterverilog.v
     Info (12023): Found entity 1: MasterVerilog
 Info (12021): Found 1 design units, including 1 entities, in source file sevensegmentdisplaydecoder.v
     Info (12023): Found entity 1: SevenSegmentDisplayDecoder
-Info (12021): Found 1 design units, including 1 entities, in source file outputtohex.v
-    Info (12023): Found entity 1: OutputToHex
+Warning (12019): Can't analyze file -- file OutputToHex.v is missing
 Info (12021): Found 1 design units, including 1 entities, in source file registerfile.v
     Info (12023): Found entity 1: RegisterFile
 Info (12021): Found 1 design units, including 1 entities, in source file instructionaddressgenerator.v
@@ -563,22 +567,10 @@ Info (12021): Found 1 design units, including 1 entities, in source file display
 Info (12127): Elaborating entity "MasterVerilog" for the top level hierarchy
 Info (12128): Elaborating entity "PushButton_Debouncer" for hierarchy "PushButton_Debouncer:debounceit"
 Warning (10230): Verilog HDL assignment warning at PushButton_Debouncer.v(51): truncated value with size 32 to match size of target (16)
-Info (12128): Elaborating entity "Processor" for hierarchy "Processor:aProcessor"
-Info (12128): Elaborating entity "DisplayMux" for hierarchy "Processor:aProcessor|DisplayMux:displayAll"
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(56): variable "Display_Select" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(57): variable "PC" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(58): variable "IR" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(59): variable "RA" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(60): variable "RB" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(61): variable "RZ" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(62): variable "RM" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(63): variable "RY" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(64): variable "AddressRF" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10240): Verilog HDL Always Construct warning at DisplayMux.v(46): inferring latch(es) for variable "HexDisplay32Bits", which holds its previous value in one or more paths through the always construct
-Info (12128): Elaborating entity "ROM" for hierarchy "ROM:uROM"
-Info (12128): Elaborating entity "altsyncram" for hierarchy "ROM:uROM|altsyncram:altsyncram_component"
-Info (12130): Elaborated megafunction instantiation "ROM:uROM|altsyncram:altsyncram_component"
-Info (12133): Instantiated megafunction "ROM:uROM|altsyncram:altsyncram_component" with the following parameter:
+Info (12128): Elaborating entity "ROM" for hierarchy "ROM:ROM1"
+Info (12128): Elaborating entity "altsyncram" for hierarchy "ROM:ROM1|altsyncram:altsyncram_component"
+Info (12130): Elaborated megafunction instantiation "ROM:ROM1|altsyncram:altsyncram_component"
+Info (12133): Instantiated megafunction "ROM:ROM1|altsyncram:altsyncram_component" with the following parameter:
     Info (12134): Parameter "clock_enable_input_a" = "NORMAL"
     Info (12134): Parameter "clock_enable_output_a" = "NORMAL"
     Info (12134): Parameter "init_file" = "MemoryInitializationFile.mif"
@@ -594,42 +586,54 @@ Info (12133): Instantiated megafunction "ROM:uROM|altsyncram:altsyncram_componen
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_cp91.tdf
     Info (12023): Found entity 1: altsyncram_cp91
-Info (12128): Elaborating entity "altsyncram_cp91" for hierarchy "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated"
+Info (12128): Elaborating entity "altsyncram_cp91" for hierarchy "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated"
+Info (12128): Elaborating entity "Processor" for hierarchy "Processor:aProcessor"
+Info (12128): Elaborating entity "DisplayMux" for hierarchy "Processor:aProcessor|DisplayMux:displayAll"
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(85): variable "Display_Select" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(86): variable "PC" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(87): variable "IR" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(88): variable "RA" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(89): variable "RB" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(90): variable "RZ" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(91): variable "RM" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(92): variable "RY" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DisplayMux.v(93): variable "AddressRF" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10240): Verilog HDL Always Construct warning at DisplayMux.v(75): inferring latch(es) for variable "HexDisplay32Bits", which holds its previous value in one or more paths through the always construct
 Info (12128): Elaborating entity "SevenSegmentDisplayDecoder" for hierarchy "SevenSegmentDisplayDecoder:uHEX0"
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following RAM node(s):
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[0]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[1]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[2]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[3]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[4]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[5]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[6]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[7]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[8]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[9]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[10]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[11]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[12]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[13]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[14]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[15]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[16]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[17]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[18]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[19]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[20]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[21]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[22]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[23]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[24]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[25]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[26]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[27]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[28]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[29]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[30]"
-        Warning (14320): Synthesized away node "ROM:uROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[31]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[0]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[1]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[2]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[3]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[4]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[5]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[6]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[7]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[8]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[9]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[10]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[11]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[12]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[13]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[14]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[15]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[16]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[17]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[18]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[19]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[20]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[21]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[22]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[23]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[24]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[25]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[26]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[27]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[28]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[29]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[30]"
+        Warning (14320): Synthesized away node "ROM:ROM1|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[31]"
 Warning (12241): 10 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "green[0]" is stuck at GND
@@ -679,7 +683,7 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "Hex7[4]" is stuck at GND
     Warning (13410): Pin "Hex7[5]" is stuck at GND
     Warning (13410): Pin "Hex7[6]" is stuck at VCC
-Info (144001): Generated suppressed messages file C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.map.smsg
+Info (144001): Generated suppressed messages file F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 17 input pin(s) that do not drive logic
@@ -704,16 +708,16 @@ Info (21057): Implemented 156 device resources after synthesis - the final resou
     Info (21058): Implemented 24 input pins
     Info (21059): Implemented 83 output pins
     Info (21061): Implemented 49 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 113 warnings
-    Info: Peak virtual memory: 442 megabytes
-    Info: Processing ended: Fri Oct 24 18:44:11 2014
-    Info: Elapsed time: 00:00:02
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 114 warnings
+    Info: Peak virtual memory: 460 megabytes
+    Info: Processing ended: Sat Oct 25 13:02:53 2014
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:01
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.map.smsg.
+The suppressed messages can be found in F:/JORDAN/Docs-Primary/School/College/SDSU/Work/FA2014/Computer Org And Architecture CSC-317-S01/Projects/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.map.smsg.
 
 
