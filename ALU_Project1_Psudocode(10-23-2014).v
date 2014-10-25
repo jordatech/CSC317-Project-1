@@ -1,19 +1,18 @@
 //ALU - Arithmatical Logical Unit
 //Created By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
 //10/21/2014
+//
+//Revision 10-22-2014
 
 module ALU_Project1(
 input [31:0] instruction , RA, RB, // Since RB Is Muxed In We May Use RBI = RB_IMMEDIATE To Specify An Imediate Value
-input [1:0] InstructionFormat, //Formats (a,b,c) (0,1,2)
 input enable, clock,
 output wire[31:0] RZ, CCR,// Out and Condition Control Register
 								  //CCR 32-Bit Format [...IFNR, INR , N, Z, V, C]
 								  //CCR [... Instruction Format Not Recognized, Instruction Not Recognized, Negative,Zero,Overflow,Carry]
-reg INFR_FLAG, INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG // FLAGS For Condition Control Regester, which are "hooked" to the CCR output wire
-				
-);
-
-
+// Internal Registers
+reg IFNR_FLAG, INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG // FLAGS For Condition Control Regester, which are "hooked" to the CCR output wire
+input [1:0] InstructionFormat, //Formats (a,b,c) (0,1,2)
 // INSTRUCTION FORMATS:
 // Instruction Format (a) (RSRC1[31:27])(RSRC2[26:22])(RDST[21:17])(OPCODE[16:0])
 	//InstructionFormat='d0;
@@ -22,58 +21,106 @@ reg INFR_FLAG, INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG // 
 // Instruction Format (c) (IMMEDIATE_VALUE[31:6])(OPCODE[5:0])
 	//InstructionFormat='d2;
 
+				
+);
+
+
+
+
 // (RTL) Register Transfer Language Description References:
 //	(1.)http://www.ece.uprm.edu/~nayda/Courses/Inel4215F03/Lectures/LectureSept22.pdf
 // (2.)http://repository.cmu.edu/cgi/viewcontent.cgi?article=2666&context=compsci
-
+// Most of RTL Equivelents use the verilog operator for the given opperation...
 
 always @(posedge clock)
 	begin
 
 		//Instruction Format (a)		 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA						
 		//(RSRC1[31:27])(RSRC2[26:22])(RDST[21:17])(OPCODE[16:0]) Instruction Format (a)	Instruction Format (a)	Instruction Format (a)	
-		if(InstructionFormat=='d0) //  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+		if(InstructionFormat=='d0) begin //  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		
 			casex(instruction[16:0])
 				
 				
-				17'bxxxx_xxxxxxx_111111: /*NOP*/;
+				//17'bxxxx_xxxxxxx_111111: RZ;// Debugging Purposes
 					/*_____________________(NOP)________________________
 					(NOP)DESCRIPTION:
-						(1.) No Operation  // Stall
+						(1.) No Operation  // Stall but take 5 cycles to do it...
+						
 					____________________________________________________	
 					(NOP)RTL EQUIVELENT:
 						(1.) "Do Nothing"
+						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
+						//??????// Do we need a "NOP" flag in the condition control register
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 					
 				
-				17'b0000_0000001_000000: /*ADD*/;
+				17'b0000_0000001_000000: RZ=RA+RB;
+												 if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))begin
+													OVERFLOW_FLAG=1;
+												 end
+												 ZERO_FLAG=(RZ==0);
+												 NEGATIVE_FLAG=RZ[31];
 					/*_____________________(ADD)________________________
 					(ADD)DESCRIPTION:
 						(1.) Addition
 					____________________________________________________	
 					(ADD)RTL EQUIVELENT:
 						(1.) RZ<- [RA]+[RB]
+						(2.) if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))
+								OVERFLOW_FLAG<- 1
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) OVERFLOW_FLAG
+							// if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0)) //Overflow Occurs When (Adding) Two (Positives) And Get A (Negative) or (Adding) Two (Negatives) And Get A (Positive)
+								// OVERFLOW_FLAG=1;
+						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
+							//ZERO_FLAG=(RZ==0);
+						(3.) NEGATIVE_FLAG
+							//NEGATIVE_FLAG=RZ[31];
 					____________________________________________________*/
 				
 				
-				17'b0000_0000100_000000: /*SUB*/;
+				17'b0000_0000100_000000: RZ=RA-RB;
+												 if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0))begin
+													OVERFLOW_FLAG=1;
+												 end
+												 ZERO_FLAG=(RZ==0);
+												 NEGATIVE_FLAG=RZ[31];
 					/*_____________________(SUB)________________________
 					(SUB)DESCRIPTION:
 						(1.) Subtraction
 					____________________________________________________	
 					(SUB)RTL EQUIVELENT:
 						(1.) RZ<- [RA]-[RB]
+						(2.) if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0))
+								OVERFLOW_FLAG<- 1
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) OVERFLOW_FLAG
+							// if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0)) //Overflow Occurs When (Subtracting) A (Positive By A Negative) And Getting A (Negative) or (Subtracting) A (Negative By A Positive) And Getting A (Positive)
+								//Then// OVERFLOW_FLAG=1;
+						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
+							//ZERO_FLAG=(RZ==0);
+						(3.) NEGATIVE_FLAG
+							//NEGATIVE_FLAG=RZ[31];
 					____________________________________________________*/
 
 					
-				17'b0000_0001000_000000: /*AnD*/;// Bitwise AnD "camel_backed" to keep seperate from ADDITION
+				17'b0000_0001000_000000:/*AnD*/;// Bitwise AnD "camel_backed" to keep seperate from ADDITION
 					/*_____________________(AnD)________________________
 					(AnD)DESCRIPTION:
 						(1.) Bitwise AnD
 					____________________________________________________	
 					(AnD)RTL EQUIVELENT:
 						(1.) RZ<- [RA]&[RB]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) ZERO_FLAG // Continuously Assigned Using An Internal Register
+							//ZERO_FLAG=(RZ==0);
 					____________________________________________________*/
 				
 				
@@ -84,6 +131,9 @@ always @(posedge clock)
 					____________________________________________________	
 					(ADD)RTL EQUIVELENT:
 						(1.) RZ<- [RA]|[RB]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 				
 				
@@ -94,6 +144,9 @@ always @(posedge clock)
 					____________________________________________________	
 					(NEG)RTL EQUIVELENT:
 						(1.) RZ<- -[RA]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE // IGNORING OVERFLOW
 					____________________________________________________*/
 
 				
@@ -104,6 +157,9 @@ always @(posedge clock)
 					____________________________________________________	
 					(XOR)RTL EQUIVELENT:
 						(1.) RZ<- [RA]^[RB]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 					
 					
@@ -115,6 +171,9 @@ always @(posedge clock)
 					(COMP)RTL EQUIVELENT:
 						(1.) RZ<- ~[RA]
 						(2.) //??????//Do We Need To Assign The CARRY_FLAG
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 				
 				
@@ -126,6 +185,9 @@ always @(posedge clock)
 					(LSR)RTL EQUIVELENT:
 						(1.) RZ<- [RA] >> 1
 						(2.) CARRY_FLAG<- [RA[0]] // Carry Flag From LSB On RHS [0]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) CARRY_FLAG
 					____________________________________________________*/
 
 				
@@ -137,6 +199,9 @@ always @(posedge clock)
 					(ASR)RTL EQUIVELENT:
 						(1.) RZ<- [RA] >>> 1
 						(2.) CARRY_FLAG<- [RA[0]] // Carry Flag From LSB On RHS [0]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) CARRY_FLAG
 					____________________________________________________*/
 		
 
@@ -149,6 +214,9 @@ always @(posedge clock)
 					(LSL_ASL)RTL EQUIVELENT:
 						(1.) RZ<- [RA] << 1  //  RZ<- [RA] <<< 1
 						(2.) CARRY_FLAG<- [RA[31]] // Carry Flag From MSB On LHS [31]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) CARRY_FLAG
 					____________________________________________________*/
 		
 
@@ -159,8 +227,13 @@ always @(posedge clock)
 						(1.) Rotate Right  // By One Bit Position
 					____________________________________________________	
 					(ROR)RTL EQUIVELENT:
-						(1.) RZ<- {RA[0],RA[31:1]} // Bring The CARRY_FLAG Back Arround, No Loss Of Data...
+						(1.) RZ<- {CARRY_FLAG,RA[31:1]} // Bring The CARRY_FLAG Back Arround, No Loss Of Data...
 						(2.) CARRY_FLAG<- [RA[0]] // Carry Flag From LSB On RHS [0]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) CARRY_FLAG
+						//??????// But then the output depends on the last instruction which assigns the CARRY_FLAG...
+						//??????// I question this implementation because it will NOT provide a one-one, input-output mapping (ie: a given input may have two separate outputs which are dependent upon PAST INPUTS).
 					____________________________________________________*/
 		
 		
@@ -170,8 +243,13 @@ always @(posedge clock)
 						(1.) Rotate Left  // By One Bit Position
 					____________________________________________________	
 					(ROL)RTL EQUIVELENT:
-						(1.) RZ<- {RA[30:0],RA[31]} // Bring The CARRY_FLAG Back Arround, No Loss Of Data...
+						(1.) RZ<- {RA[30:0],CARRY_FLAG} // Bring The CARRY_FLAG Back Arround, No Loss Of Data...
 						(2.) CARRY_FLAG<- [RA[31]] // Carry Flag From MSB On LHS [31]
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) CARRY_FLAG
+						//??????// But then the output depends on the last instruction which assigns the CARRY_FLAG...
+						//??????// I question this implementation because it will NOT provide a one-one, input-output mapping (ie: a given input may have two separate outputs which are dependent upon PAST INPUTS).
 					____________________________________________________*/
 						
 						
@@ -182,6 +260,10 @@ always @(posedge clock)
 					____________________________________________________	
 					(MOVE)RTL EQUIVELENT:
 						(1.) RZ<-[RA]
+						//!!!!!!!// Have To Store To Memory
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 				
 				
@@ -195,6 +277,9 @@ always @(posedge clock)
 						//!!!!!!!// Have To Fetch From Memory
 						//???????// HOW IS AN (LBI) DIFFERENT FROM AN (ADD) FROM THE ALU's PERSPECTIVE
 						//???????// DO WE NEED AN "IS ADDRESS" CONTROL SIGNAL IN THE CCR
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 
 					
@@ -207,6 +292,9 @@ always @(posedge clock)
 						(1.) RZ<-(RB) // EA=[RB]
 						//!!!!!!!// Have To Fetch From Memory
 						//???????// AGAIN DO WE NEED AN "IS ADDRESS" CONTROL SIGNAL IN THE CCR
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 				
 				
@@ -217,17 +305,20 @@ always @(posedge clock)
 					____________________________________________________	
 					(ERROR)RTL EQUIVELENT:
 						(1.) RZ<-'d4294967296 // 2^32 // OUTPUT ALL ONES 
-						(2.) INR <- 'b1 //"SET "INSTRUCTION NOT RECOGNIZED" ERROR FLAG IN CCR"
+						(2.) INR_FLAG <- 'b1 //"SET "INSTRUCTION NOT RECOGNIZED" ERROR FLAG IN CCR"
 						(2.a) ANNOTATE INSTRUCTION FORMAT (a) InstructionFormat=='d0
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) INR_FLAG
 					____________________________________________________*/
 		
 		
 			endcase//END FORMAT (a) InstructionFormat=='d0
-		
+			end// END IF FORMAT (a) InstructionFormat=='d0
 		
 		//Instruction Format (B)		     BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 		//(RSRC1[31:27])(RSRC2[26:22])(IMMEDIATE_OPPERAND[21:6])(OPCODE[5:0]) Instruction Format (b) Instruction Format (b) Instruction Format (b)
-		elseif(InstructionFormat=='d1) //  BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+		if(InstructionFormat=='d1) begin//  BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 			casex(instruction[5:0])
 				
 				
@@ -239,6 +330,9 @@ always @(posedge clock)
 					(NOP)RTL EQUIVELENT:
 						(1.) "Do Nothing"
 						
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 				
 				
@@ -249,17 +343,20 @@ always @(posedge clock)
 					____________________________________________________	
 					(ERROR)RTL EQUIVELENT:
 						(1.) RZ<-'d4294967296-1  // 2^32-1 // OUTPUT Mostly ONES_ ALL But The Least Significant Bit // This Is To Indicate The Instruction Format
-						(2.) INR <- 'b1 //"SET "INSTRUCTION NOT RECOGNIZED" ERROR FLAG IN CCR"
+						(2.) INR_FLAG <- 'b1 //"SET "INSTRUCTION NOT RECOGNIZED" ERROR FLAG IN CCR"
 						(2.a) ANNOTATE INSTRUCTION FORMAT (b) InstructionFormat=='d1
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) INR_FLAG
 					____________________________________________________*/
 			
 			
 			endcase//END FORMAT (b) InstructionFormat=='d1
-		
+		end// END IF FORMAT (b) InstructionFormat=='d1
 		
 		//Instruction Format (C)		     CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 		//(IMMEDIATE_VALUE[31:6])(OPCODE[5:0]) Instruction Format (c) Instruction Format (c) Instruction Format (c) Instruction Format (c) 
-		elseif(InstructionFormat=='d2) //  CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+		if(InstructionFormat=='d2) begin//  CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 			casex(instruction[5:0])
 
 			
@@ -270,6 +367,9 @@ always @(posedge clock)
 					____________________________________________________	
 					(NOP)RTL EQUIVELENT:
 						(1.) "Do Nothing"
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 				
 							
@@ -280,6 +380,9 @@ always @(posedge clock)
 					____________________________________________________	
 					(LD#)RTL EQUIVELENT:
 						(1.) RZ<-{6{instruction[31]},instruction[31:6]}  // {n{m}} Replicate value m, n times For Sign Extending
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 				
 							
@@ -290,6 +393,9 @@ always @(posedge clock)
 					____________________________________________________	
 					(LDU#)RTL EQUIVELENT:
 						(1.) RZ<-{6{0},instruction[31:6]}  //The value in the immediate field is sign extended and placed in the Rdst.
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
 					____________________________________________________*/
 					
 					
@@ -300,12 +406,18 @@ always @(posedge clock)
 					____________________________________________________	
 					(ERROR)RTL EQUIVELENT:
 						(1.) RZ<-'d4294967296-2  // 2^32-2 // OUTPUT Mostly ONES_ ALL But The Two Least Significant Bits // This Is To Indicate The Instruction Format
-						(2.) INR <- 'b1 //"SET "INSTRUCTION NOT RECOGNIZED" ERROR FLAG IN CCR"
+						(2.) INR_FLAG <- 'b1 //"SET "INSTRUCTION NOT RECOGNIZED" ERROR FLAG IN CCR"
 						(2.a) ANNOTATE INSTRUCTION FORMAT (b) InstructionFormat=='d2
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) INR_FLAG
 					____________________________________________________*/
 			endcase//END FORMAT (c) InstructionFormat=='d2
+		endcase//END IF FORMAT (c) InstructionFormat=='d2
 			
-		else
+			
+		//ONLY IF 	
+		else begin
 			/*ERROR*/;
 			/*_____________________(ERROR)______________________
 			(ERROR)DESCRIPTION:
@@ -313,10 +425,25 @@ always @(posedge clock)
 			____________________________________________________	
 			(ERROR)RTL EQUIVELENT:
 				(1.) RZ<-'hF0F0F0F0 // 2^32 // OUTPUT Alternating 1111's and 0000's 
-				(2.) IFNR <- 'b1 // "SET "INSTRUCTION FORMAT NOT RECOGNIZED" ERROR FLAG IN CCR"
+				(2.) IFNR_FLAG <- 'b1 // "SET "INSTRUCTION FORMAT NOT RECOGNIZED" ERROR FLAG IN CCR"
 				(2.a) ANNOTATE BAD INSTRUCTION FORMAT
+			____________________________________________________
+			FLAGS TO UPDATE FOR THIS OPPERATION:
+				(1.) IFNR_FLAG
 			____________________________________________________*/
+		end//END FORMAT NOT RECOGNIZED
+	
+	//Don't clear flags if it is a NOP //instruction[5:0]!=6'b111111;
+	if(instruction[5:0]!=6'b111111 && )begin
 		
+		if(RZ==0)begin
+			ZERO_FLAG=1;//(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
+		end
+		
+		NEGATIVE_FLAG=RZ[31];//(3.) NEGATIVE_FLAG
+		
+	end
+
 	end //END ALWAYS
 
 
@@ -329,7 +456,10 @@ assign CCR[1]=NEGATIVE_FLAG;
 assign CCR[2]=OVERFLOW_FLAG;
 assign CCR[3]=ZERO_FLAG;
 assign CCR[4]=INR_FLAG;
-assign CCR[5]=INFR_FLAG;
+assign CCR[5]=IFNR_FLAG;
 assign CCR[31:6]=0; // May Add More Flags/ Control Signals Later
+
+
+
 
 end //END MODULE

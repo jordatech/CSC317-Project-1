@@ -1,6 +1,6 @@
 Fitter report for MasterVerilog
-Thu Oct 23 21:38:53 2014
-Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+Fri Oct 24 18:44:17 2014
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -59,15 +59,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                       ;
 +------------------------------------+-------------------------------------------------+
-; Fitter Status                      ; Successful - Thu Oct 23 21:38:53 2014           ;
-; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Fitter Status                      ; Successful - Fri Oct 24 18:44:17 2014           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; MasterVerilog                                   ;
 ; Top-level Entity Name              ; MasterVerilog                                   ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 26 / 33,216 ( < 1 % )                           ;
-;     Total combinational functions  ; 26 / 33,216 ( < 1 % )                           ;
+; Total logic elements               ; 49 / 33,216 ( < 1 % )                           ;
+;     Total combinational functions  ; 49 / 33,216 ( < 1 % )                           ;
 ;     Dedicated logic registers      ; 0 / 33,216 ( 0 % )                              ;
 ; Total registers                    ; 0                                               ;
 ; Total pins                         ; 107 / 475 ( 23 % )                              ;
@@ -135,7 +135,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 2      ;
+; Number detected on machine ; 4      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
@@ -146,8 +146,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Type                ; Value                  ;
 +---------------------+------------------------+
 ; Placement (by node) ;                        ;
-;     -- Requested    ; 0 / 137 ( 0.00 % )     ;
-;     -- Achieved     ; 0 / 137 ( 0.00 % )     ;
+;     -- Requested    ; 0 / 160 ( 0.00 % )     ;
+;     -- Achieved     ; 0 / 160 ( 0.00 % )     ;
 ;                     ;                        ;
 ; Routing (by net)    ;                        ;
 ;     -- Requested    ; 0 / 0 ( 0.00 % )       ;
@@ -170,7 +170,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
 ; Partition Name                 ; # Nodes ; # Preserved Nodes ; Preservation Level Used ; Netlist Type Used ;
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
-; Top                            ; 134     ; 0                 ; N/A                     ; Source File       ;
+; Top                            ; 157     ; 0                 ; N/A                     ; Source File       ;
 ; hard_block:auto_generated_inst ; 3       ; 0                 ; N/A                     ; Source File       ;
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
 
@@ -178,7 +178,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/Users/jordatech/Downloads/Temp/Comp org/CSC317-Project-1b/ProcessorProjectCSC317/MasterVerilog.pin.
+The pin-out file can be found in C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.pin.
 
 
 +---------------------------------------------------------------------+
@@ -186,26 +186,26 @@ The pin-out file can be found in C:/Users/jordatech/Downloads/Temp/Comp org/CSC3
 +---------------------------------------------+-----------------------+
 ; Resource                                    ; Usage                 ;
 +---------------------------------------------+-----------------------+
-; Total logic elements                        ; 26 / 33,216 ( < 1 % ) ;
-;     -- Combinational with no register       ; 26                    ;
+; Total logic elements                        ; 49 / 33,216 ( < 1 % ) ;
+;     -- Combinational with no register       ; 49                    ;
 ;     -- Register only                        ; 0                     ;
 ;     -- Combinational with a register        ; 0                     ;
 ;                                             ;                       ;
 ; Logic element usage by number of LUT inputs ;                       ;
-;     -- 4 input functions                    ; 19                    ;
-;     -- 3 input functions                    ; 6                     ;
-;     -- <=2 input functions                  ; 1                     ;
+;     -- 4 input functions                    ; 27                    ;
+;     -- 3 input functions                    ; 19                    ;
+;     -- <=2 input functions                  ; 3                     ;
 ;     -- Register only                        ; 0                     ;
 ;                                             ;                       ;
 ; Logic elements by mode                      ;                       ;
-;     -- normal mode                          ; 26                    ;
+;     -- normal mode                          ; 49                    ;
 ;     -- arithmetic mode                      ; 0                     ;
 ;                                             ;                       ;
 ; Total registers*                            ; 0 / 34,593 ( 0 % )    ;
 ;     -- Dedicated logic registers            ; 0 / 33,216 ( 0 % )    ;
 ;     -- I/O registers                        ; 0 / 1,377 ( 0 % )     ;
 ;                                             ;                       ;
-; Total LABs:  partially or completely used   ; 2 / 2,076 ( < 1 % )   ;
+; Total LABs:  partially or completely used   ; 4 / 2,076 ( < 1 % )   ;
 ; Virtual pins                                ; 0                     ;
 ; I/O pins                                    ; 107 / 475 ( 23 % )    ;
 ;     -- Clock pins                           ; 8 / 8 ( 100 % )       ;
@@ -221,11 +221,11 @@ The pin-out file can be found in C:/Users/jordatech/Downloads/Temp/Comp org/CSC3
 ; ASMI blocks                                 ; 0 / 1 ( 0 % )         ;
 ; CRC blocks                                  ; 0 / 1 ( 0 % )         ;
 ; Average interconnect usage (total/H/V)      ; 0% / 0% / 0%          ;
-; Peak interconnect usage (total/H/V)         ; 0% / 0% / 0%          ;
-; Maximum fan-out                             ; 13                    ;
-; Highest non-global fan-out                  ; 13                    ;
-; Total fan-out                               ; 122                   ;
-; Average fan-out                             ; 0.90                  ;
+; Peak interconnect usage (total/H/V)         ; 0% / 0% / 1%          ;
+; Maximum fan-out                             ; 27                    ;
+; Highest non-global fan-out                  ; 27                    ;
+; Total fan-out                               ; 207                   ;
+; Average fan-out                             ; 1.30                  ;
 +---------------------------------------------+-----------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -238,25 +238,25 @@ The pin-out file can be found in C:/Users/jordatech/Downloads/Temp/Comp org/CSC3
 +---------------------------------------------+----------------------+--------------------------------+
 ; Difficulty Clustering Region                ; Low                  ; Low                            ;
 ;                                             ;                      ;                                ;
-; Total logic elements                        ; 26 / 33216 ( < 1 % ) ; 0 / 33216 ( 0 % )              ;
-;     -- Combinational with no register       ; 26                   ; 0                              ;
+; Total logic elements                        ; 49 / 33216 ( < 1 % ) ; 0 / 33216 ( 0 % )              ;
+;     -- Combinational with no register       ; 49                   ; 0                              ;
 ;     -- Register only                        ; 0                    ; 0                              ;
 ;     -- Combinational with a register        ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Logic element usage by number of LUT inputs ;                      ;                                ;
-;     -- 4 input functions                    ; 19                   ; 0                              ;
-;     -- 3 input functions                    ; 6                    ; 0                              ;
-;     -- <=2 input functions                  ; 1                    ; 0                              ;
+;     -- 4 input functions                    ; 27                   ; 0                              ;
+;     -- 3 input functions                    ; 19                   ; 0                              ;
+;     -- <=2 input functions                  ; 3                    ; 0                              ;
 ;     -- Register only                        ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Logic elements by mode                      ;                      ;                                ;
-;     -- normal mode                          ; 26                   ; 0                              ;
+;     -- normal mode                          ; 49                   ; 0                              ;
 ;     -- arithmetic mode                      ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Total registers                             ; 0                    ; 0                              ;
 ;     -- Dedicated logic registers            ; 0 / 33216 ( 0 % )    ; 0 / 33216 ( 0 % )              ;
 ;                                             ;                      ;                                ;
-; Total LABs:  partially or completely used   ; 2 / 2076 ( < 1 % )   ; 0 / 2076 ( 0 % )               ;
+; Total LABs:  partially or completely used   ; 4 / 2076 ( < 1 % )   ; 0 / 2076 ( 0 % )               ;
 ;                                             ;                      ;                                ;
 ; Virtual pins                                ; 0                    ; 0                              ;
 ; I/O pins                                    ; 107                  ; 0                              ;
@@ -271,7 +271,7 @@ The pin-out file can be found in C:/Users/jordatech/Downloads/Temp/Comp org/CSC3
 ;     -- Registered Output Connections        ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Internal Connections                        ;                      ;                                ;
-;     -- Total Connections                    ; 122                  ; 0                              ;
+;     -- Total Connections                    ; 207                  ; 0                              ;
 ;     -- Registered Connections               ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; External Connections                        ;                      ;                                ;
@@ -306,28 +306,28 @@ The pin-out file can be found in C:/Users/jordatech/Downloads/Temp/Comp org/CSC3
 +------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 ; clk_27     ; D13   ; 3        ; 31           ; 36           ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; clk_50     ; N2    ; 2        ; 0            ; 18           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; pushBut[0] ; G26   ; 5        ; 65           ; 27           ; 1           ; 13                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; pushBut[0] ; G26   ; 5        ; 65           ; 27           ; 1           ; 27                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; pushBut[1] ; N23   ; 5        ; 65           ; 20           ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; pushBut[2] ; P23   ; 6        ; 65           ; 18           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; pushBut[2] ; P23   ; 6        ; 65           ; 18           ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; pushBut[3] ; W26   ; 6        ; 65           ; 10           ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[0]  ; N25   ; 5        ; 65           ; 19           ; 0           ; 9                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[10] ; N1    ; 2        ; 0            ; 18           ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[11] ; P1    ; 1        ; 0            ; 18           ; 3           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[12] ; P2    ; 1        ; 0            ; 18           ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[13] ; T7    ; 1        ; 0            ; 11           ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[14] ; U3    ; 1        ; 0            ; 12           ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[15] ; U4    ; 1        ; 0            ; 12           ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[16] ; V1    ; 1        ; 0            ; 12           ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[17] ; V2    ; 1        ; 0            ; 12           ; 3           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[1]  ; N26   ; 5        ; 65           ; 19           ; 1           ; 7                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[2]  ; P25   ; 6        ; 65           ; 19           ; 2           ; 9                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[3]  ; AE14  ; 7        ; 33           ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[4]  ; AF14  ; 7        ; 33           ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[5]  ; AD13  ; 8        ; 33           ; 0            ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[6]  ; AC13  ; 8        ; 33           ; 0            ; 3           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[7]  ; C13   ; 3        ; 31           ; 36           ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[8]  ; B13   ; 4        ; 31           ; 36           ; 0           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[9]  ; A13   ; 4        ; 31           ; 36           ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[0]  ; N25   ; 5        ; 65           ; 19           ; 0           ; 22                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[10] ; N1    ; 2        ; 0            ; 18           ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[11] ; P1    ; 1        ; 0            ; 18           ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[12] ; P2    ; 1        ; 0            ; 18           ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[13] ; T7    ; 1        ; 0            ; 11           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[14] ; U3    ; 1        ; 0            ; 12           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[15] ; U4    ; 1        ; 0            ; 12           ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[16] ; V1    ; 1        ; 0            ; 12           ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[17] ; V2    ; 1        ; 0            ; 12           ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[1]  ; N26   ; 5        ; 65           ; 19           ; 1           ; 19                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[2]  ; P25   ; 6        ; 65           ; 19           ; 2           ; 22                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[3]  ; AE14  ; 7        ; 33           ; 0            ; 0           ; 27                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[4]  ; AF14  ; 7        ; 33           ; 0            ; 1           ; 27                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[5]  ; AD13  ; 8        ; 33           ; 0            ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[6]  ; AC13  ; 8        ; 33           ; 0            ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[7]  ; C13   ; 3        ; 31           ; 36           ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[8]  ; B13   ; 4        ; 31           ; 36           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[9]  ; A13   ; 4        ; 31           ; 36           ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 +------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 
 
@@ -1156,16 +1156,18 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 Note: User assignments will override these defaults. The user specified values are listed in the Output Pins and Bidir Pins tables.
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                                                                        ;
-+------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+--------------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node               ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                ; Library Name ;
-+------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+--------------------------------------------------------------------+--------------+
-; |MasterVerilog                           ; 26 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 107  ; 0            ; 26 (0)       ; 0 (0)             ; 0 (0)            ; |MasterVerilog                                                     ; work         ;
-;    |Display:displayAll|                  ; 26 (16)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 26 (16)      ; 0 (0)             ; 0 (0)            ; |MasterVerilog|Display:displayAll                                  ; work         ;
-;       |SevenSegmentDisplayDecoder:uHEX0| ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|Display:displayAll|SevenSegmentDisplayDecoder:uHEX0 ; work         ;
-;       |SevenSegmentDisplayDecoder:uHEX1| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|Display:displayAll|SevenSegmentDisplayDecoder:uHEX1 ; work         ;
-+------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+--------------------------------------------------------------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                                                  ;
++---------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------+--------------+
+; Compilation Hierarchy Node            ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                             ; Library Name ;
++---------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------+--------------+
+; |MasterVerilog                        ; 49 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 107  ; 0            ; 49 (0)       ; 0 (0)             ; 0 (0)            ; |MasterVerilog                                  ; work         ;
+;    |SevenSegmentDisplayDecoder:uHEX0| ; 14 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 0 (0)            ; |MasterVerilog|SevenSegmentDisplayDecoder:uHEX0 ; work         ;
+;    |SevenSegmentDisplayDecoder:uHEX1| ; 12 (12)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (12)      ; 0 (0)             ; 0 (0)            ; |MasterVerilog|SevenSegmentDisplayDecoder:uHEX1 ; work         ;
+;    |SevenSegmentDisplayDecoder:uHEX2| ; 12 (12)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (12)      ; 0 (0)             ; 0 (0)            ; |MasterVerilog|SevenSegmentDisplayDecoder:uHEX2 ; work         ;
+;    |SevenSegmentDisplayDecoder:uHEX3| ; 9 (9)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (9)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|SevenSegmentDisplayDecoder:uHEX3 ; work         ;
+;    |SevenSegmentDisplayDecoder:uHEX4| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|SevenSegmentDisplayDecoder:uHEX4 ; work         ;
++---------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -1176,6 +1178,19 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------+----------+---------------+---------------+-----------------------+-----+
 ; clk_27     ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
 ; clk_50     ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[5]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
+; switch[6]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
+; switch[7]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
+; switch[8]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
+; switch[9]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
+; switch[10] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[11] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[12] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[13] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[14] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[15] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[16] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[17] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
 ; green[0]   ; Output   ; --            ; --            ; --                    ; --  ;
 ; green[1]   ; Output   ; --            ; --            ; --                    ; --  ;
 ; green[2]   ; Output   ; --            ; --            ; --                    ; --  ;
@@ -1204,7 +1219,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; red[16]    ; Output   ; --            ; --            ; --                    ; --  ;
 ; red[17]    ; Output   ; --            ; --            ; --                    ; --  ;
 ; pushBut[1] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
-; pushBut[2] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
 ; pushBut[3] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
 ; Hex0[0]    ; Output   ; --            ; --            ; --                    ; --  ;
 ; Hex0[1]    ; Output   ; --            ; --            ; --                    ; --  ;
@@ -1262,129 +1276,138 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Hex7[4]    ; Output   ; --            ; --            ; --                    ; --  ;
 ; Hex7[5]    ; Output   ; --            ; --            ; --                    ; --  ;
 ; Hex7[6]    ; Output   ; --            ; --            ; --                    ; --  ;
-; pushBut[0] ; Input    ; (6) 2523 ps   ; (6) 2523 ps   ; --                    ; --  ;
-; switch[3]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; switch[4]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; switch[5]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; switch[6]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; switch[7]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; switch[8]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; switch[9]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; switch[10] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
-; switch[11] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
-; switch[12] ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
-; switch[13] ; Input    ; (6) 2523 ps   ; (6) 2523 ps   ; --                    ; --  ;
-; switch[14] ; Input    ; (6) 2523 ps   ; (6) 2523 ps   ; --                    ; --  ;
-; switch[15] ; Input    ; (6) 2523 ps   ; (6) 2523 ps   ; --                    ; --  ;
-; switch[16] ; Input    ; (6) 2523 ps   ; (6) 2523 ps   ; --                    ; --  ;
-; switch[17] ; Input    ; (6) 2523 ps   ; (6) 2523 ps   ; --                    ; --  ;
-; switch[2]  ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; pushBut[2] ; Input    ; (6) 2523 ps   ; (6) 2523 ps   ; --                    ; --  ;
 ; switch[0]  ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
 ; switch[1]  ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[2]  ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; switch[3]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
+; switch[4]  ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
+; pushBut[0] ; Input    ; (6) 2523 ps   ; (6) 2523 ps   ; --                    ; --  ;
 +------------+----------+---------------+---------------+-----------------------+-----+
 
 
-+----------------------------------------------------------------------------------------------------+
-; Pad To Core Delay Chain Fanout                                                                     ;
-+----------------------------------------------------------------------+-------------------+---------+
-; Source Pin / Fanout                                                  ; Pad To Core Index ; Setting ;
-+----------------------------------------------------------------------+-------------------+---------+
-; clk_27                                                               ;                   ;         ;
-; clk_50                                                               ;                   ;         ;
-; pushBut[1]                                                           ;                   ;         ;
-; pushBut[2]                                                           ;                   ;         ;
-; pushBut[3]                                                           ;                   ;         ;
-; pushBut[0]                                                           ;                   ;         ;
-;      - Display:displayAll|displayAtHex0[3]~1                         ; 1                 ; 6       ;
-;      - Display:displayAll|displayAtHex0[2]~2                         ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr6~0 ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr5~0 ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr4~1 ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr3~0 ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr2~0 ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr1~0 ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX1|WideOr5~0 ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX1|WideOr4~0 ; 1                 ; 6       ;
-;      - Display:displayAll|SevenSegmentDisplayDecoder:uHEX1|WideOr3~0 ; 1                 ; 6       ;
-;      - Display:displayAll|displayAtHex1[1]~2                         ; 1                 ; 6       ;
-;      - Display:displayAll|displayAtHex1[0]~3                         ; 1                 ; 6       ;
-; switch[3]                                                            ;                   ;         ;
-; switch[4]                                                            ;                   ;         ;
-; switch[5]                                                            ;                   ;         ;
-; switch[6]                                                            ;                   ;         ;
-; switch[7]                                                            ;                   ;         ;
-; switch[8]                                                            ;                   ;         ;
-; switch[9]                                                            ;                   ;         ;
-; switch[10]                                                           ;                   ;         ;
-; switch[11]                                                           ;                   ;         ;
-; switch[12]                                                           ;                   ;         ;
-; switch[13]                                                           ;                   ;         ;
-;      - Display:displayAll|Equal0~2                                   ; 0                 ; 6       ;
-; switch[14]                                                           ;                   ;         ;
-;      - Display:displayAll|Equal0~2                                   ; 0                 ; 6       ;
-; switch[15]                                                           ;                   ;         ;
-;      - Display:displayAll|Equal0~3                                   ; 1                 ; 6       ;
-; switch[16]                                                           ;                   ;         ;
-;      - Display:displayAll|Equal0~3                                   ; 1                 ; 6       ;
-; switch[17]                                                           ;                   ;         ;
-;      - Display:displayAll|Equal0~3                                   ; 1                 ; 6       ;
-; switch[2]                                                            ;                   ;         ;
-; switch[0]                                                            ;                   ;         ;
-; switch[1]                                                            ;                   ;         ;
-+----------------------------------------------------------------------+-------------------+---------+
++----------------------------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                                                   ;
++----------------------------------------------------+-------------------+---------+
+; Source Pin / Fanout                                ; Pad To Core Index ; Setting ;
++----------------------------------------------------+-------------------+---------+
+; clk_27                                             ;                   ;         ;
+; clk_50                                             ;                   ;         ;
+; switch[5]                                          ;                   ;         ;
+; switch[6]                                          ;                   ;         ;
+; switch[7]                                          ;                   ;         ;
+; switch[8]                                          ;                   ;         ;
+; switch[9]                                          ;                   ;         ;
+; switch[10]                                         ;                   ;         ;
+; switch[11]                                         ;                   ;         ;
+; switch[12]                                         ;                   ;         ;
+; switch[13]                                         ;                   ;         ;
+; switch[14]                                         ;                   ;         ;
+; switch[15]                                         ;                   ;         ;
+; switch[16]                                         ;                   ;         ;
+; switch[17]                                         ;                   ;         ;
+; pushBut[1]                                         ;                   ;         ;
+; pushBut[3]                                         ;                   ;         ;
+; pushBut[2]                                         ;                   ;         ;
+;      - green[8]                                    ; 0                 ; 6       ;
+; switch[0]                                          ;                   ;         ;
+; switch[1]                                          ;                   ;         ;
+; switch[2]                                          ;                   ;         ;
+; switch[3]                                          ;                   ;         ;
+; switch[4]                                          ;                   ;         ;
+; pushBut[0]                                         ;                   ;         ;
+;      - SevenSegmentDisplayDecoder:uHEX4|Decoder0~0 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX0|WideOr5~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX0|WideOr4~12 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX0|WideOr3~3  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX0|WideOr2~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX0|WideOr1~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX0|WideOr0~12 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX0|WideOr6~3  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX1|WideOr5~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX1|WideOr4~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX1|WideOr3~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX1|WideOr2~12 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX1|WideOr0~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX2|WideOr5~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX2|WideOr4~12 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX2|WideOr3~12 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX2|WideOr2~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX2|WideOr0~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX3|WideOr5~3  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX3|WideOr4~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX3|WideOr3~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX3|WideOr2~3  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX3|WideOr1~12 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX3|WideOr0~9  ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX3|WideOr6~12 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX2|WideOr6~12 ; 0                 ; 6       ;
+;      - SevenSegmentDisplayDecoder:uHEX2|WideOr1~12 ; 0                 ; 6       ;
++----------------------------------------------------+-------------------+---------+
 
 
-+-------------------------------------------------------------------------+
-; Non-Global High Fan-Out Signals                                         ;
-+---------------------------------------------------------------+---------+
-; Name                                                          ; Fan-Out ;
-+---------------------------------------------------------------+---------+
-; pushBut[0]                                                    ; 13      ;
-; switch[0]                                                     ; 9       ;
-; switch[2]                                                     ; 9       ;
-; Display:displayAll|Equal0~4                                   ; 9       ;
-; switch[1]                                                     ; 7       ;
-; Display:displayAll|Selector28~0                               ; 5       ;
-; Display:displayAll|WideNor0                                   ; 5       ;
-; Display:displayAll|WideNor0~0                                 ; 5       ;
-; Display:displayAll|displayAtHex1[1]~2                         ; 4       ;
-; Display:displayAll|displayAtHex0[3]~1                         ; 4       ;
-; Display:displayAll|Selector27~0                               ; 3       ;
-; Display:displayAll|displayAtHex0[2]~2                         ; 3       ;
-; Display:displayAll|displayAtHex1[0]~3                         ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX1|WideOr3~0 ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX1|WideOr4~0 ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX1|WideOr5~0 ; 2       ;
-; Display:displayAll|Equal3~0                                   ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr1~0 ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr2~0 ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr3~0 ; 2       ;
-; Display:displayAll|Equal4~0                                   ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr4~1 ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr5~0 ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr6~0 ; 2       ;
-; Display:displayAll|SevenSegmentDisplayDecoder:uHEX0|WideOr4~0 ; 2       ;
-; switch[17]                                                    ; 1       ;
-; switch[16]                                                    ; 1       ;
-; switch[15]                                                    ; 1       ;
-; switch[14]                                                    ; 1       ;
-; switch[13]                                                    ; 1       ;
-; switch[12]                                                    ; 1       ;
-; switch[11]                                                    ; 1       ;
-; switch[10]                                                    ; 1       ;
-; switch[9]                                                     ; 1       ;
-; switch[8]                                                     ; 1       ;
-; switch[7]                                                     ; 1       ;
-; switch[6]                                                     ; 1       ;
-; switch[5]                                                     ; 1       ;
-; switch[4]                                                     ; 1       ;
-; switch[3]                                                     ; 1       ;
-; Display:displayAll|displayAtHex0[3]~0                         ; 1       ;
-; Display:displayAll|Equal0~3                                   ; 1       ;
-; Display:displayAll|Equal0~2                                   ; 1       ;
-; Display:displayAll|Equal0~1                                   ; 1       ;
-; Display:displayAll|Equal0~0                                   ; 1       ;
-+---------------------------------------------------------------+---------+
++-------------------------------------------------------+
+; Non-Global High Fan-Out Signals                       ;
++---------------------------------------------+---------+
+; Name                                        ; Fan-Out ;
++---------------------------------------------+---------+
+; pushBut[0]                                  ; 27      ;
+; switch[4]                                   ; 27      ;
+; switch[3]                                   ; 27      ;
+; switch[2]                                   ; 22      ;
+; switch[0]                                   ; 22      ;
+; switch[1]                                   ; 19      ;
+; SevenSegmentDisplayDecoder:uHEX4|Decoder0~1 ; 7       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr6~12 ; 2       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr1~12 ; 2       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr0~4  ; 2       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr3~4  ; 2       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr4~4  ; 2       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr4~3  ; 2       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr5~4  ; 2       ;
+; pushBut[2]                                  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr1~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr1~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr6~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr6~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr6~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr0~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr2~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr2~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr3~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr4~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr5~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX3|WideOr5~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr0~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr0~4  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr2~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr2~4  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr3~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr3~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr4~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX2|WideOr5~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr0~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr1~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr2~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr2~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr3~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr4~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr5~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX1|WideOr5~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr6~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr6~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr0~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr0~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr1~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr1~4  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr2~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr2~4  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr3~3  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr3~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr4~12 ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX0|WideOr5~9  ; 1       ;
+; SevenSegmentDisplayDecoder:uHEX4|Decoder0~0 ; 1       ;
++---------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -1392,23 +1415,23 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------+-----------------------+
 ; Other Routing Resource Type ; Usage                 ;
 +-----------------------------+-----------------------+
-; Block interconnects         ; 55 / 94,460 ( < 1 % ) ;
-; C16 interconnects           ; 17 / 3,315 ( < 1 % )  ;
+; Block interconnects         ; 63 / 94,460 ( < 1 % ) ;
+; C16 interconnects           ; 7 / 3,315 ( < 1 % )   ;
 ; C4 interconnects            ; 45 / 60,840 ( < 1 % ) ;
-; Direct links                ; 8 / 94,460 ( < 1 % )  ;
+; Direct links                ; 5 / 94,460 ( < 1 % )  ;
 ; Global clocks               ; 0 / 16 ( 0 % )        ;
-; Local interconnects         ; 10 / 33,216 ( < 1 % ) ;
-; R24 interconnects           ; 32 / 3,091 ( 1 % )    ;
-; R4 interconnects            ; 88 / 81,294 ( < 1 % ) ;
+; Local interconnects         ; 22 / 33,216 ( < 1 % ) ;
+; R24 interconnects           ; 16 / 3,091 ( < 1 % )  ;
+; R4 interconnects            ; 66 / 81,294 ( < 1 % ) ;
 +-----------------------------+-----------------------+
 
 
 +---------------------------------------------------------------------------+
 ; LAB Logic Elements                                                        ;
 +---------------------------------------------+-----------------------------+
-; Number of Logic Elements  (Average = 13.00) ; Number of LABs  (Total = 2) ;
+; Number of Logic Elements  (Average = 12.25) ; Number of LABs  (Total = 4) ;
 +---------------------------------------------+-----------------------------+
-; 1                                           ; 0                           ;
+; 1                                           ; 1                           ;
 ; 2                                           ; 0                           ;
 ; 3                                           ; 0                           ;
 ; 4                                           ; 0                           ;
@@ -1417,23 +1440,23 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 7                                           ; 0                           ;
 ; 8                                           ; 0                           ;
 ; 9                                           ; 0                           ;
-; 10                                          ; 1                           ;
+; 10                                          ; 0                           ;
 ; 11                                          ; 0                           ;
 ; 12                                          ; 0                           ;
 ; 13                                          ; 0                           ;
 ; 14                                          ; 0                           ;
 ; 15                                          ; 0                           ;
-; 16                                          ; 1                           ;
+; 16                                          ; 3                           ;
 +---------------------------------------------+-----------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                        ;
 +----------------------------------------------+-----------------------------+
-; Number of Signals Sourced  (Average = 13.00) ; Number of LABs  (Total = 2) ;
+; Number of Signals Sourced  (Average = 12.25) ; Number of LABs  (Total = 4) ;
 +----------------------------------------------+-----------------------------+
 ; 0                                            ; 0                           ;
-; 1                                            ; 0                           ;
+; 1                                            ; 1                           ;
 ; 2                                            ; 0                           ;
 ; 3                                            ; 0                           ;
 ; 4                                            ; 0                           ;
@@ -1442,61 +1465,48 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 7                                            ; 0                           ;
 ; 8                                            ; 0                           ;
 ; 9                                            ; 0                           ;
-; 10                                           ; 1                           ;
-; 11                                           ; 0                           ;
-; 12                                           ; 0                           ;
-; 13                                           ; 0                           ;
-; 14                                           ; 0                           ;
-; 15                                           ; 0                           ;
-; 16                                           ; 1                           ;
-+----------------------------------------------+-----------------------------+
-
-
-+-------------------------------------------------------------------------------+
-; LAB Signals Sourced Out                                                       ;
-+-------------------------------------------------+-----------------------------+
-; Number of Signals Sourced Out  (Average = 9.50) ; Number of LABs  (Total = 2) ;
-+-------------------------------------------------+-----------------------------+
-; 0                                               ; 0                           ;
-; 1                                               ; 0                           ;
-; 2                                               ; 0                           ;
-; 3                                               ; 0                           ;
-; 4                                               ; 0                           ;
-; 5                                               ; 0                           ;
-; 6                                               ; 0                           ;
-; 7                                               ; 0                           ;
-; 8                                               ; 0                           ;
-; 9                                               ; 1                           ;
-; 10                                              ; 1                           ;
-+-------------------------------------------------+-----------------------------+
-
-
-+----------------------------------------------------------------------------+
-; LAB Distinct Inputs                                                        ;
-+----------------------------------------------+-----------------------------+
-; Number of Distinct Inputs  (Average = 14.00) ; Number of LABs  (Total = 2) ;
-+----------------------------------------------+-----------------------------+
-; 0                                            ; 0                           ;
-; 1                                            ; 0                           ;
-; 2                                            ; 0                           ;
-; 3                                            ; 0                           ;
-; 4                                            ; 0                           ;
-; 5                                            ; 0                           ;
-; 6                                            ; 0                           ;
-; 7                                            ; 0                           ;
-; 8                                            ; 0                           ;
-; 9                                            ; 1                           ;
 ; 10                                           ; 0                           ;
 ; 11                                           ; 0                           ;
 ; 12                                           ; 0                           ;
 ; 13                                           ; 0                           ;
 ; 14                                           ; 0                           ;
 ; 15                                           ; 0                           ;
-; 16                                           ; 0                           ;
-; 17                                           ; 0                           ;
-; 18                                           ; 0                           ;
-; 19                                           ; 1                           ;
+; 16                                           ; 3                           ;
 +----------------------------------------------+-----------------------------+
+
+
++-------------------------------------------------------------------------------+
+; LAB Signals Sourced Out                                                       ;
++-------------------------------------------------+-----------------------------+
+; Number of Signals Sourced Out  (Average = 7.00) ; Number of LABs  (Total = 4) ;
++-------------------------------------------------+-----------------------------+
+; 0                                               ; 0                           ;
+; 1                                               ; 1                           ;
+; 2                                               ; 0                           ;
+; 3                                               ; 0                           ;
+; 4                                               ; 0                           ;
+; 5                                               ; 0                           ;
+; 6                                               ; 0                           ;
+; 7                                               ; 0                           ;
+; 8                                               ; 1                           ;
+; 9                                               ; 1                           ;
+; 10                                              ; 1                           ;
++-------------------------------------------------+-----------------------------+
+
+
++---------------------------------------------------------------------------+
+; LAB Distinct Inputs                                                       ;
++---------------------------------------------+-----------------------------+
+; Number of Distinct Inputs  (Average = 5.50) ; Number of LABs  (Total = 4) ;
++---------------------------------------------+-----------------------------+
+; 0                                           ; 0                           ;
+; 1                                           ; 0                           ;
+; 2                                           ; 0                           ;
+; 3                                           ; 0                           ;
+; 4                                           ; 1                           ;
+; 5                                           ; 0                           ;
+; 6                                           ; 3                           ;
++---------------------------------------------+-----------------------------+
 
 
 +-------------------------------------------------------------------------+
@@ -1552,20 +1562,20 @@ Info (332130): Timing requirements not specified -- quality metrics such as perf
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:00:01
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:00
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 0% of the available device resources
-    Info (170196): Router estimated peak interconnect usage is 0% of the available device resources in the region that extends from location X33_Y0 to location X43_Y11
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
+    Info (170196): Router estimated peak interconnect usage is 0% of the available device resources in the region that extends from location X55_Y0 to location X65_Y11
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
-Info (11888): Total time spent on timing analysis during the Fitter is 0.39 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.17 seconds.
 Info (306004): Started post-fitting delay annotation
 Warning (306006): Found 83 output pins without output pin load capacitance assignment
     Info (306007): Pin "green[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
@@ -1654,19 +1664,19 @@ Warning (306006): Found 83 output pins without output pin load capacitance assig
 Info (306005): Delay annotation completed successfully
 Info (306004): Started post-fitting delay annotation
 Info (306005): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:02
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
-Info (144001): Generated suppressed messages file C:/Users/jordatech/Downloads/Temp/Comp org/CSC317-Project-1b/ProcessorProjectCSC317/MasterVerilog.fit.smsg
-Info: Quartus II 32-bit Fitter was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 483 megabytes
-    Info: Processing ended: Thu Oct 23 21:38:54 2014
-    Info: Elapsed time: 00:00:23
-    Info: Total CPU time (on all processors): 00:00:14
+Info (144001): Generated suppressed messages file C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.fit.smsg
+Info: Quartus II 64-Bit Fitter was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 653 megabytes
+    Info: Processing ended: Fri Oct 24 18:44:17 2014
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:05
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/Users/jordatech/Downloads/Temp/Comp org/CSC317-Project-1b/ProcessorProjectCSC317/MasterVerilog.fit.smsg.
+The suppressed messages can be found in C:/Users/DIGITLAB7/Desktop/CSC317-Project-1/ProcessorProjectCSC317/MasterVerilog.fit.smsg.
 
 
