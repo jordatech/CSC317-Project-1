@@ -2,12 +2,12 @@
 //Created By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
 //10/21/2014
 //
-//Revision 10-22-2014
+//Revision 10-26-2014
 
 module ALU_Project1(
-input [31:0] instruction , RA, RB, // Since RB Is Muxed In We May Use RBI = RB_IMMEDIATE To Specify An Imediate Value
+input wire [31:0] instruction , RA, RB, // Since RB Is Muxed In We May Use RBI = RB_IMMEDIATE To Specify An Imediate Value
 input enable, clock,
-input [1:0] InstructionFormat, //Formats (a,b,c) (0,1,2)
+input wire [1:0] InstructionFormat, //Formats (a,b,c) (0,1,2)
 	// INSTRUCTION FORMATS:
 	// Instruction Format (a) (RSRC1[31:27])(RSRC2[26:22])(RDST[21:17])(OPCODE[16:0])
 		//InstructionFormat='d0;
@@ -23,7 +23,8 @@ output wire[31:0] RZ, CCR// Out and Condition Control Register
 );
 
 // Internal Registers
-reg IFNR_FLAG, INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG // FLAGS For Condition Control Regester, which are "hooked" to the CCR output wire
+//reg IFNR_FLAG,
+reg  INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG // FLAGS For Condition Control Regester, which are "hooked" to the CCR output wire
 
 
 

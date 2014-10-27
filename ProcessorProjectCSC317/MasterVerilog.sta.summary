@@ -2,4 +2,52 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
+Type  : Slow Model Setup 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : -2.804
+TNS   : -69.130
+
+Type  : Slow Model Setup 'clk_27'
+Slack : -2.164
+TNS   : -138.825
+
+Type  : Slow Model Hold 'clk_27'
+Slack : -2.515
+TNS   : -23.171
+
+Type  : Slow Model Hold 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : 0.531
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'clk_27'
+Slack : -1.423
+TNS   : -185.528
+
+Type  : Slow Model Minimum Pulse Width 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : -0.500
+TNS   : -64.000
+
+Type  : Fast Model Setup 'clk_27'
+Slack : -0.979
+TNS   : -33.387
+
+Type  : Fast Model Setup 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : -0.842
+TNS   : -9.418
+
+Type  : Fast Model Hold 'clk_27'
+Slack : -1.562
+TNS   : -17.290
+
+Type  : Fast Model Hold 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : 0.243
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'clk_27'
+Slack : -1.423
+TNS   : -185.528
+
+Type  : Fast Model Minimum Pulse Width 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : -0.500
+TNS   : -64.000
+
 ------------------------------------------------------------

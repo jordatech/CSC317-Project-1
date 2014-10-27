@@ -163,13 +163,14 @@ set_location_assignment PIN_G26 -to pushBut[0]
 set_global_assignment -name VERILOG_FILE PushButton_Debouncer.v
 set_global_assignment -name VERILOG_FILE memory.v
 set_global_assignment -name VERILOG_FILE reg_32b.v
-set_global_assignment -name VERILOG_FILE InstAddGen.v
 set_global_assignment -name VERILOG_FILE ROM.v
 set_global_assignment -name VERILOG_FILE MasterVerilog.v
 set_global_assignment -name VERILOG_FILE SevenSegmentDisplayDecoder.v
-set_global_assignment -name VERILOG_FILE OutputToHex.v
 set_global_assignment -name VERILOG_FILE RegisterFile.v
 set_global_assignment -name VERILOG_FILE InstructionAddressGenerator.v
 set_global_assignment -name VERILOG_FILE Processor.v
 set_global_assignment -name VERILOG_FILE DisplayMux.v
+set_global_assignment -name MIF_FILE MemoryInitializationFile.mif
+set_global_assignment -name SOURCE_FILE db/MasterVerilog.cmp.rdb
+set_global_assignment -name VERILOG_FILE ../DecodeInstruction.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

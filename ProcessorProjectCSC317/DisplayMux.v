@@ -37,14 +37,20 @@ input wire Display_Enable,
 		//Main Processor Datapath
 			input wire[31:0] PC, IR, RA, RB, RZ, RM, RY,
 			//input [?:0] ReturnAddress,
+			
 	//Processor-memory interface and IR control signals
-		//input [?:0] ALU_OP, 
+		//input [?:0] ALU_OP,
+		input wire [31:0] OP_Code, IMMEDIATE_OPPERAND,
+	//Condition Control Register
+		input wire [31:0] CCR_Out,
 	//Main Processor Datapath Control Signals
 		//input [?:0] C_Display_Select, B_Display_Select, Y_Display_Select //(WARNING) I DO NOT KNOW THE SIZE OF THESE Display_Select Lines
 		//input [?:0] ConditionCodes,//(WARNING) I DO NOT KNOW THE SIZE OF THE ConditionCodes
 		//input [?:0] Sign_Extend_ALU_B_Imediate,
 	//Program Counter
 		//input [?:0] PC, PC_Display_Select, PC_Enable, BranchOffset_Display_Select
+		input wire PC_Select, PC_Enable, INC_Select,
+		input wire[31:0] PC_Temp, BranchOffset,
 	//Memory
 		//input [?:0] MEM_Read, MEM_Write, MFC, MEM_Address_Display_Select_RZ_OR_PC
 	//Instruction Register
@@ -52,10 +58,11 @@ input wire Display_Enable,
 	//Data
 		//Peripheral Form Of Input
 			//input [?:0] UserInput,		
-		//Program Counter
-			//input [?:0] PC, PC_Temp,
 		//Instruction Register
 			//input [?:0] IR,
+		//Read Only Memory
+			input wire [31:0] ROM_Out,
+
 //END INPUT DATA---------------------------------------------------------------------------------------------------------------------
 
 //OUTPUT DATA++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -66,31 +73,41 @@ input wire Display_Enable,
 // Map RF_a to HEX 6&7, Map RF_b to HEX 4&5, Map RF_c to HEX 0&1
 wire [31:0] AddressRF;
 											//{2'b0,RF_a} Because Addresses are 5 Bits and Display is 4Bits Per Hex 
-		assign AddressRF[31:24] = {2'b0,RF_a};//Address (a) In The Register File INPUT DATA To Processor
-		assign AddressRF[23:16] = {2'b0,RF_b};//Address (b) In The Register File INPUT DATA To Processor
+		assign AddressRF[31:24] = {2'b0,RF_a[4:0]};//Address (a) In The Register File INPUT DATA To Processor
+		assign AddressRF[23:16] = {2'b0,RF_b[4:0]};//Address (b) In The Register File INPUT DATA To Processor
 		assign AddressRF[15:8] = 8'h00;
-		assign AddressRF[7:0] = {2'b0,RF_c};//Address (c) In The Register File OUTPUT DATA From Processor
+		assign AddressRF[7:0] = {2'b0,RF_c[4:0]};//Address (c) In The Register File OUTPUT DATA From Processor
 
 
 always @(Display_Enable)//Look at the Display_Selected contents when Display_Enable is pressed
 	begin
 	//pushbuttons are active low but this is the only way I'll know that it was the clock which triggered this statement
-		if	(Display_Enable) ///Do Not Automatically Drive The Display
+		if	(~Display_Enable) ///Do Not Automatically Drive The Display
 			begin
 				HexDisplay32Bits<=16'h0FF0; //OFF
 			end
 		
-		else if(~Display_Enable)//pushbuttons are active low, display when pushed down...
+		else if(Display_Enable)//pushbuttons are active low, display when pushed down...
 		begin
 			case(Display_Select)
-				0:	HexDisplay32Bits = PC;//Program Counter, Auto Increments Prior To The (Fetch) Stage 
+				0:	HexDisplay32Bits = PC[31:0];//Program Counter, Auto Increments Prior To The (Fetch) Stage 
 				1:	HexDisplay32Bits = IR;//Instruction Register Written To After The (Fetch) Stage 
-				2:	HexDisplay32Bits = RA;//RA = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
-				3:	HexDisplay32Bits = RB;//RB = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
-				4:	HexDisplay32Bits = RZ;//RZ = Written To After The (Compute) Stage 
-				5:	HexDisplay32Bits = RM;//RM = Written To After The (Compute) Stage And Is Used In The Memory Access Stage 
-				6:	HexDisplay32Bits = RY;//RY = Written To After The (Memory Access) Stage 
-				7:	HexDisplay32Bits = AddressRF;//Display Register File Adresses
+				2:	HexDisplay32Bits = RA[31:0];//RA = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
+				3:	HexDisplay32Bits = RB[31:0];//RB = Written To After The (Decode) Stage And Is Used In The ALU (Compute) Stage
+				4:	HexDisplay32Bits = RZ[31:0];//RZ = Written To After The (Compute) Stage 
+				5:	HexDisplay32Bits = RM[31:0];//RM = Written To After The (Compute) Stage And Is Used In The Memory Access Stage 
+				6:	HexDisplay32Bits = RY[31:0];//RY = Written To After The (Memory Access) Stage 
+				7:	HexDisplay32Bits = AddressRF[31:0];//Display Register File Adresses
+				8:	HexDisplay32Bits = ROM_Out[31:0];//ROM Output ...
+				9: HexDisplay32Bits = PC_Temp[31:0];// PC-1 or PC-BranchOffset or PC-RA // One Cycle Behind...
+				10: HexDisplay32Bits = BranchOffset[31:0]; // Branch Offset
+				11: HexDisplay32Bits = PC_Select;// Increment PC "0"->jump to "RA" .... "1"->inc by MuxINC  // MuxPC = PC_select ? NextAdd: RA
+				12: HexDisplay32Bits = PC_Enable;// Enable Program Counter
+				13: HexDisplay32Bits = INC_Select;// Increment PC "0"->inc by "1" .... "1"->inc by "BranchOffset"  // MuxINC = INC_select ? BranchOffset: 32'd1
+				14: HexDisplay32Bits = CCR_Out[31:0];// Condition Control Register
+				15: HexDisplay32Bits = OP_Code[31:0];// Operation (ie: add, subtract...)
+				16: HexDisplay32Bits = IMMEDIATE_OPPERAND[31:0];// Immediate Value Muxed into ALU or other
+				
 				default: HexDisplay32Bits = 16'hDEDE;//"Display Error"
 			endcase
 		end

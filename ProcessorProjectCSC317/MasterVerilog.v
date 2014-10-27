@@ -18,19 +18,28 @@ module MasterVerilog(
 	wire [31:0] HexDisplay32Bits_Wire;
 	reg [31:0] HexDisplay32Bits;
 	
-//Debounce The Clock
-	wire clk_Debounced; //Clock is connected to a Push Button
-	PushButton_Debouncer debounceit(.clock27MHz(clk_27),.PB(pushBut[0]),.PB_state(clk_Debounced));
+//Debounce The Clock and The Other Buttons
+	wire [3:0]pushBut_DB; 
+	PushButton_Debouncer debounceit0(.clock27MHz(clk_27),.PB(pushBut[0]),.PB_state(pushBut_DB[0]));
+	PushButton_Debouncer debounceit1(.clock27MHz(clk_27),.PB(pushBut[1]),.PB_state(pushBut_DB[1]));
+	PushButton_Debouncer debounceit2(.clock27MHz(clk_27),.PB(pushBut[2]),.PB_state(pushBut_DB[2]));
+	PushButton_Debouncer debounceit3(.clock27MHz(clk_27),.PB(pushBut[3]),.PB_state(pushBut_DB[3]));
 
+	
+//ROM
+	wire [31:0] ROM_Out, ROM_Address_Select;
+	wire MEM_Read;
+	assign MEM_Read = switch[17];
+	
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /////// 			START		Memory
 
 //Read Only Memory
 ROM ROM1(
-	.address(), // From MuxMA
-	.clken(),	// MEM_Read
-	.clock(),	// Clock
-	.q()			// To IR  // Instruction Out
+	.address(ROM_Address_Select), // From MuxMA
+	.clken(MEM_Read),	// MEM_Read
+	.clock(clk_27),	// Clock
+	.q(ROM_Out[31:0])			// To IR  // Instruction Out
 	); 		
 	
 	
@@ -43,15 +52,19 @@ ROM ROM1(
 /////// 			START		Processor
 
 Processor aProcessor(
-	//.ROM1(ROM1),
-	//.MEM
-	.Display_Select(switch),
-	.Display_Enable(pushBut[0]),
+	.ROM_Out(ROM_Out[31:0]),
+	.MEM_Read(MEM_Read),
+	.PC_Reset(pushBut_DB[3]),
+	.Display_Select(switch[4:0]),
+	.Display_Enable(pushBut_DB[1]),
    .ProcessorReset(0), 	// Resets the processor to initial state
-	.ProcessorEnable(pushBut[2]), 	// Run switch 
-	.Clock(clk_Debounced),
+	.ProcessorEnable(pushBut_DB[2]), 	// Run switch 
+	.Clock(pushBut_DB[0]),
 	.OperationFinished(green[8]),
+	.TestLight(green[7]),
+	.ROM_Address_Select(ROM_Address_Select),
 	.HexDisplay(HexDisplay32Bits_Wire)
+	
 );
 
 /////// 			FINISH	Processor
@@ -66,7 +79,7 @@ assign red[15:0] = 0;
 assign red[16] = 0;
 assign red[17] = 0;
 assign green[6:0] = 0;
-assign green[7] = 0;
+//assign green[7] = 0;
 //assign green[8]=0; 	
 
 /////// 			FINISH		LED Output

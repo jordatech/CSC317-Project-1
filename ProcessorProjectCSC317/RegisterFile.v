@@ -5,7 +5,7 @@
 					Jeremy Laird
 */
 //Edited By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
-//9:05 PM 10/20/2014
+//10/26/2014
 
 /******BRIEF DESCRIPTION****************
 	REFERENCE: Figure 5.8, "Computer Organization and Embedded Systems, 6th Ed."
@@ -39,7 +39,9 @@ module RegisterFile(Rdst,Rsrc1,Rsrc2,RA,RB,RY,clk,RF_WRITE);
 	//At each clock the contents of RY are written to the general purpose register specified by Rdst(5 bits)
 		always@(posedge clk)
 			begin
-				R[Rdst][31:0]<=RY[31:0];
+				if(RF_WRITE)begin
+					R[Rdst][31:0]<=RY[31:0];
+				end
 			end
 		
 endmodule 

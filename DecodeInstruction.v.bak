@@ -1,0 +1,7 @@
+//Created By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
+//10/25/2014
+//General 32-bit register
+module DecodeInstruction(
+
+)
+endmodule
