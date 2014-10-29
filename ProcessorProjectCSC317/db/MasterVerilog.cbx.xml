@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="MasterVerilog">
-		<CBX_INST_ENTRY INSTANCE_NAME="|MasterVerilog|ROM:ROM1|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cp91.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MasterVerilog|ROM:InstructionROM|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_cp91.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

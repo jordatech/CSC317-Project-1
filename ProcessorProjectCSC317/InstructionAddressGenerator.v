@@ -29,8 +29,7 @@ begin
 	if(PC_enable & ~PC_Reset)begin								// Two registers (PC and PC_temp) to save the address of the current 
 		PC <= MuxPC;
 	end
-	
-	if (PC_Reset)begin
+	if(PC_Reset) begin
 		PC <=0;
 	end											// instruction for either an address to find the next instruction (PC)
 													// or an address to return to after a branch (PC_temp)

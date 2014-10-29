@@ -29,13 +29,12 @@ module MasterVerilog(
 //ROM
 	wire [31:0] ROM_Out, ROM_Address_Select;
 	wire MEM_Read;
-	assign MEM_Read = switch[17];
 	
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /////// 			START		Memory
 
 //Read Only Memory
-ROM ROM1(
+ROM InstructionROM(
 	.address(ROM_Address_Select), // From MuxMA
 	.clken(MEM_Read),	// MEM_Read
 	.clock(clk_27),	// Clock

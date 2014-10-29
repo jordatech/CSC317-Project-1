@@ -7,7 +7,7 @@
 //Edited By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
 //10/26/2014
 
-/******BRIEF DESCRIPTION****************
+/******BRIEF DESCRIPTION****************	
 	REFERENCE: Figure 5.8, "Computer Organization and Embedded Systems, 6th Ed."
 	
 	Rdst:		5 bit address of the destination register
@@ -24,9 +24,9 @@
 /********************BEGIN MODULE*****************/
 
 module RegisterFile(Rdst,Rsrc1,Rsrc2,RA,RB,RY,clk,RF_WRITE);
-	input [4:0]Rdst,Rsrc1,Rsrc2;
-	input clk, RF_WRITE;
-	input [31:0]RY;
+	input wire [4:0]Rdst,Rsrc1,Rsrc2;
+	input wire clk, RF_WRITE;
+	input wire [31:0]RY;
 	output wire [31:0]RA,RB;
 	
 	//Initialize 32 32-bit registers

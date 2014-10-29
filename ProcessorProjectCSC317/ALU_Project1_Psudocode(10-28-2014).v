@@ -1,29 +1,31 @@
 //ALU - Arithmatical Logical Unit
 //Created By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
 //10/21/2014
-//
-//Revision 10-22-2014
+//Revision 10-28-2014
 
-module ALU_Project1(
-input [31:0] instruction , RA, RB, // Since RB Is Muxed In We May Use RBI = RB_IMMEDIATE To Specify An Imediate Value
-input enable, clock,
-output wire[31:0] RZ, CCR,// Out and Condition Control Register
+//ArithmeticLogicalUnit ALU1(.InstructionFormat(),.Clock(),.Instruction(),.RA(),.RB(),.RZ(),.INR_FLAG(),.ZERO_FLAG(),.OVERFLOW_FLAG(),.NEGATIVE_FLAG(),.CARRY_FLAG());
+
+module ArithmeticLogicalUnit(
+input wire [31:0] Instruction , RA, RB, // Since RB Is Muxed In We May Use RBI = RB_IMMEDIATE To Specify An Imediate Value
+input Clock,
+input wire [1:0] InstructionFormat, //Formats (a,b,c) (0,1,2)
+	// INSTRUCTION FORMATS:
+	// Instruction Format (a) (RSRC1[31:27])(RSRC2[26:22])(RDST[21:17])(OPCODE[16:0])
+		//InstructionFormat='d0;
+	// Instruction Format (b) (RSRC1[31:27])(RSRC2[26:22])(IMMEDIATE_OPPERAND[21:6])(OPCODE[5:0])
+		//InstructionFormat='d1;
+	// Instruction Format (c) (IMMEDIATE_VALUE[31:6])(OPCODE[5:0])
+		//InstructionFormat='d2;
+output wire[31:0] RZ, // Out and Condition Control Register
 								  //CCR 32-Bit Format [...IFNR, INR , N, Z, V, C]
 								  //CCR [... Instruction Format Not Recognized, Instruction Not Recognized, Negative,Zero,Overflow,Carry]
-// Internal Registers
-reg IFNR_FLAG, INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG // FLAGS For Condition Control Regester, which are "hooked" to the CCR output wire
-input [1:0] InstructionFormat, //Formats (a,b,c) (0,1,2)
-// INSTRUCTION FORMATS:
-// Instruction Format (a) (RSRC1[31:27])(RSRC2[26:22])(RDST[21:17])(OPCODE[16:0])
-	//InstructionFormat='d0;
-// Instruction Format (b) (RSRC1[31:27])(RSRC2[26:22])(IMMEDIATE_OPPERAND[21:6])(OPCODE[5:0])
-	//InstructionFormat='d1;
-// Instruction Format (c) (IMMEDIATE_VALUE[31:6])(OPCODE[5:0])
-	//InstructionFormat='d2;
-
+output reg INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG;// FLAGS For Condition Control Regester, which are "hooked" to the CCR output wire
 				
 );
 
+// Internal Registers
+//reg IFNR_FLAG,
+// INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG; // FLAGS For Condition Control Regester, which are "hooked" to the CCR output wire
 
 
 
@@ -39,7 +41,7 @@ always @(posedge clock)
 		//(RSRC1[31:27])(RSRC2[26:22])(RDST[21:17])(OPCODE[16:0]) Instruction Format (a)	Instruction Format (a)	Instruction Format (a)	
 		if(InstructionFormat=='d0) begin //  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		
-			casex(instruction[16:0])
+			casex(Instruction[16:0])
 				
 				
 				//17'bxxxx_xxxxxxx_111111: RZ;// Debugging Purposes
@@ -58,12 +60,12 @@ always @(posedge clock)
 					____________________________________________________*/
 					
 				
-				17'b0000_0000001_000000: RZ=RA+RB;
-												 if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))begin
-													OVERFLOW_FLAG=1;
-												 end
-												 ZERO_FLAG=(RZ==0);
-												 NEGATIVE_FLAG=RZ[31];
+//				17'b0000_0000001_000000: RZ=RA+RB;
+//												 if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))begin
+//													OVERFLOW_FLAG=1;
+//												 end
+//												 ZERO_FLAG=(RZ==0);
+//												 NEGATIVE_FLAG=RZ[31];
 					/*_____________________(ADD)________________________
 					(ADD)DESCRIPTION:
 						(1.) Addition
@@ -84,12 +86,12 @@ always @(posedge clock)
 					____________________________________________________*/
 				
 				
-				17'b0000_0000100_000000: RZ=RA-RB;
-												 if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0))begin
-													OVERFLOW_FLAG=1;
-												 end
-												 ZERO_FLAG=(RZ==0);
-												 NEGATIVE_FLAG=RZ[31];
+//				//17'b0000_0000100_000000: RZ=RA-RB;
+//												 if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0))begin
+//													OVERFLOW_FLAG=1;
+//												 end
+//												 ZERO_FLAG=(RZ==0);
+//												 NEGATIVE_FLAG=RZ[31];
 					/*_____________________(SUB)________________________
 					(SUB)DESCRIPTION:
 						(1.) Subtraction
@@ -110,7 +112,7 @@ always @(posedge clock)
 					____________________________________________________*/
 
 					
-				17'b0000_0001000_000000:/*AnD*/;// Bitwise AnD "camel_backed" to keep seperate from ADDITION
+				//17'b0000_0001000_000000:/*AnD*/;// Bitwise AnD "camel_backed" to keep seperate from ADDITION
 					/*_____________________(AnD)________________________
 					(AnD)DESCRIPTION:
 						(1.) Bitwise AnD
@@ -124,7 +126,7 @@ always @(posedge clock)
 					____________________________________________________*/
 				
 				
-				17'b0000_0001001_000000: /*OR*/;
+				//17'b0000_0001001_000000: /*OR*/;
 					/*_____________________(OR)________________________
 					(OR)DESCRIPTION:
 						(1.) Bitwise OR
@@ -137,7 +139,7 @@ always @(posedge clock)
 					____________________________________________________*/
 				
 				
-				17'b0000_0001010_000000: /*NEG*/;
+				//17'b0000_0001010_000000: /*NEG*/;
 					/*_____________________(NEG)________________________
 					(NEG)DESCRIPTION:
 						(1.) (Two's) Complement  //To get the two's complement of a binary number, the bits are inverted, or "flipped", by using the bitwise NOT operation; the value of 1 is then added to the resulting value, ignoring the overflow which occurs when taking the two's complement of 0.
@@ -150,7 +152,7 @@ always @(posedge clock)
 					____________________________________________________*/
 
 				
-				17'b0000_0001011_000000: /*XOR*/;
+				//17'b0000_0001011_000000: /*XOR*/;
 					/*_____________________(XOR)________________________
 					(XOR)DESCRIPTION:
 						(1.) Bitwise Exclusive OR // Exclusive OR is a logical operation that outputs true whenever both inputs differ (one is true, the other is false).
@@ -163,7 +165,7 @@ always @(posedge clock)
 					____________________________________________________*/
 					
 					
-				17'b0000_0001100_000000: /*COMP*/;
+				//17'b0000_0001100_000000: /*COMP*/;
 					/*_____________________(COMP)________________________
 					(COMP)DESCRIPTION:
 						(1.) Bitwise (One's) Complement
@@ -177,7 +179,7 @@ always @(posedge clock)
 					____________________________________________________*/
 				
 				
-				17'b0000_0010000_000000: /*LSR*/;
+				//17'b0000_0010000_000000: /*LSR*/;
 					/*_____________________(LSR)________________________
 					(LSR)DESCRIPTION:
 						(1.) Logical Shift Right  // Shift One Bit Position Only
@@ -191,7 +193,7 @@ always @(posedge clock)
 					____________________________________________________*/
 
 				
-				17'b0000_0010001_000000: /*ASR*/;
+				//17'b0000_0010001_000000: /*ASR*/;
 					/*_____________________(ASR)________________________
 					(ASR)DESCRIPTION:
 						(1.) Arithmetic Shift Right  // Arithmetic Shifts Sign Extend // Shift One Bit Position Only
@@ -206,7 +208,7 @@ always @(posedge clock)
 		
 
 				
-				17'b0000_0010011_000000: /*LSL_ASL*/;  // LSL Is The Same As ASL , Back Fills With Zeros
+				//17'b0000_0010011_000000: /*LSL_ASL*/;  // LSL Is The Same As ASL , Back Fills With Zeros
 					/*_____________________(LSL_ASL)________________________
 					(LSL_ASL)DESCRIPTION:
 						(1.) Logical/Arithmatical Shift Left  // Shift One Bit Position Only
@@ -221,7 +223,7 @@ always @(posedge clock)
 		
 
 				
-				17'b0000_0011001_000000: /*ROR*/;
+				//17'b0000_0011001_000000: /*ROR*/;
 					/*_____________________(ROR)________________________
 					(ROR)DESCRIPTION:
 						(1.) Rotate Right  // By One Bit Position
@@ -232,12 +234,12 @@ always @(posedge clock)
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) CARRY_FLAG
-						//??????// But then the output depends on the last instruction which assigns the CARRY_FLAG...
+						//??????// But then the output depends on the last Instruction which assigns the CARRY_FLAG...
 						//??????// I question this implementation because it will NOT provide a one-one, input-output mapping (ie: a given input may have two separate outputs which are dependent upon PAST INPUTS).
 					____________________________________________________*/
 		
 		
-				17'b0000_0011010_000000: /*ROL*/;
+				//17'b0000_0011010_000000: /*ROL*/;
 					/*_____________________(ROL)________________________
 					(ROL)DESCRIPTION:
 						(1.) Rotate Left  // By One Bit Position
@@ -248,12 +250,12 @@ always @(posedge clock)
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) CARRY_FLAG
-						//??????// But then the output depends on the last instruction which assigns the CARRY_FLAG...
+						//??????// But then the output depends on the last Instruction which assigns the CARRY_FLAG...
 						//??????// I question this implementation because it will NOT provide a one-one, input-output mapping (ie: a given input may have two separate outputs which are dependent upon PAST INPUTS).
 					____________________________________________________*/
 						
 						
-				17'b0000_0100000_000000: /*MOVE*/;
+				//17'b0000_0100000_000000: /*MOVE*/;
 					/*_____________________(MOVE)________________________
 					(MOVE)DESCRIPTION:
 						(1.) Move // Copy
@@ -267,7 +269,7 @@ always @(posedge clock)
 					____________________________________________________*/
 				
 				
-				17'b0000_0100001_000000: /*LBI*/;
+				//17'b0000_0100001_000000: /*LBI*/;
 					/*_____________________(LBI)________________________
 					(LBI)DESCRIPTION:
 						(1.) Load Base With Index
@@ -283,7 +285,7 @@ always @(posedge clock)
 					____________________________________________________*/
 
 					
-				17'b0000_0100010_000000: /*LDRI*/;
+				//17'b0000_0100010_000000: /*LDRI*/;
 					/*_____________________(LDRI)________________________
 					(LDRI)DESCRIPTION:
 						(1.) Load Register Indirect
@@ -319,10 +321,10 @@ always @(posedge clock)
 		//Instruction Format (B)		     BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 		//(RSRC1[31:27])(RSRC2[26:22])(IMMEDIATE_OPPERAND[21:6])(OPCODE[5:0]) Instruction Format (b) Instruction Format (b) Instruction Format (b)
 		if(InstructionFormat=='d1) begin//  BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-			casex(instruction[5:0])
+			casex(Instruction[5:0])
 				
 				
-				5'b111111: /*NOP*/;
+				//5'b111111: /*NOP*/;
 					/*_____________________(NOP)________________________
 					(NOP)DESCRIPTION:
 						(1.) No Operation  // Stall
@@ -357,10 +359,10 @@ always @(posedge clock)
 		//Instruction Format (C)		     CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 		//(IMMEDIATE_VALUE[31:6])(OPCODE[5:0]) Instruction Format (c) Instruction Format (c) Instruction Format (c) Instruction Format (c) 
 		if(InstructionFormat=='d2) begin//  CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-			casex(instruction[5:0])
+			casex(Instruction[5:0])
 
 			
-				5'b111111: /*NOP*/;
+				//5'b111111: /*NOP*/;
 					/*_____________________(NOP)________________________
 					(NOP)DESCRIPTION:
 						(1.) No Operation  // Stall
@@ -373,26 +375,26 @@ always @(posedge clock)
 					____________________________________________________*/
 				
 							
-				5'100010: /*LD#*/;
+				//5'b100010: /*LD#*/;
 					/*_____________________(LD#)________________________
 					(LD#)DESCRIPTION:
 						(1.) Load Immediate  //The value in the immediate field is sign extended and placed in the Rdst.
 					____________________________________________________	
 					(LD#)RTL EQUIVELENT:
-						(1.) RZ<-{6{instruction[31]},instruction[31:6]}  // {n{m}} Replicate value m, n times For Sign Extending
+						(1.) RZ<-{6{Instruction[31]},Instruction[31:6]}  // {n{m}} Replicate value m, n times For Sign Extending
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) NONE
 					____________________________________________________*/
 				
 							
-				5'100011: /*LDU#*/;
+				//5'b100011: /*LDU#*/;
 					/*_____________________(LDU#)________________________
 					(LDU#)DESCRIPTION:
 						(1.) Load Unsigned Immediate
 					____________________________________________________	
 					(LDU#)RTL EQUIVELENT:
-						(1.) RZ<-{6{0},instruction[31:6]}  //The value in the immediate field is sign extended and placed in the Rdst.
+						(1.) RZ<-{6{0},Instruction[31:6]}  //The value in the immediate field is sign extended and placed in the Rdst.
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) NONE
@@ -433,14 +435,16 @@ always @(posedge clock)
 			____________________________________________________*/
 		end//END FORMAT NOT RECOGNIZED
 	
-	//Don't clear flags if it is a NOP //instruction[5:0]!=6'b111111;
-	if(instruction[5:0]!=6'b111111 && )begin
+	
+	//Always Update the ZERO_FLAG and NEGATIVE_FLAG
+	//Don't change flags if it is a NOP //Instruction[5:0]!=6'b111111;
+	if(Instruction[5:0]!=6'b111111)begin
 		
 		if(RZ==0)begin
-			ZERO_FLAG=1;//(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
+			ZERO_FLAG = 1;//(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
 		end
 		
-		NEGATIVE_FLAG=RZ[31];//(3.) NEGATIVE_FLAG
+		NEGATIVE_FLAG = RZ[31];//(3.) NEGATIVE_FLAG
 		
 	end
 

@@ -4,24 +4,36 @@
 //Jordan D. Ulmer - jordatech@gmail.com
 //(10-13-2014)
 //Edited By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
-//10/24/2014
+//10/28/2014
 
 
-// EXAMPLE INSTANTIATION (10-24-2014)
+// EXAMPLE INSTANTIATION (10-28-2014)
+////Display Unit For Debugging And Validation
 //DisplayMux displayAll(
 //	//INPUT DATA+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //		.Display_Select(Display_Select[4:0]),
 //		.Display_Enable(Display_Enable),
-//		.PC(16'h0101),
+//		.PC(PC[31:0]),
+//		.PC_Temp(PC_Temp),
 //		.IR(16'hFFFF),
-//		.RA(16'haaaa),
-//		.RB(16'hbbbb),
-//		.RZ(16'h2626),
-//		.RM(16'h1313),
-//		.RY(16'h2525),
-//		.RF_a(5'h1),
-//		.RF_b(5'h2),
-//		.RF_c(5'h3),
+//		.RA(RA_Out[31:0]),
+//		.RB(RB_Out[31:0]),
+//		.RZ(RZ_Out[31:0]),
+//		.RM(RM_Out[31:0]),
+//		.RY(RY_Out[31:0]),
+//		.RF_a(RF_a),
+//		.RF_b(RF_b),
+//		.RF_c(RF_c),
+//		.BranchOffset(BranchOffset[31:0]),
+//		.ROM_Out(ROM_Out[31:0]),
+//		.PC_Select(PC_Select),
+//		.PC_Enable(PC_Enable),
+//		.INC_Select(INC_Select),
+//		.CCR_Out(CCR_Out),
+//		.OP_Code(OP_Code),
+//		.IMMEDIATE_OPPERAND(IMMEDIATE_OPPERAND),
+//		.ClockCount(ClockCount),
+//
 //	//OUTPUT DATA++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //		.HexDisplay32Bits(HexDisplay)
 //	);
@@ -36,8 +48,10 @@ input wire Display_Enable,
 			input wire[4:0] RF_a, RF_b, RF_c, 
 		//Main Processor Datapath
 			input wire[31:0] PC, IR, RA, RB, RZ, RM, RY,
+			input wire [2:0]ClockCount,
 			//input [?:0] ReturnAddress,
-			
+	//[Decode]
+		input wire [1:0] InstructionFormat,
 	//Processor-memory interface and IR control signals
 		//input [?:0] ALU_OP,
 		input wire [31:0] OP_Code, IMMEDIATE_OPPERAND,
@@ -107,6 +121,8 @@ always @(Display_Enable)//Look at the Display_Selected contents when Display_Ena
 				14: HexDisplay32Bits = CCR_Out[31:0];// Condition Control Register
 				15: HexDisplay32Bits = OP_Code[31:0];// Operation (ie: add, subtract...)
 				16: HexDisplay32Bits = IMMEDIATE_OPPERAND[31:0];// Immediate Value Muxed into ALU or other
+				17: HexDisplay32Bits = ClockCount[2:0];// Clocks since last instruction 0,1,2,3,4,0,1... RESETS AFTER 5
+				18: HexDisplay32Bits = InstructionFormat[1:0];// Determined in Decode Stage (a,b,c)=(0,1,2)
 				
 				default: HexDisplay32Bits = 16'hDEDE;//"Display Error"
 			endcase
