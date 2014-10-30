@@ -1,9 +1,9 @@
-// MUX N TO 1
+// Mux N TO 1
 // Written By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
 // 10/28/2014
-//MUXn MUX_NAME #(.WidthOfInputs(WidthOfInputs),.NumberOfInputs(NumberOfInputs))(.Select(Select),.Out(Out),.In_0(In_0),.In_1(In_1),.In_2(In_2),.In_3(In_3),.In_4(In_4),.In_5(In_5),.In_6(In_6),.In_7(In_7));
-//MUXn MUX_NAME #(.WidthOfInputs(WidthOfInputs),.NumberOfInputs(NumberOfInputs))(.Select(Select),.Out(Out),.ConcatanatedInputs(ConcatanatedInputs))
-module MUXn #(	
+//Muxn Mux_NAME #(.WidthOfInputs(WidthOfInputs),.NumberOfInputs(NumberOfInputs))(.Select(Select),.Out(Out),.In_0(In_0),.In_1(In_1),.In_2(In_2),.In_3(In_3),.In_4(In_4),.In_5(In_5),.In_6(In_6),.In_7(In_7));
+//Muxn Mux_NAME #(.WidthOfInputs(WidthOfInputs),.NumberOfInputs(NumberOfInputs))(.Select(Select),.Out(Out),.ConcatanatedInputs(ConcatanatedInputs))
+module Muxn #(	
 	parameter WidthOfInputs, NumberOfInputs
 )
 (

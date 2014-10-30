@@ -28,7 +28,7 @@ module MasterVerilog(
 	
 //ROM
 	wire [31:0] ROM_Out, ROM_Address_Select;
-	wire MEM_Read;
+	wire ROM_Read;
 	
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /////// 			START		Memory
@@ -36,7 +36,7 @@ module MasterVerilog(
 //Read Only Memory
 ROM InstructionROM(
 	.address(ROM_Address_Select), // From MuxMA
-	.clken(MEM_Read),	// MEM_Read
+	.clken(ROM_Read),	// ROM_Read
 	.clock(clk_27),	// Clock
 	.q(ROM_Out[31:0])			// To IR  // Instruction Out
 	); 		
@@ -52,7 +52,7 @@ ROM InstructionROM(
 
 Processor aProcessor(
 	.ROM_Out(ROM_Out[31:0]),
-	.MEM_Read(MEM_Read),
+	.ROM_Read(ROM_Read),
 	.PC_Reset(pushBut_DB[3]),
 	.Display_Select(switch[4:0]),
 	.Display_Enable(pushBut_DB[1]),

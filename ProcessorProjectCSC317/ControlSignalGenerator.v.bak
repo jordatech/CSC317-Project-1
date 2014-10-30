@@ -1,0 +1,30 @@
+module ControlSignalGenerator(
+	//Input
+	input [31:0] external, instruction, timeStep, conditionSignal,
+	//Output
+	output reg controlSignal
+	);	
+	//		  16_1512_11 8_7  4_3  0
+	//Format	0_0000_0000_1000_0000
+	//		   0000_0 0110 10_00 0000
+	always @(instruction)
+	begin
+		if(instruction[16:13] != 4'b0000)
+			//Invalid instruction
+			controlSignal = 0;
+		else if(instruction[5:0] == 6'b00_0000) //Variation A 1 0000_xxxxxxx_000000
+			case(instruction[12:6])
+				6'b000000:
+					controlSignal = 1;
+				default:
+					controlSignal = 0;
+			endcase
+		else if (instruction[12:6] == 7'b000_0000) //Variation B or C 
+			case(instruction[5:0])
+				7'b000_0000:
+					controlSignal = 1;				
+				default:
+					controlSignal = 0;
+			endcase
+	end
+endmodule

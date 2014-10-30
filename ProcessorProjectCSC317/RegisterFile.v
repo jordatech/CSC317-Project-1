@@ -10,7 +10,7 @@
 /******BRIEF DESCRIPTION****************	
 	REFERENCE: Figure 5.8, "Computer Organization and Embedded Systems, 6th Ed."
 	
-	Rdst:		5 bit address of the destination register
+	MuxC_Out_Rdst:		5 bit address of the destination register
 	Rsrc1:	5 bit address of the first register in the opperand
 					-This register is written to RA
 	Rsrc2:	5 bit address of the second register in the opperand
@@ -18,13 +18,13 @@
 	RA,RB:	are 32 bit outputs and should portmapped to the respective registers of the processor
 	RY:		32 bit input and should be portmapped to RY 
 	Comment:  To implement in a piplined processor Rsrc1 and Rsrc2 will not come from the same instruction
-				 as Rdst.
+				 as MuxC_Out_Rdst.
 */
  
 /********************BEGIN MODULE*****************/
 
-module RegisterFile(Rdst,Rsrc1,Rsrc2,RA,RB,RY,clk,RF_WRITE);
-	input wire [4:0]Rdst,Rsrc1,Rsrc2;
+module RegisterFile(MuxC_Out_Rdst,Rsrc1,Rsrc2,RA,RB,RY,clk,RF_WRITE);
+	input wire [4:0]MuxC_Out_Rdst,Rsrc1,Rsrc2;
 	input wire clk, RF_WRITE;
 	input wire [31:0]RY;
 	output wire [31:0]RA,RB;
@@ -36,11 +36,11 @@ module RegisterFile(Rdst,Rsrc1,Rsrc2,RA,RB,RY,clk,RF_WRITE);
 		assign RA[31:0]=R[Rsrc1][31:0];									
 		assign RB[31:0]=R[Rsrc2][31:0];
 	
-	//At each clock the contents of RY are written to the general purpose register specified by Rdst(5 bits)
+	//At each clock the contents of RY are written to the general purpose register specified by MuxC_Out_Rdst(5 bits)
 		always@(posedge clk)
 			begin
 				if(RF_WRITE)begin
-					R[Rdst][31:0]<=RY[31:0];
+					R[MuxC_Out_Rdst][31:0]<=RY[31:0];
 				end
 			end
 		

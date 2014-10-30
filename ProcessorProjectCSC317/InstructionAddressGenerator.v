@@ -11,6 +11,7 @@ module InstructionAddressGenerator(BranchOff,RA,PC_select,PC_enable,INC_select,C
 	output reg [31:0]PC, PC_temp;
 	wire [31:0]MuxINC, MuxPC;
 	wire [31:0]NextAdd;
+	
 
 	//(INC_select) Increment PC "0"->inc by "1" .... "1"->inc by "BranchOffset"  // MuxINC = INC_select ? BranchOffset: 32'd1
 	assign MuxINC = INC_select ? BranchOff: 32'd1;	// Multiplexer to select between decimal ONE or an

@@ -2,76 +2,52 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow Model Setup 'PushButton_Debouncer:debounceit0|PB_state'
-Slack : -2.788
-TNS   : -71.666
-
 Type  : Slow Model Setup 'clk_27'
 Slack : -2.164
-TNS   : -140.725
+TNS   : -122.196
 
-Type  : Slow Model Setup 'ROM:InstructionROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[1]'
-Slack : 0.503
-TNS   : 0.000
+Type  : Slow Model Setup 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : -1.558
+TNS   : -1.558
 
 Type  : Slow Model Hold 'clk_27'
-Slack : -2.511
-TNS   : -28.174
-
-Type  : Slow Model Hold 'ROM:InstructionROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[1]'
-Slack : -1.043
-TNS   : -15.077
+Slack : -2.486
+TNS   : -25.062
 
 Type  : Slow Model Hold 'PushButton_Debouncer:debounceit0|PB_state'
-Slack : 0.391
+Slack : 2.328
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'clk_27'
 Slack : -1.423
-TNS   : -202.604
+TNS   : -152.298
 
 Type  : Slow Model Minimum Pulse Width 'PushButton_Debouncer:debounceit0|PB_state'
 Slack : -0.500
-TNS   : -68.000
-
-Type  : Slow Model Minimum Pulse Width 'ROM:InstructionROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[1]'
-Slack : 0.500
-TNS   : 0.000
+TNS   : -1.000
 
 Type  : Fast Model Setup 'clk_27'
 Slack : -0.979
-TNS   : -33.559
+TNS   : -32.935
 
 Type  : Fast Model Setup 'PushButton_Debouncer:debounceit0|PB_state'
-Slack : -0.828
-TNS   : -9.482
-
-Type  : Fast Model Setup 'ROM:InstructionROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[1]'
-Slack : 0.364
-TNS   : 0.000
+Slack : -0.522
+TNS   : -0.522
 
 Type  : Fast Model Hold 'clk_27'
-Slack : -1.559
-TNS   : -20.086
-
-Type  : Fast Model Hold 'ROM:InstructionROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[1]'
-Slack : -0.285
-TNS   : -0.983
+Slack : -1.536
+TNS   : -18.064
 
 Type  : Fast Model Hold 'PushButton_Debouncer:debounceit0|PB_state'
-Slack : 0.215
+Slack : 1.402
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'clk_27'
 Slack : -1.423
-TNS   : -202.604
+TNS   : -152.298
 
 Type  : Fast Model Minimum Pulse Width 'PushButton_Debouncer:debounceit0|PB_state'
 Slack : -0.500
-TNS   : -68.000
-
-Type  : Fast Model Minimum Pulse Width 'ROM:InstructionROM|altsyncram:altsyncram_component|altsyncram_cp91:auto_generated|q_a[1]'
-Slack : 0.500
-TNS   : 0.000
+TNS   : -1.000
 
 ------------------------------------------------------------
