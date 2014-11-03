@@ -101,9 +101,7 @@ always @(Display_Enable)//Update the Display_Selected contents when anything cha
 				16: HexDisplay32Bits = CCR_Out[31:0];// Condition Control Register
 				17: HexDisplay32Bits = OP_Code[31:0];// Operation (ie: add, subtract...)
 				18: HexDisplay32Bits = ImmediateBlock_Out[31:0];// Immediate Value Muxed into ALU or other
-				19: HexDisplay32Bits = InstructionFormat[1:0];// Determined in Decode Stage (a,b,c)=(0,1,2)
-
-				
+				19: HexDisplay32Bits = InstructionFormat[1:0];// Determined in Decode Stage (a,b,c)=(0,1,2)                                
 				
 				default: HexDisplay32Bits = 16'hDEDE;//"Display Error"
 			endcase

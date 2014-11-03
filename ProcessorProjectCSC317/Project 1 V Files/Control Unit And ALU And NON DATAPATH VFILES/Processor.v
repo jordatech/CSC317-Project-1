@@ -60,7 +60,7 @@ module Processor (
 
 		
 	 //[Decode]*************************************************
-		// ALU Input Registers
+		//  Input Registers
 			wire 				RA_Enable, RB_Enable;
 			wire [31:0] 	RA_In, RB_In;
 			wire [31:0] 	RA_Out, RB_Out;
@@ -69,13 +69,13 @@ module Processor (
 			wire [31:0] 	MuxB_Out;
 			
 	 //[Execute]*************************************************
-		// ALU
+		// 
 			wire [1:0] 		InstructionFormat; 
 			wire [31:0] 	Instruction_Immediate,Instruction_OP_Code, ALU_Op, ImmediateBlock_Out;
 			// FLAGS For Condition Control Regester, which are "hooked" to the CCR output wire
-				wire 			INR_FLAG,  // Instruction Not Recognized ... Driven From ALU
-								ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG;// Four Default CCR Flags FROM ALU
-		// ALU Output Register
+				wire 			INR_FLAG,  // Instruction Not Recognized ... Driven From 
+								ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG;// Four Default CCR Flags FROM 
+		//  Output Register
 			wire 				RZ_Enable;
 			wire [31:0] 	RZ_In;
 			wire [31:0] 	RZ_Out;
@@ -134,9 +134,9 @@ module Processor (
 //[Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode]
 //STAGE#(2) [Source Registers]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	// ALU Input Registers
-		reg_32b RA (.R(RA_In), .Rin(RA_Enable), .Clock(Clock), .Q(RA_Out));// IN(REGFILE) -> OUT(ALU)
-		reg_32b RB (.R(RB_In), .Rin(RB_Enable), .Clock(Clock), .Q(RB_Out));// IN(REGFILE) -> OUT(ALU)
+	//  Input Registers
+		reg_32b RA (.R(RA_In), .Rin(RA_Enable), .Clock(Clock), .Q(RA_Out));// IN(REGFILE) -> OUT()
+		reg_32b RB (.R(RB_In), .Rin(RB_Enable), .Clock(Clock), .Q(RB_Out));// IN(REGFILE) -> OUT()
 	// MuxB
 		Muxn #(.WidthOfInputs(32),.NumberOfInputs(2)) 
 		MuxB(.Select(B_Select),.Out(MuxB_Out),.ConcatanatedInputs({ImmediateBlock_Out,RB_Out}));// B_Select[1,0] = {ImmediateBlock_Out,RB_Out}
@@ -157,18 +157,18 @@ module Processor (
 //-------------------------------------------------------------------------------------------------------------------------
 
 //[Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute][Execute]
-//STAGE#(3) [ALU]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//STAGE#(3) []+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	// ALU
-		ArithmeticLogicalUnit ALU1(.Clock(Clock),.ALU_Op(ALU_Op),.RA(RA_Out),.RB(MuxB_Out),.RZ(RZ_In),.INR_FLAG(INR_FLAG),
+	// 
+		ArithmeticLogicalUnit ALU(.Clock(Clock),.ALU_Op(ALU_Op),.RA(RA_Out),.RB(MuxB_Out),.RZ(RZ_In),.INR_FLAG(INR_FLAG),
 		.ZERO_FLAG(ZERO_FLAG),.OVERFLOW_FLAG(OVERFLOW_FLAG),.NEGATIVE_FLAG(NEGATIVE_FLAG),.CARRY_FLAG(CARRY_FLAG),.NOP_FLAG(NOP_FLAG));
-	// ALU Output Register // Memory Address Register
-		reg_32b RZ (.R(RZ_In), .Rin(RZ_Enable), .Clock(Clock), .Q(RZ_Out));// IN(ALU) -> OUT(MEMORY || MuxY)
+	//  Output Register // Memory Address Register
+		reg_32b RZ (.R(RZ_In), .Rin(RZ_Enable), .Clock(Clock), .Q(RZ_Out));// IN() -> OUT(MEMORY || MuxY)
   // Condition Control Register
 	  // CCR 32-Bit Format [...NOP, IFNR, INR , N, Z, V, C]
 	  // CCR [... No Operation, Instruction Format Not Recognized, Instruction Not Recognized, Negative,Zero,Overflow,Carry]	
 		reg_32b CCR (.R({NOP_FLAG, IFNR_FLAG, INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_FLAG, CARRY_FLAG}),
-		.Rin(CCR_Enable), .Clock(Clock), .Q(CCR_Out));// IN(ALU || Decode) -> OUT(USER)
+		.Rin(CCR_Enable), .Clock(Clock), .Q(CCR_Out));// IN( || Decode) -> OUT(USER)
 					
 
 //-------------------------------------------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ module Processor (
 //STAGE#(4) [Memory Access]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
 	// Memory Data Register
-		reg_32b RM (.R(RM_In), .Rin(RM_Enable), .Clock(Clock), .Q(RM_Out));// IN(ALU) -> OUT(MEMORY, Indirectly MuxY)  // Like RB_Temp..... but goes into memory
+		reg_32b RM (.R(RM_In), .Rin(RM_Enable), .Clock(Clock), .Q(RM_Out));// IN() -> OUT(MEMORY, Indirectly MuxY)  // Like RB_Temp..... but goes into memory
 	// MuxMA
 		Muxn #(.WidthOfInputs(32),.NumberOfInputs(2)) 
 		MuxMA(.Select(MA_Select),.Out(MuxMA_Out),.ConcatanatedInputs({PC_Out,RZ_Out}));// (MA_Select) [1,0] = {PC_Out,RZ_Out}

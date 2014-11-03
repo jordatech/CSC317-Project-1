@@ -14,11 +14,11 @@ module ControlSignalGenerator(
 				//Instruction Register
 					output wire			IR_Enable, 
 				// Immediate Block and "Decode Instruction"
-					output wire			Extend,
+					output wire	[1:0]	Extend,
 					output wire 		NOP_FLAG, IFNR_FLAG,
 				// Instruction Address Generator
 					output wire			PC_Enable,
-					output wire 			PC_Select, INC_Select,
+					output wire 		PC_Select, INC_Select,
 
 				// Register File
 					output wire			RF_WRITE, 
@@ -65,7 +65,8 @@ module ControlSignalGenerator(
 	// DecodeInstruction
 		DecodeInstruction DecodeInst(.Instruction(Instruction),
 		.Instruction_Format(Instruction_Format),.Instruction_Rsrc1(Instruction_Rsrc1),.Instruction_Rsrc2(Instruction_Rsrc2),
-		.Instruction_Rdst(Instruction_Rdst),.Instruction_Immediate(Instruction_Immediate),.Instruction_OP_Code(OP_Code),.IFNR_FLAG(IFNR_FLAG));
+		.Instruction_Rdst(Instruction_Rdst),.Instruction_Immediate(Instruction_Immediate),.Instruction_OP_Code(OP_Code),.IFNR_FLAG(IFNR_FLAG)
+		);
 	
 	// Step Counter - What Stage Are We In?
 		ClockCounter StageGenerator(.Clock(Clock),.ClockCount(Stage));
@@ -79,12 +80,13 @@ module ControlSignalGenerator(
 			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),.ROM1_Read(ROM1_Read)
 		);
 		
-	// Opperation Dependent Controll Signals
+	// Operation Dependent Control Signals
 		SelectController SelectSignals(
 			//Inputs
-			.OP_Code(Instruction_OP_Code),.Instruction_Format(Instruction_Format)
+			.OP_Code(Instruction_OP_Code),.Instruction_Format(Instruction_Format),
 			//Outputs
-
+			.ALU_Op(ALU_Op[6:0]),.Extend(Extend[1:0]),.C_Select(C_Select[1:0]),.Y_Select(Y_Select[1:0]),			
+			.NOP_FLAG(NOP_FLAG),.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.MA_Select(MA_Select)
 		);
 
 /*
@@ -96,36 +98,8 @@ module ControlSignalGenerator(
 */
 		
 		
-// TEMPORARY CONSTANT SIGNALS -----------------------------------------------------------------------------------------------------------------------------
-	// Output Control Signals
-
-			 //[Fetch]********************
-				// Immediate Block and "Decode Instruction"
-					assign 					Extend= 2'b0; //(Extend) [3,2,1,0] = [(format (b) zero extend),(format (b) sign extend),(format (a) zero extend),(format (a) sign extend)]
-					assign					NOP_FLAG = 1'b0; //(NOP_FLAG) No Operation
-				// Instruction Address Generator
-					assign 					PC_Select = 1; //(PC_select) Increment PC "0"->jump to "RA" .... "1"->inc by MuxINC  // MuxPC = PC_select ? NextAdd: RA
-					assign 					INC_Select=0; //(INC_select) Increment PC "0"->inc by "1" .... "1"->inc by "BranchOffset"  // MuxINC = INC_select ? BranchOffset: 32'd1
-				// Register File
-					assign					RF_WRITE = 1 ;//(RF_WRITE) Write To Register File 
-				// MUXC
-					assign					C_Select[1:0] = 1 ;// "Rdst" //C_Select[2,1,0] = {LINK  ,  Instruction Format (a)(RDST[21:17])  ,   Instruction Format (b) (RSRC1[31:27])(RDST[26:22])}
-	
-			 //[Decode]********************
-				// MUXB
-					assign					B_Select = 0;// "ALU_RB_IN" //(B_Select) [1,0] = {ImmediateBlock_Out,RB_Out} // What goes into the ALU...
-		
-			 //[Execute]********************
-				// ALU
-					assign					ALU_Op = 32'b0 ;// (ALU_Op) ALU Unique Opperation Identifier
-					
-			 //[Memory]********************
-				// MuxMA // Memory Address
-					assign					MA_Select = 0;// (MA_Select) [1,0] = {PC_Out,RZ_Out}
-
-			 //[Write Back]********************
-				//MuxY
-					assign					Y_Select = 0;// (Y_Select) [2,1,0] = {Return_Address,RAM1_Data_Out,RZ_Out}
+// Register File
+	assign RF_WRITE = 1 ;//(RF_WRITE) Write To Register File 
 
 
 

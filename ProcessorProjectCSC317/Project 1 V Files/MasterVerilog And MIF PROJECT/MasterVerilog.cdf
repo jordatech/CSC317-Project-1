@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP2C35F672) Path("C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11012014)/ProcessorProjectCSC317/Project 1 V Files/MasterVerilog And MIF PROJECT/") File("MasterVerilog.sof") MfrSpec(OpMask(1));
+		Device PartName(EP2C35F672) Path("C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11022014)/ProcessorProjectCSC317/Project 1 V Files/MasterVerilog And MIF PROJECT/") File("MasterVerilog.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

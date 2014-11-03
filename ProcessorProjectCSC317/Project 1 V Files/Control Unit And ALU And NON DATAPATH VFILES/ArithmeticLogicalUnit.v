@@ -19,7 +19,7 @@ output reg /*NOP_FLAG, INFR_FLAG*/ INR_FLAG, ZERO_FLAG, OVERFLOW_FLAG, NEGATIVE_
 always @(Clock)
 	begin
 	
-	RZ<=RA+1;
+	RZ<=RA+RB+1;
 	
 //		casex(ALU_Op)
 //		
