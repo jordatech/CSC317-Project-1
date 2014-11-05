@@ -27,11 +27,11 @@ reg 			[31:0] mem_bank [0:63];	//64 32bit registers
 	assign dataOut = (enable) ? mem_bank[address[5:0]] : 1'bz;
 
 	always @(address, dataIn, write)
-	if(enable)
-	begin
-		if(write)							//if enable, write to memory
+//	if(enable) //if enable, write to memory  // THIS WAS INCORRECT,(WITH THE OLD IMPLEMENTATION WE COULD ONLY WRITE WHEN WE WERE READING) AND SO IT WAS REMOVED
+//	begin
+		if(write)							
 			begin
 					mem_bank[address[5:0]]	= dataIn;
 			end
-	end
+//	end 
 endmodule

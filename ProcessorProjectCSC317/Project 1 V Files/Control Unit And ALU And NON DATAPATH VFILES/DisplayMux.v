@@ -20,7 +20,8 @@ input wire Display_Enable,
 		//Decoded Instruction Format (0,1,2) = (a,b,c)
 			input wire [1:0] InstructionFormat,
 
-			input wire [31:0] OP_Code, ImmediateBlock_Out,
+			input wire [31:0] OP_Code, ALU_Op, ImmediateBlock_Out,
+			input wire [31:0] MuxB_Out,
 		//Condition Control Register
 			input wire [31:0] CCR_Out,
 		//Program Counter
@@ -102,6 +103,8 @@ always @(Display_Enable)//Update the Display_Selected contents when anything cha
 				17: HexDisplay32Bits = OP_Code[31:0];// Operation (ie: add, subtract...)
 				18: HexDisplay32Bits = ImmediateBlock_Out[31:0];// Immediate Value Muxed into ALU or other
 				19: HexDisplay32Bits = InstructionFormat[1:0];// Determined in Decode Stage (a,b,c)=(0,1,2)                                
+				20: HexDisplay32Bits = ALU_Op[31:0];// ALU Control Signal(ie: add, subtract...)
+				21: HexDisplay32Bits = MuxB_Out[31:0];// RB, and Immediates...
 				
 				default: HexDisplay32Bits = 16'hDEDE;//"Display Error"
 			endcase

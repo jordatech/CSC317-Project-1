@@ -3,7 +3,7 @@
 //Decode Instruction Format
 module DecodeInstruction(
 	input wire [31:0] Instruction,
-	output reg IFNR_FLAG,
+	output reg IFNR_FLAG,NOP_FLAG,
 	output reg [1:0] Instruction_Format,
 	// INSTRUCTION FORMATS:
 	// Instruction Format (a) (RSRC1[31:27])(RSRC2[26:22])(RDST[21:17])(OPCODE[16:0])
@@ -19,6 +19,13 @@ module DecodeInstruction(
 
 
 always@(Instruction)begin
+
+	if(Instruction[5:0]==6'b111111)begin// No Operation = 111111
+		NOP_FLAG=1;
+	end
+	else if(Instruction[5:0]!=6'b111111)begin
+		NOP_FLAG=0;
+	end
 
 	// Determine Instruction_Format
 	case(Instruction[5:0])

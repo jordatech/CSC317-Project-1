@@ -14,8 +14,8 @@ module MemoryInterface(
 
 	// RAM Wires
 		// Inputs
-			input wire[31:0] 	RAM1_Address, // WORD ADDRESSABLE
-			input wire 			RAM1_Read_H_Write_L, 
+			input wire[5:0] 	RAM1_Address, // WORD ADDRESSABLE
+			input wire 			RAM1_Read_H_Write_L, RAM1_Out_Enable,
 			input wire[31:0]  RAM1_Data_In,
 		// Outputs
 			output wire[31:0] RAM1_Data_Out,
@@ -32,14 +32,15 @@ ROM ROM1(
 	.clock(ROM1_Clock),	// Clock
 	.q(ROM1_Data_Out) // Instruction
 	); 		
-	
+
+//assign wire RAM1_Out_Enable_L = ~RAM1_Out_Enable;
 //Random Access Memory
 RAM RAM1(
-	.address(RAM1_Address), // From RZ or PC // WORD ADDRESSABLE
+	.address({~RAM1_Out_Enable,RAM1_Address}), // From RZ or PC // WORD ADDRESSABLE
 	.read_w(RAM1_Read_H_Write_L), // Memory Read (1) Write (0)
 	.MFC(RAM1_MFC),  // MemoryFunctionComplete
 	.dataIn(RAM1_Data_In), // Input Data
-	.dataOut(RAM1_Data_Out), // Output Data
+	.dataOut(RAM1_Data_Out) // Output Data
 	);
 	
 endmodule

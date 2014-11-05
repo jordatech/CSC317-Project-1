@@ -19,7 +19,7 @@ module Processor (
 	// RAM Wires
 		// Inputs
 			input wire[31:0] 		RAM1_Data_Out, 
-			input wire				RAM1_MFC,
+			input wire				RAM1_MFC,RAM1_Out_Enable,
 		// Outputs
 			output wire[31:0] 	RAM1_Address, // WORD ADDRESSABLE
 			output wire 			RAM1_Read_H_Write_L, 
@@ -149,9 +149,10 @@ module Processor (
 			//Outputs
 				.Stage(Stage),.IR_Enable(IR_Enable),.Extend(Extend),.NOP_FLAG(NOP_FLAG),.IFNR_FLAG(IFNR_FLAG),.PC_Enable(PC_Enable),.PC_Select(PC_Select),
 				.INC_Select(INC_Select),.RF_WRITE(RF_WRITE),.Instruction_Rsrc1(Instruction_Rsrc1),.Instruction_Rsrc2(Instruction_Rsrc2),
-				.Instruction_Immediate(Instruction_Immediate),.Instruction_Rdst(Instruction_Rdst),.C_Select(C_Select),.RA_Enable(RA_Enable),.RB_Enable(RB_Enable),.B_Select(B_Select),
-				.Instruction_Format(Instruction_Format),.Instruction_OP_Code(OP_Code),.ALU_Op(ALU_Op),.RZ_Enable(RZ_Enable),.CCR_Enable(CCR_Enable),
-				.RM_Enable(RM_Enable),.MA_Select(MA_Select),.MEM_Read_H_Write_L(MEM_Read_H_Write_L),.ROM1_Read(ROM1_Read),.Y_Select(Y_Select),.RY_Enable(RY_Enable)
+				.Instruction_Immediate(Instruction_Immediate),.Instruction_Rdst(Instruction_Rdst),.C_Select(C_Select),.RA_Enable(RA_Enable)
+				,.RB_Enable(RB_Enable),.B_Select(B_Select),.Instruction_Format(Instruction_Format),.Instruction_OP_Code(Instruction_OP_Code),
+				.ALU_Op(ALU_Op),.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.MA_Select(MA_Select),.RAM1_Write_L(RAM1_Read_H_Write_L),
+				.RAM1_Read(RAM1_Out_Enable),.ROM1_Read(ROM1_Read),.Y_Select(Y_Select),.RY_Enable(RY_Enable)
 				);
 			
 //-------------------------------------------------------------------------------------------------------------------------
@@ -160,7 +161,7 @@ module Processor (
 //STAGE#(3) []+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
 	// 
-		ArithmeticLogicalUnit ALU(.Clock(Clock),.ALU_Op(ALU_Op),.RA(RA_Out),.RB(MuxB_Out),.RZ(RZ_In),.INR_FLAG(INR_FLAG),
+		ArithmeticLogicalUnit ALU(.Clock(Clock),.ALU_Op(ALU_Op),.RA(RA_Out),.RB(MuxB_Out),.RZ(RZ_In),.CCR_Enable(CCR_Enable),.INR_FLAG(INR_FLAG),
 		.ZERO_FLAG(ZERO_FLAG),.OVERFLOW_FLAG(OVERFLOW_FLAG),.NEGATIVE_FLAG(NEGATIVE_FLAG),.CARRY_FLAG(CARRY_FLAG),.NOP_FLAG(NOP_FLAG));
 	//  Output Register // Memory Address Register
 		reg_32b RZ (.R(RZ_In), .Rin(RZ_Enable), .Clock(Clock), .Q(RZ_Out));// IN() -> OUT(MEMORY || MuxY)
@@ -238,7 +239,9 @@ DisplayMux displayAll(
 		.ROM1_Read(ROM1_Read),
 		.INC_Select(INC_Select),
 		.CCR_Out(CCR_Out),
-		.OP_Code(Instruction_OP_Code),
+		.OP_Code(OP_Code),
+		.ALU_Op(ALU_Op),
+		.MuxB_Out(MuxB_Out[31:0]),
 		.ImmediateBlock_Out(ImmediateBlock_Out),
 		.Stage(Stage),
 		.InstructionFormat(Instruction_Format),

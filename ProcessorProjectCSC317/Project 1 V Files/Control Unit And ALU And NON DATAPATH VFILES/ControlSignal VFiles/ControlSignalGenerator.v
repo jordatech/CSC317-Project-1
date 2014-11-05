@@ -39,7 +39,7 @@ module ControlSignalGenerator(
 				// ALU Output Register
 					output wire			RZ_Enable,
 				// Condition Control Register
-					output reg			CCR_Enable,
+					//output reg			CCR_Enable,
 					
 			 //[Memory]********************
 				// Memory Address Register
@@ -49,7 +49,7 @@ module ControlSignalGenerator(
 				// MuxMA // Memory Address
 					output wire			MA_Select,
 				// Random Access Memory
-					output reg 			MEM_Read_H_Write_L,
+					output wire			RAM1_Read, RAM1_Write_L,
 				// Read Only Memory					
 					output wire			ROM1_Read,
 
@@ -65,7 +65,7 @@ module ControlSignalGenerator(
 	// DecodeInstruction
 		DecodeInstruction DecodeInst(.Instruction(Instruction),
 		.Instruction_Format(Instruction_Format),.Instruction_Rsrc1(Instruction_Rsrc1),.Instruction_Rsrc2(Instruction_Rsrc2),
-		.Instruction_Rdst(Instruction_Rdst),.Instruction_Immediate(Instruction_Immediate),.Instruction_OP_Code(OP_Code),.IFNR_FLAG(IFNR_FLAG)
+		.Instruction_Rdst(Instruction_Rdst),.Instruction_Immediate(Instruction_Immediate),.Instruction_OP_Code(Instruction_OP_Code),.IFNR_FLAG(IFNR_FLAG),.NOP_FLAG(NOP_FLAG)
 		);
 	
 	// Step Counter - What Stage Are We In?
@@ -74,7 +74,7 @@ module ControlSignalGenerator(
 	// Enable Controller
 		StageTracker EnableSignals(
 			//Inputs
-			.Stage(Stage[2:0]),
+			.Stage(Stage[2:0]),.NOP_FLAG(NOP_FLAG),.RF_WRITE(RF_WRITE),
 			//Outputs
 			.IR_Enable(IR_Enable),.PC_Enable(PC_Enable),.RA_Enable(RA_Enable),.RB_Enable(RB_Enable),
 			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),.ROM1_Read(ROM1_Read)
@@ -85,22 +85,25 @@ module ControlSignalGenerator(
 			//Inputs
 			.OP_Code(Instruction_OP_Code),.Instruction_Format(Instruction_Format),
 			//Outputs
-			.ALU_Op(ALU_Op[6:0]),.Extend(Extend[1:0]),.C_Select(C_Select[1:0]),.Y_Select(Y_Select[1:0]),			
-			.NOP_FLAG(NOP_FLAG),.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.MA_Select(MA_Select)
+			.ALU_Op(ALU_Op[31:0]),.Extend(Extend[1:0]),.C_Select(C_Select[1:0]),.Y_Select(Y_Select[1:0]),			
+			.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.MA_Select(MA_Select)
 		);
 
 /*
 // Special Case
 // Random Access Memory
-	output reg 			MEM_Read_H_Write_L,
+	output reg 			RAM1_Read_H_Write_L,
 
 
 */
 		
 		
 // Register File
-	assign RF_WRITE = 1 ;//(RF_WRITE) Write To Register File 
-
+//	assign RF_WRITE = ~NOP_FLAG;//(RF_WRITE) Write To Register File, if it's not a NOP
+	assign RAM1_Read = 1;//(RAM1_Read) (0) Ouput is high impedance (1)Output is RAM1_Address
+	assign RAM1_Write_L = 1; //(RAM1_Write_L)
+	
+// Will need to change...When we deal with RAM
 
 
 endmodule

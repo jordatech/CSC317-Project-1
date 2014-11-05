@@ -4,12 +4,14 @@
 
 module StageTracker(
 	input wire [2:0] Stage,
+	input wire NOP_FLAG,
 	
 		 //[Fetch]********************
-			//Instruction Register
-				output reg 			IR_Enable, 
+			// Instruction Register
+				output reg 			IR_Enable,
 			// Instruction Address Generator
 				output reg 			PC_Enable,
+
 
 		 //[Decode]********************
 			// ALU Input Registers
@@ -25,11 +27,13 @@ module StageTracker(
 			// Memory Data Register
 				output reg			RM_Enable,
 			// Read Only Memory					
-				output reg			ROM1_Read,
+				output reg			ROM1_Read, 
 				
 		 //[Write Back]********************
 			// Final Output Register
-				output reg			RY_Enable
+				output reg			RY_Enable,
+			// Register File
+				output reg 			RF_WRITE
 	
 );
 
@@ -42,6 +46,7 @@ initial 	begin
 			
 // What should be enabled, at each stage?
 always@(Stage)begin
+	if(NOP_FLAG==0)begin //Normal Operation
 
 	case(Stage)
 	//[Fetch]********************
@@ -55,6 +60,7 @@ always@(Stage)begin
 					RM_Enable <= 0;
 					RY_Enable <= 0;
 					ROM1_Read <= 0;// Enable ROM1_Read in cycle 5, Get instruction from ROM in cycle 1
+					RF_WRITE  <= 0;// Enable RF_WRITE in cycle 5, Write RY->R[Rdst] In Cycle 1
 				end
 	//[Decode]********************
 			//Stage(2) 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
@@ -67,6 +73,7 @@ always@(Stage)begin
 					RM_Enable <= 1;// Enable RM in cycle 2 Place RB_Out In RM in cycle 3 ...
 					RY_Enable <= 0;
 					ROM1_Read <= 0;
+					RF_WRITE  <= 0;// Enable RF_WRITE in cycle 5, Write RY->R[Rdst] In Cycle 1
 				end
 	//[Execute]********************
 			//Stage(3) 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
@@ -79,6 +86,7 @@ always@(Stage)begin
 					RM_Enable <= 0;// Enable RM in cycle 2 Place RB_Out In RM in cycle 3 ...
 					RY_Enable <= 1;// Enable RY in cycle 3 Place MuxY_Out In RY in cycle 4 ...
 					ROM1_Read <= 0;
+					RF_WRITE  <= 0;// Enable RF_WRITE in cycle 5, Write RY->R[Rdst] In Cycle 1
 				end
 	//[Memory]********************
 			//Stage(4) 444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
@@ -91,6 +99,7 @@ always@(Stage)begin
 					RM_Enable <= 0;
 					RY_Enable <= 0;// Enable RY in cycle 3 Place MuxY_Out In RY in cycle 4 ...
 					ROM1_Read <= 0;
+					RF_WRITE  <= 0;// Enable RF_WRITE in cycle 5, Write RY->R[Rdst] In Cycle 1
 				end
 	//[Write Back]********************
 			//Stage(5) 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
@@ -103,6 +112,7 @@ always@(Stage)begin
 					RM_Enable <= 0;
 					RY_Enable <= 0;
 					ROM1_Read <= 1;// Enable ROM1_Read in cycle 5, Get instruction from ROM in cycle 1
+					RF_WRITE  <= 1;// Enable RF_WRITE in cycle 5, Write RY->R[Rdst] In Cycle 1 
 				end
 				
 				
@@ -119,6 +129,49 @@ always@(Stage)begin
 				
 	endcase // ENDCASE STAGE Stage
 	
+	end // END IF (NOP_FLAG==0) //END Normal Operation
+
+	if(NOP_FLAG==1)begin //No Operation, Special Case
+			//Constant Signals
+				RF_WRITE  <= 0;
+				RA_Enable <= 0;
+				RB_Enable <= 0;
+				RZ_Enable <= 0;
+				RM_Enable <= 0;
+				RY_Enable <= 0;
+				
+			case(Stage)
+				//[Fetch]********************
+						//Stage(1) 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+						1:	begin
+								IR_Enable <= 0;// Enable IR in cycle 5, Get instruction in cycle 1
+								PC_Enable <= 1;// Increment PC after getting instruction... Enable PC in cycle 1, increment PC in cycle 2 ... Every opperation takes 5 cycles... 
+								ROM1_Read <= 0;// Enable ROM1_Read in cycle 5, Get instruction from ROM in cycle 1
+							end
+				//[Decode,Execute,Memory]********************
+						//Stage(2) 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+						2,3,4:	begin // Disable All Registers in steps 2,3,4
+								IR_Enable <= 0;
+								PC_Enable <= 0;// Increment PC after getting instruction... Enable PC in cycle 1, increment PC in cycle 2 ... Every opperation takes 5 cycles... 
+								ROM1_Read <= 0;
+							end
+				//[Write Back]********************
+						//Stage(5) 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+						5:	begin
+								IR_Enable <= 1;// Enable IR in cycle 5, Get instruction in cycle 1
+								PC_Enable <= 0;
+								ROM1_Read <= 1;// Enable ROM1_Read in cycle 5, Get instruction from ROM in cycle 1
+							end
+							
+							
+				default:	begin  // DISABLE ALL
+								IR_Enable <= 0;
+								PC_Enable <= 0;
+								ROM1_Read <= 0;
+							end
+							
+				endcase // ENDCASE STAGE Stage
+	end // END IF (NOP_FLAG==1) //END No Operation
 end//End Always
 
 
