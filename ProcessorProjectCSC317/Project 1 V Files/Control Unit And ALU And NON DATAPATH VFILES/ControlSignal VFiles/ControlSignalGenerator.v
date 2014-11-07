@@ -65,7 +65,8 @@ module ControlSignalGenerator(
 	// DecodeInstruction
 		DecodeInstruction DecodeInst(.Instruction(Instruction),
 		.Instruction_Format(Instruction_Format),.Instruction_Rsrc1(Instruction_Rsrc1),.Instruction_Rsrc2(Instruction_Rsrc2),
-		.Instruction_Rdst(Instruction_Rdst),.Instruction_Immediate(Instruction_Immediate),.Instruction_OP_Code(Instruction_OP_Code),.IFNR_FLAG(IFNR_FLAG),.NOP_FLAG(NOP_FLAG)
+		.Instruction_Rdst(Instruction_Rdst),.Instruction_Immediate(Instruction_Immediate),.Instruction_OP_Code(Instruction_OP_Code),
+		.IFNR_FLAG(IFNR_FLAG),.NOP_FLAG(NOP_FLAG)
 		);
 	
 	// Step Counter - What Stage Are We In?
@@ -74,10 +75,11 @@ module ControlSignalGenerator(
 	// Enable Controller
 		StageTracker EnableSignals(
 			//Inputs
-			.Stage(Stage[2:0]),.NOP_FLAG(NOP_FLAG),.RF_WRITE(RF_WRITE),
+			.Stage(Stage[2:0]),.NOP_FLAG(NOP_FLAG),.WillWriteTo_Memory_H_RF_L(WillWriteTo_Memory_H_RF_L),
 			//Outputs
 			.IR_Enable(IR_Enable),.PC_Enable(PC_Enable),.RA_Enable(RA_Enable),.RB_Enable(RB_Enable),
-			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),.ROM1_Read(ROM1_Read)
+			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),.ROM1_Read(ROM1_Read),
+			.RF_WRITE(RF_WRITE),.RAM1_Write_L(RAM1_Write_L)
 		);
 		
 	// Operation Dependent Control Signals
@@ -86,24 +88,16 @@ module ControlSignalGenerator(
 			.OP_Code(Instruction_OP_Code),.Instruction_Format(Instruction_Format),
 			//Outputs
 			.ALU_Op(ALU_Op[31:0]),.Extend(Extend[1:0]),.C_Select(C_Select[1:0]),.Y_Select(Y_Select[1:0]),			
-			.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.MA_Select(MA_Select)
+			.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.MA_Select(MA_Select),.WillWriteTo_Memory_H_RF_L(WillWriteTo_Memory_H_RF_L),
 		);
 
-/*
-// Special Case
+
+		
+		
 // Random Access Memory
-	output reg 			RAM1_Read_H_Write_L,
-
-
-*/
-		
-		
-// Register File
-//	assign RF_WRITE = ~NOP_FLAG;//(RF_WRITE) Write To Register File, if it's not a NOP
-	assign RAM1_Read = 1;//(RAM1_Read) (0) Ouput is high impedance (1)Output is RAM1_Address
-	assign RAM1_Write_L = 1; //(RAM1_Write_L)
+	assign RAM1_Read = 1;// Always Read From Memory, Just Do Not Always Select The Output at MUXY //(RAM1_Read) (0) Ouput is high impedance (1)Output is RAM1_Address
 	
-// Will need to change...When we deal with RAM
+
 
 
 endmodule

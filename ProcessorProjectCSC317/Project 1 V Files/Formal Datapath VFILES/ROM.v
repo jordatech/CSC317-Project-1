@@ -87,7 +87,7 @@ module ROM(
 	defparam
 		altsyncram_component.clock_enable_input_a = "NORMAL",
 		altsyncram_component.clock_enable_output_a = "NORMAL",
-		altsyncram_component.init_file = "MemoryInitializationFile.mif",
+		altsyncram_component.init_file = "InstructionTestSet(11062014).mif",
 		altsyncram_component.intended_device_family = "Cyclone II",
 		altsyncram_component.lpm_hint = "ENABLE_RUNTIME_MOD=NO",
 		altsyncram_component.lpm_type = "altsyncram",
@@ -120,7 +120,7 @@ endmodule
 // Retrieval info: PRIVATE: JTAG_ENABLED NUMERIC "0"
 // Retrieval info: PRIVATE: JTAG_ID STRING "NONE"
 // Retrieval info: PRIVATE: MAXIMUM_DEPTH NUMERIC "0"
-// Retrieval info: PRIVATE: MIFfilename STRING "MemoryInitializationFile.mif"
+// Retrieval info: PRIVATE: MIFfilename STRING "InstructionTestSet(11062014).mif"
 // Retrieval info: PRIVATE: NUMWORDS_A NUMERIC "64"
 // Retrieval info: PRIVATE: RAM_BLOCK_TYPE NUMERIC "0"
 // Retrieval info: PRIVATE: RegAddr NUMERIC "1"
@@ -134,7 +134,7 @@ endmodule
 // Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 // Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "NORMAL"
 // Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_A STRING "NORMAL"
-// Retrieval info: CONSTANT: INIT_FILE STRING "MemoryInitializationFile.mif"
+// Retrieval info: CONSTANT: INIT_FILE STRING "InstructionTestSet(11062014).mif"
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone II"
 // Retrieval info: CONSTANT: LPM_HINT STRING "ENABLE_RUNTIME_MOD=NO"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "altsyncram"

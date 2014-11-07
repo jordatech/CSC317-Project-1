@@ -24,7 +24,7 @@ always @(ALU_Op,RA,RB)
 	
 		casex(ALU_Op)
 			0: begin/*NOP*/
-					RZ <= RA + 1 ; // Assign Null Value to RZ_In  but do not enable RZ....
+					RZ <= 0; // Assign Null Value to RZ_In  but do not enable RZ....
 					
 			  			// Don't enable CCR
 //					_____________________(NOP)________________________	
@@ -42,16 +42,14 @@ always @(ALU_Op,RA,RB)
 				end // END No Operation
 
 			1,15: begin/*ADD*/  //Adding is the same as Load Base With Index from the ALU's Prospective
-					RZ <= RA + RB; // Addition
-					R33 <= RA + RB;
+					{CARRY_FLAG,RZ} <= RA + RB; // Addition //33-bit register "CHEATING METHOD" used for determining the CARRY_FLAG // CARRY_FLAG <= (( RA | RB ) == 2^32-1 ) && ( RA&RB != 0 ) ;//if RA+RB > 32 Bits
 					if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))begin
 						OVERFLOW_FLAG <= 1 ;
 					end
 					else begin
 						OVERFLOW_FLAG <= 0 ;
 					end
-					CARRY_FLAG <= R33[32]; //33-bit register "CHEATING METHOD" used for determining the CARRY_FLAG
-					//CARRY_FLAG <= (( RA | RB ) == 2^32-1 ) && ( RA&RB != 0 ) ;//if RA+RB > 32 Bits
+					
 					/*_____________________(ADD)________________________
 					(ADD)DESCRIPTION:
 						(1.) Addition

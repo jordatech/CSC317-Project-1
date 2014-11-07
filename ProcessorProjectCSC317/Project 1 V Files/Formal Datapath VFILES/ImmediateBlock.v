@@ -16,7 +16,7 @@ module ImmediateBlock (IR, clk, Extend, ImmediateBlock_Out);
 	output reg [31:0] ImmediateBlock_Out;// To MUX_C and To MUX_INC
 
 
-always@(Extend)
+always@(Extend,IR)
 	begin
 		case(Extend)
 			//In Instruction Format (a) We Do Not Look at ImmediateBlock_Out

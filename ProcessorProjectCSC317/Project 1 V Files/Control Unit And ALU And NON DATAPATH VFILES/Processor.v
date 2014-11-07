@@ -8,6 +8,7 @@ module Processor (
 	input wire Display_Enable,
 	input wire Clock,
 	output wire [31:0] HexDisplay,
+	output reg  [6:0] GreenLEDs,
 	
 	// ROM Wires   // WHERE ALL OUR INSTRUCTIONS ARE STORED
 		// Inputs
@@ -24,6 +25,7 @@ module Processor (
 			output wire[31:0] 	RAM1_Address, // WORD ADDRESSABLE
 			output wire 			RAM1_Read_H_Write_L, 
 			output wire[31:0]  	RAM1_Data_In
+
 			
 );
 
@@ -134,13 +136,13 @@ module Processor (
 //[Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode][Decode]
 //STAGE#(2) [Source Registers]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	//  Input Registers
+	// Input Registers
 		reg_32b RA (.R(RA_In), .Rin(RA_Enable), .Clock(Clock), .Q(RA_Out));// IN(REGFILE) -> OUT()
 		reg_32b RB (.R(RB_In), .Rin(RB_Enable), .Clock(Clock), .Q(RB_Out));// IN(REGFILE) -> OUT()
 	// MuxB
 		Muxn #(.WidthOfInputs(32),.NumberOfInputs(2)) 
 		MuxB(.Select(B_Select),.Out(MuxB_Out),.ConcatanatedInputs({ImmediateBlock_Out,RB_Out}));// B_Select[1,0] = {ImmediateBlock_Out,RB_Out}
-	//Register File
+	// Register File
 		RegisterFile RegFile(.Rsrc1(Instruction[31:27]),.Rsrc2(Instruction[26:22]),.Rdst(MuxC_Out),.RA(RA_In),.RB(RB_In),.RY(RY_Out),.clk(Clock),.RF_WRITE(RF_WRITE));
 	// Control Signal Generator
 		ControlSignalGenerator CSG(
@@ -154,6 +156,18 @@ module Processor (
 				.ALU_Op(ALU_Op),.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.MA_Select(MA_Select),.RAM1_Write_L(RAM1_Read_H_Write_L),
 				.RAM1_Read(RAM1_Out_Enable),.ROM1_Read(ROM1_Read),.Y_Select(Y_Select),.RY_Enable(RY_Enable)
 				);
+	// Stage Progress Bar (What Stage Am I In?)
+		always@(Stage)begin
+			case(Stage)
+				1: GreenLEDs=6'b1;
+				2: GreenLEDs=6'b11;
+				3: GreenLEDs=6'b111;
+				4: GreenLEDs=6'b1111;
+				5: GreenLEDs=6'b11111;
+				default: GreenLEDs=6'b101010;
+			endcase
+		end
+			
 			
 //-------------------------------------------------------------------------------------------------------------------------
 
