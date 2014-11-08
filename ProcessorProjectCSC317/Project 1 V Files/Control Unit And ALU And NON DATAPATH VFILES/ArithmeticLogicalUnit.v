@@ -24,7 +24,7 @@ always @(ALU_Op,RA,RB)
 	
 		casex(ALU_Op)
 			0: begin/*NOP*/
-					RZ <= 0; // Assign Null Value to RZ_In  but do not enable RZ....
+					RZ <= RA + 1 ; // Assign Null Value to RZ_In  but do not enable RZ....
 					
 			  			// Don't enable CCR
 //					_____________________(NOP)________________________	

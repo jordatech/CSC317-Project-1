@@ -1,5 +1,5 @@
 Fitter report for MasterVerilog
-Fri Nov 07 17:13:19 2014
+Fri Nov 07 22:35:22 2014
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -65,15 +65,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                       ;
 +------------------------------------+-------------------------------------------------+
-; Fitter Status                      ; Successful - Fri Nov 07 17:13:19 2014           ;
+; Fitter Status                      ; Successful - Fri Nov 07 22:35:22 2014           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; MasterVerilog                                   ;
 ; Top-level Entity Name              ; MasterVerilog                                   ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 2,785 / 33,216 ( 8 % )                          ;
-;     Total combinational functions  ; 2,499 / 33,216 ( 8 % )                          ;
+; Total logic elements               ; 2,897 / 33,216 ( 9 % )                          ;
+;     Total combinational functions  ; 2,598 / 33,216 ( 8 % )                          ;
 ;     Dedicated logic registers      ; 1,313 / 33,216 ( 4 % )                          ;
 ; Total registers                    ; 1313                                            ;
 ; Total pins                         ; 107 / 475 ( 23 % )                              ;
@@ -152,8 +152,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Type                ; Value                  ;
 +---------------------+------------------------+
 ; Placement (by node) ;                        ;
-;     -- Requested    ; 0 / 3960 ( 0.00 % )    ;
-;     -- Achieved     ; 0 / 3960 ( 0.00 % )    ;
+;     -- Requested    ; 0 / 4059 ( 0.00 % )    ;
+;     -- Achieved     ; 0 / 4059 ( 0.00 % )    ;
 ;                     ;                        ;
 ; Routing (by net)    ;                        ;
 ;     -- Requested    ; 0 / 0 ( 0.00 % )       ;
@@ -176,7 +176,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
 ; Partition Name                 ; # Nodes ; # Preserved Nodes ; Preservation Level Used ; Netlist Type Used ;
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
-; Top                            ; 3957    ; 0                 ; N/A                     ; Source File       ;
+; Top                            ; 4056    ; 0                 ; N/A                     ; Source File       ;
 ; hard_block:auto_generated_inst ; 3       ; 0                 ; N/A                     ; Source File       ;
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
 
@@ -184,7 +184,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-06-2014)d/ProcessorProjectCSC317/Project 1 V Files/MasterVerilog And MIF PROJECT/MasterVerilog.pin.
+The pin-out file can be found in C:/Users/Patrick/Documents/GitHub/CSC317-Project-1/ProcessorProjectCSC317/Project 1 V Files/MasterVerilog And MIF PROJECT/MasterVerilog.pin.
 
 
 +-------------------------------------------------------------------------+
@@ -192,26 +192,26 @@ The pin-out file can be found in C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-
 +---------------------------------------------+---------------------------+
 ; Resource                                    ; Usage                     ;
 +---------------------------------------------+---------------------------+
-; Total logic elements                        ; 2,785 / 33,216 ( 8 % )    ;
-;     -- Combinational with no register       ; 1472                      ;
-;     -- Register only                        ; 286                       ;
-;     -- Combinational with a register        ; 1027                      ;
+; Total logic elements                        ; 2,897 / 33,216 ( 9 % )    ;
+;     -- Combinational with no register       ; 1584                      ;
+;     -- Register only                        ; 299                       ;
+;     -- Combinational with a register        ; 1014                      ;
 ;                                             ;                           ;
 ; Logic element usage by number of LUT inputs ;                           ;
-;     -- 4 input functions                    ; 1998                      ;
-;     -- 3 input functions                    ; 327                       ;
-;     -- <=2 input functions                  ; 174                       ;
-;     -- Register only                        ; 286                       ;
+;     -- 4 input functions                    ; 2025                      ;
+;     -- 3 input functions                    ; 344                       ;
+;     -- <=2 input functions                  ; 229                       ;
+;     -- Register only                        ; 299                       ;
 ;                                             ;                           ;
 ; Logic elements by mode                      ;                           ;
-;     -- normal mode                          ; 2329                      ;
-;     -- arithmetic mode                      ; 170                       ;
+;     -- normal mode                          ; 2397                      ;
+;     -- arithmetic mode                      ; 201                       ;
 ;                                             ;                           ;
 ; Total registers*                            ; 1,313 / 34,593 ( 4 % )    ;
 ;     -- Dedicated logic registers            ; 1,313 / 33,216 ( 4 % )    ;
 ;     -- I/O registers                        ; 0 / 1,377 ( 0 % )         ;
 ;                                             ;                           ;
-; Total LABs:  partially or completely used   ; 196 / 2,076 ( 9 % )       ;
+; Total LABs:  partially or completely used   ; 212 / 2,076 ( 10 % )      ;
 ; Virtual pins                                ; 0                         ;
 ; I/O pins                                    ; 107 / 475 ( 23 % )        ;
 ;     -- Clock pins                           ; 8 / 8 ( 100 % )           ;
@@ -226,12 +226,12 @@ The pin-out file can be found in C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-
 ; JTAGs                                       ; 0 / 1 ( 0 % )             ;
 ; ASMI blocks                                 ; 0 / 1 ( 0 % )             ;
 ; CRC blocks                                  ; 0 / 1 ( 0 % )             ;
-; Average interconnect usage (total/H/V)      ; 4% / 4% / 4%              ;
-; Peak interconnect usage (total/H/V)         ; 27% / 25% / 31%           ;
+; Average interconnect usage (total/H/V)      ; 5% / 5% / 5%              ;
+; Peak interconnect usage (total/H/V)         ; 39% / 38% / 41%           ;
 ; Maximum fan-out                             ; 1238                      ;
 ; Highest non-global fan-out                  ; 244                       ;
-; Total fan-out                               ; 13555                     ;
-; Average fan-out                             ; 3.33                      ;
+; Total fan-out                               ; 13825                     ;
+; Average fan-out                             ; 3.31                      ;
 +---------------------------------------------+---------------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -244,25 +244,25 @@ The pin-out file can be found in C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-
 +---------------------------------------------+----------------------+--------------------------------+
 ; Difficulty Clustering Region                ; Low                  ; Low                            ;
 ;                                             ;                      ;                                ;
-; Total logic elements                        ; 2785 / 33216 ( 8 % ) ; 0 / 33216 ( 0 % )              ;
-;     -- Combinational with no register       ; 1472                 ; 0                              ;
-;     -- Register only                        ; 286                  ; 0                              ;
-;     -- Combinational with a register        ; 1027                 ; 0                              ;
+; Total logic elements                        ; 2897 / 33216 ( 9 % ) ; 0 / 33216 ( 0 % )              ;
+;     -- Combinational with no register       ; 1584                 ; 0                              ;
+;     -- Register only                        ; 299                  ; 0                              ;
+;     -- Combinational with a register        ; 1014                 ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Logic element usage by number of LUT inputs ;                      ;                                ;
-;     -- 4 input functions                    ; 1998                 ; 0                              ;
-;     -- 3 input functions                    ; 327                  ; 0                              ;
-;     -- <=2 input functions                  ; 174                  ; 0                              ;
-;     -- Register only                        ; 286                  ; 0                              ;
+;     -- 4 input functions                    ; 2025                 ; 0                              ;
+;     -- 3 input functions                    ; 344                  ; 0                              ;
+;     -- <=2 input functions                  ; 229                  ; 0                              ;
+;     -- Register only                        ; 299                  ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Logic elements by mode                      ;                      ;                                ;
-;     -- normal mode                          ; 2329                 ; 0                              ;
-;     -- arithmetic mode                      ; 170                  ; 0                              ;
+;     -- normal mode                          ; 2397                 ; 0                              ;
+;     -- arithmetic mode                      ; 201                  ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Total registers                             ; 1313                 ; 0                              ;
 ;     -- Dedicated logic registers            ; 1313 / 33216 ( 4 % ) ; 0 / 33216 ( 0 % )              ;
 ;                                             ;                      ;                                ;
-; Total LABs:  partially or completely used   ; 196 / 2076 ( 9 % )   ; 0 / 2076 ( 0 % )               ;
+; Total LABs:  partially or completely used   ; 212 / 2076 ( 10 % )  ; 0 / 2076 ( 0 % )               ;
 ;                                             ;                      ;                                ;
 ; Virtual pins                                ; 0                    ; 0                              ;
 ; I/O pins                                    ; 107                  ; 0                              ;
@@ -279,8 +279,8 @@ The pin-out file can be found in C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-
 ;     -- Registered Output Connections        ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Internal Connections                        ;                      ;                                ;
-;     -- Total Connections                    ; 13555                ; 0                              ;
-;     -- Registered Connections               ; 6191                 ; 0                              ;
+;     -- Total Connections                    ; 13825                ; 0                              ;
+;     -- Registered Connections               ; 6380                 ; 0                              ;
 ;                                             ;                      ;                                ;
 ; External Connections                        ;                      ;                                ;
 ;     -- Top                                  ; 0                    ; 0                              ;
@@ -318,7 +318,7 @@ The pin-out file can be found in C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-
 ; pushBut[1] ; N23   ; 5        ; 65           ; 20           ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; pushBut[2] ; P23   ; 6        ; 65           ; 18           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; pushBut[3] ; W26   ; 6        ; 65           ; 10           ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[0]  ; N25   ; 5        ; 65           ; 19           ; 0           ; 125                   ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[0]  ; N25   ; 5        ; 65           ; 19           ; 0           ; 121                   ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[10] ; N1    ; 2        ; 0            ; 18           ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[11] ; P1    ; 1        ; 0            ; 18           ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[12] ; P2    ; 1        ; 0            ; 18           ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
@@ -327,10 +327,10 @@ The pin-out file can be found in C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-
 ; switch[15] ; U4    ; 1        ; 0            ; 12           ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[16] ; V1    ; 1        ; 0            ; 12           ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[17] ; V2    ; 1        ; 0            ; 12           ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[1]  ; N26   ; 5        ; 65           ; 19           ; 1           ; 125                   ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[1]  ; N26   ; 5        ; 65           ; 19           ; 1           ; 120                   ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[2]  ; P25   ; 6        ; 65           ; 19           ; 2           ; 57                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[3]  ; AE14  ; 7        ; 33           ; 0            ; 0           ; 48                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; switch[4]  ; AF14  ; 7        ; 33           ; 0            ; 1           ; 57                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[3]  ; AE14  ; 7        ; 33           ; 0            ; 0           ; 52                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; switch[4]  ; AF14  ; 7        ; 33           ; 0            ; 1           ; 59                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[5]  ; AD13  ; 8        ; 33           ; 0            ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[6]  ; AC13  ; 8        ; 33           ; 0            ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; switch[7]  ; C13   ; 3        ; 31           ; 36           ; 2           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
@@ -1169,34 +1169,33 @@ Note: User assignments will override these defaults. The user specified values a
 +------------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                     ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                                                           ; Library Name ;
 +------------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------------------------------------------------------------------------------------------------+--------------+
-; |MasterVerilog                                 ; 2785 (0)    ; 1313 (0)                  ; 0 (0)         ; 2048        ; 1    ; 0            ; 0       ; 0         ; 107  ; 0            ; 1472 (0)     ; 286 (0)           ; 1027 (0)         ; |MasterVerilog                                                                                                ; work         ;
-;    |MemoryInterface:Memory|                    ; 64 (0)      ; 0 (0)                     ; 0 (0)         ; 2048        ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 59 (0)       ; 0 (0)             ; 5 (0)            ; |MasterVerilog|MemoryInterface:Memory                                                                         ; work         ;
-;       |RAM:RAM1|                               ; 64 (64)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 59 (59)      ; 0 (0)             ; 5 (5)            ; |MasterVerilog|MemoryInterface:Memory|RAM:RAM1                                                                ; work         ;
+; |MasterVerilog                                 ; 2897 (0)    ; 1313 (0)                  ; 0 (0)         ; 2048        ; 1    ; 0            ; 0       ; 0         ; 107  ; 0            ; 1584 (0)     ; 299 (0)           ; 1014 (0)         ; |MasterVerilog                                                                                                ; work         ;
+;    |MemoryInterface:Memory|                    ; 64 (0)      ; 0 (0)                     ; 0 (0)         ; 2048        ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 64 (0)       ; 0 (0)             ; 0 (0)            ; |MasterVerilog|MemoryInterface:Memory                                                                         ; work         ;
+;       |RAM:RAM1|                               ; 64 (64)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 64 (64)      ; 0 (0)             ; 0 (0)            ; |MasterVerilog|MemoryInterface:Memory|RAM:RAM1                                                                ; work         ;
 ;       |ROM:ROM1|                               ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 2048        ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|MemoryInterface:Memory|ROM:ROM1                                                                ; work         ;
 ;          |altsyncram:altsyncram_component|     ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 2048        ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component                                ; work         ;
 ;             |altsyncram_pl91:auto_generated|   ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 2048        ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated ; work         ;
-;    |Processor:aProcessor|                      ; 2598 (5)    ; 1256 (0)                  ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1342 (5)     ; 286 (0)           ; 970 (0)          ; |MasterVerilog|Processor:aProcessor                                                                           ; work         ;
-;       |ArithmeticLogicalUnit:ALU|              ; 381 (381)   ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 344 (344)    ; 0 (0)             ; 37 (37)          ; |MasterVerilog|Processor:aProcessor|ArithmeticLogicalUnit:ALU                                                 ; work         ;
-;       |ControlSignalGenerator:CSG|             ; 71 (0)      ; 3 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 52 (0)       ; 0 (0)             ; 19 (0)           ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG                                                ; work         ;
+;    |Processor:aProcessor|                      ; 2704 (7)    ; 1256 (0)                  ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1448 (7)     ; 298 (0)           ; 958 (0)          ; |MasterVerilog|Processor:aProcessor                                                                           ; work         ;
+;       |ArithmeticLogicalUnit:ALU|              ; 478 (478)   ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 437 (437)    ; 0 (0)             ; 41 (41)          ; |MasterVerilog|Processor:aProcessor|ArithmeticLogicalUnit:ALU                                                 ; work         ;
+;       |ControlSignalGenerator:CSG|             ; 71 (0)      ; 3 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 56 (0)       ; 0 (0)             ; 15 (0)           ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG                                                ; work         ;
 ;          |ClockCounter:StageGenerator|         ; 3 (3)       ; 3 (3)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 3 (3)            ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG|ClockCounter:StageGenerator                    ; work         ;
-;          |DecodeInstruction:DecodeInst|        ; 14 (14)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 9 (9)            ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst                   ; work         ;
-;          |SelectController:SelectSignals|      ; 51 (51)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 44 (44)      ; 0 (0)             ; 7 (7)            ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals                 ; work         ;
-;          |StageTracker:EnableSignals|          ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals                     ; work         ;
-;       |DisplayMux:displayAll|                  ; 355 (355)   ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 342 (342)    ; 0 (0)             ; 13 (13)          ; |MasterVerilog|Processor:aProcessor|DisplayMux:displayAll                                                     ; work         ;
+;          |DecodeInstruction:DecodeInst|        ; 10 (10)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 3 (3)            ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst                   ; work         ;
+;          |SelectController:SelectSignals|      ; 52 (52)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 43 (43)      ; 0 (0)             ; 9 (9)            ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals                 ; work         ;
+;          |StageTracker:EnableSignals|          ; 6 (6)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals                     ; work         ;
+;       |DisplayMux:displayAll|                  ; 356 (356)   ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 347 (347)    ; 0 (0)             ; 9 (9)            ; |MasterVerilog|Processor:aProcessor|DisplayMux:displayAll                                                     ; work         ;
 ;       |InstructionAddressGenerator:InstAddGen| ; 33 (33)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 32 (32)          ; |MasterVerilog|Processor:aProcessor|InstructionAddressGenerator:InstAddGen                                    ; work         ;
-;       |Muxn:MuxB|                              ; 32 (32)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 28 (28)      ; 0 (0)             ; 4 (4)            ; |MasterVerilog|Processor:aProcessor|Muxn:MuxB                                                                 ; work         ;
-;       |Muxn:MuxC|                              ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 1 (1)            ; |MasterVerilog|Processor:aProcessor|Muxn:MuxC                                                                 ; work         ;
-;       |Muxn:MuxMA|                             ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|Processor:aProcessor|Muxn:MuxMA                                                                ; work         ;
-;       |RegisterFile:RegFile|                   ; 1653 (1653) ; 1024 (1024)               ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 565 (565)    ; 257 (257)         ; 831 (831)        ; |MasterVerilog|Processor:aProcessor|RegisterFile:RegFile                                                      ; work         ;
+;       |Muxn:MuxB|                              ; 32 (32)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 23 (23)      ; 0 (0)             ; 9 (9)            ; |MasterVerilog|Processor:aProcessor|Muxn:MuxB                                                                 ; work         ;
+;       |Muxn:MuxC|                              ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 4 (4)            ; |MasterVerilog|Processor:aProcessor|Muxn:MuxC                                                                 ; work         ;
+;       |RegisterFile:RegFile|                   ; 1666 (1666) ; 1024 (1024)               ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 576 (576)    ; 269 (269)         ; 821 (821)        ; |MasterVerilog|Processor:aProcessor|RegisterFile:RegFile                                                      ; work         ;
 ;       |reg_32b:CCR|                            ; 5 (5)       ; 5 (5)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 1 (1)             ; 4 (4)            ; |MasterVerilog|Processor:aProcessor|reg_32b:CCR                                                               ; work         ;
-;       |reg_32b:IR|                             ; 32 (32)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 7 (7)             ; 25 (25)          ; |MasterVerilog|Processor:aProcessor|reg_32b:IR                                                                ; work         ;
+;       |reg_32b:IR|                             ; 32 (32)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 6 (6)             ; 26 (26)          ; |MasterVerilog|Processor:aProcessor|reg_32b:IR                                                                ; work         ;
 ;       |reg_32b:RA|                             ; 32 (32)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 32 (32)          ; |MasterVerilog|Processor:aProcessor|reg_32b:RA                                                                ; work         ;
 ;       |reg_32b:RB|                             ; 32 (32)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 32 (32)          ; |MasterVerilog|Processor:aProcessor|reg_32b:RB                                                                ; work         ;
-;       |reg_32b:RM|                             ; 32 (32)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 21 (21)           ; 11 (11)          ; |MasterVerilog|Processor:aProcessor|reg_32b:RM                                                                ; work         ;
+;       |reg_32b:RM|                             ; 32 (32)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 22 (22)           ; 10 (10)          ; |MasterVerilog|Processor:aProcessor|reg_32b:RM                                                                ; work         ;
 ;       |reg_32b:RY|                             ; 32 (32)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 32 (32)          ; |MasterVerilog|Processor:aProcessor|reg_32b:RY                                                                ; work         ;
 ;       |reg_32b:RZ|                             ; 32 (32)     ; 32 (32)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 32 (32)          ; |MasterVerilog|Processor:aProcessor|reg_32b:RZ                                                                ; work         ;
 ;    |PushButton_Debouncer:debounceit0|          ; 24 (24)     ; 19 (19)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 19 (19)          ; |MasterVerilog|PushButton_Debouncer:debounceit0                                                               ; work         ;
-;    |PushButton_Debouncer:debounceit1|          ; 24 (24)     ; 19 (19)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 19 (19)          ; |MasterVerilog|PushButton_Debouncer:debounceit1                                                               ; work         ;
+;    |PushButton_Debouncer:debounceit1|          ; 25 (25)     ; 19 (19)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 1 (1)             ; 18 (18)          ; |MasterVerilog|PushButton_Debouncer:debounceit1                                                               ; work         ;
 ;    |PushButton_Debouncer:debounceit3|          ; 24 (24)     ; 19 (19)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 0 (0)             ; 19 (19)          ; |MasterVerilog|PushButton_Debouncer:debounceit3                                                               ; work         ;
 ;    |SevenSegmentDisplayDecoder:uHEX0|          ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|SevenSegmentDisplayDecoder:uHEX0                                                               ; work         ;
 ;    |SevenSegmentDisplayDecoder:uHEX1|          ; 7 (7)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 0 (0)             ; 0 (0)            ; |MasterVerilog|SevenSegmentDisplayDecoder:uHEX1                                                               ; work         ;
@@ -1352,11 +1351,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; switch[4]                                           ;                   ;         ;
 ; clk_27                                              ;                   ;         ;
 ; pushBut[1]                                          ;                   ;         ;
-;      - PushButton_Debouncer:debounceit1|PB_sync_0~0 ; 0                 ; 6       ;
+;      - PushButton_Debouncer:debounceit1|PB_sync_0~0 ; 1                 ; 6       ;
 ; pushBut[0]                                          ;                   ;         ;
 ;      - PushButton_Debouncer:debounceit0|PB_sync_0~0 ; 1                 ; 6       ;
 ; pushBut[3]                                          ;                   ;         ;
-;      - PushButton_Debouncer:debounceit3|PB_sync_0~0 ; 0                 ; 6       ;
+;      - PushButton_Debouncer:debounceit3|PB_sync_0~0 ; 1                 ; 6       ;
 +-----------------------------------------------------+-------------------+---------+
 
 
@@ -1365,57 +1364,58 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 ; Name                                                                                       ; Location           ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +--------------------------------------------------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|WideOr5~1                                   ; LCCOMB_X35_Y26_N10 ; 1       ; Latch enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|WideOr6~1                                   ; LCCOMB_X34_Y23_N16 ; 1       ; Latch enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~1      ; LCCOMB_X30_Y23_N30 ; 42      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~1      ; LCCOMB_X30_Y23_N30 ; 2       ; Latch enable ; yes    ; Global Clock         ; GCLK12           ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1 ; LCCOMB_X30_Y26_N6  ; 5       ; Latch enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1 ; LCCOMB_X30_Y26_N6  ; 5       ; Latch enable ; yes    ; Global Clock         ; GCLK8            ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Y_Select[0] ; LCCOMB_X35_Y26_N28 ; 33      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RA_Enable~0     ; LCCOMB_X27_Y23_N22 ; 65      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RY_Enable~0     ; LCCOMB_X27_Y23_N6  ; 33      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RZ_Enable~0     ; LCCOMB_X27_Y23_N12 ; 66      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|Decoder0~0                                                            ; LCCOMB_X27_Y23_N8  ; 37      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC~34                          ; LCCOMB_X24_Y23_N30 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|Muxn:MuxMA|ShiftRight0~0                                              ; LCCOMB_X38_Y26_N30 ; 64      ; Latch enable ; yes    ; Global Clock         ; GCLK10           ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2369                                           ; LCCOMB_X36_Y19_N0  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2371                                           ; LCCOMB_X34_Y19_N22 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2373                                           ; LCCOMB_X33_Y19_N24 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2375                                           ; LCCOMB_X34_Y19_N0  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2377                                           ; LCCOMB_X37_Y19_N26 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2379                                           ; LCCOMB_X34_Y19_N20 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2381                                           ; LCCOMB_X37_Y19_N0  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2383                                           ; LCCOMB_X34_Y19_N16 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2385                                           ; LCCOMB_X31_Y19_N0  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2387                                           ; LCCOMB_X32_Y19_N10 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2389                                           ; LCCOMB_X31_Y19_N2  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2391                                           ; LCCOMB_X32_Y19_N0  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2393                                           ; LCCOMB_X37_Y19_N30 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2395                                           ; LCCOMB_X37_Y19_N16 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2397                                           ; LCCOMB_X40_Y19_N6  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2399                                           ; LCCOMB_X37_Y19_N18 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2400                                           ; LCCOMB_X34_Y19_N14 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2401                                           ; LCCOMB_X33_Y19_N6  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2402                                           ; LCCOMB_X31_Y19_N4  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2403                                           ; LCCOMB_X37_Y19_N20 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2404                                           ; LCCOMB_X35_Y19_N8  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2405                                           ; LCCOMB_X36_Y19_N12 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2406                                           ; LCCOMB_X33_Y19_N4  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2407                                           ; LCCOMB_X36_Y19_N30 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2408                                           ; LCCOMB_X33_Y19_N2  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2409                                           ; LCCOMB_X33_Y19_N28 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2410                                           ; LCCOMB_X32_Y19_N6  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2411                                           ; LCCOMB_X31_Y19_N22 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2412                                           ; LCCOMB_X33_Y19_N18 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2413                                           ; LCCOMB_X33_Y19_N16 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2414                                           ; LCCOMB_X33_Y17_N18 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2415                                           ; LCCOMB_X37_Y19_N6  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; PushButton_Debouncer:debounceit0|PB_state                                                  ; LCFF_X40_Y25_N1    ; 22      ; Clock        ; no     ; --                   ; --               ; --                        ;
-; PushButton_Debouncer:debounceit0|PB_state                                                  ; LCFF_X40_Y25_N1    ; 1238    ; Clock        ; yes    ; Global Clock         ; GCLK9            ; --                        ;
-; PushButton_Debouncer:debounceit0|comb~0                                                    ; LCCOMB_X40_Y25_N28 ; 16      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
-; PushButton_Debouncer:debounceit1|comb~0                                                    ; LCCOMB_X38_Y12_N16 ; 16      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
-; PushButton_Debouncer:debounceit3|PB_state                                                  ; LCFF_X24_Y23_N1    ; 36      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
-; PushButton_Debouncer:debounceit3|comb~0                                                    ; LCCOMB_X24_Y23_N16 ; 16      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|WideOr5~1                                   ; LCCOMB_X23_Y12_N20 ; 1       ; Latch enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|WideOr6~1                                   ; LCCOMB_X22_Y16_N2  ; 1       ; Latch enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~1      ; LCCOMB_X23_Y16_N4  ; 11      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~1      ; LCCOMB_X23_Y16_N4  ; 2       ; Latch enable ; yes    ; Global Clock         ; GCLK0            ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1 ; LCCOMB_X24_Y19_N12 ; 5       ; Latch enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1 ; LCCOMB_X24_Y19_N12 ; 4       ; Latch enable ; yes    ; Global Clock         ; GCLK3            ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Y_Select[0] ; LCCOMB_X21_Y11_N20 ; 33      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RA_Enable~0     ; LCCOMB_X25_Y15_N6  ; 64      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RY_Enable~0     ; LCCOMB_X25_Y15_N22 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RZ_Enable~1     ; LCCOMB_X25_Y15_N2  ; 64      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|Decoder0~1                                                            ; LCCOMB_X25_Y15_N16 ; 35      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]                          ; LCFF_X27_Y15_N1    ; 64      ; Latch enable ; yes    ; Global Clock         ; GCLK1            ; --                        ;
+; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC~34                          ; LCCOMB_X28_Y14_N18 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R                                                ; LCCOMB_X36_Y16_N30 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2479                                           ; LCCOMB_X35_Y16_N14 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2480                                           ; LCCOMB_X36_Y16_N20 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2481                                           ; LCCOMB_X35_Y17_N0  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2482                                           ; LCCOMB_X33_Y16_N12 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2483                                           ; LCCOMB_X33_Y16_N18 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2484                                           ; LCCOMB_X33_Y16_N4  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2485                                           ; LCCOMB_X34_Y16_N26 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2486                                           ; LCCOMB_X34_Y13_N8  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2487                                           ; LCCOMB_X34_Y16_N20 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2488                                           ; LCCOMB_X34_Y15_N16 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2489                                           ; LCCOMB_X34_Y14_N0  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2490                                           ; LCCOMB_X35_Y16_N4  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2491                                           ; LCCOMB_X35_Y16_N22 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2492                                           ; LCCOMB_X31_Y16_N4  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2493                                           ; LCCOMB_X36_Y16_N10 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2494                                           ; LCCOMB_X36_Y16_N16 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2495                                           ; LCCOMB_X33_Y16_N26 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2496                                           ; LCCOMB_X34_Y16_N2  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2497                                           ; LCCOMB_X36_Y16_N6  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2498                                           ; LCCOMB_X33_Y16_N16 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2499                                           ; LCCOMB_X35_Y16_N12 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2500                                           ; LCCOMB_X34_Y13_N22 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2501                                           ; LCCOMB_X35_Y16_N6  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2502                                           ; LCCOMB_X36_Y16_N28 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2503                                           ; LCCOMB_X33_Y16_N2  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2504                                           ; LCCOMB_X34_Y15_N2  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2505                                           ; LCCOMB_X31_Y16_N26 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2506                                           ; LCCOMB_X34_Y16_N8  ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2507                                           ; LCCOMB_X35_Y17_N26 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2508                                           ; LCCOMB_X35_Y14_N10 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2509                                           ; LCCOMB_X36_Y16_N22 ; 32      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Processor:aProcessor|WideOr0~0                                                             ; LCCOMB_X25_Y15_N20 ; 2       ; Latch enable ; no     ; --                   ; --               ; --                        ;
+; PushButton_Debouncer:debounceit0|PB_state                                                  ; LCFF_X45_Y16_N5    ; 22      ; Clock        ; no     ; --                   ; --               ; --                        ;
+; PushButton_Debouncer:debounceit0|PB_state                                                  ; LCFF_X45_Y16_N5    ; 1238    ; Clock        ; yes    ; Global Clock         ; GCLK6            ; --                        ;
+; PushButton_Debouncer:debounceit0|comb~0                                                    ; LCCOMB_X45_Y16_N16 ; 16      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; PushButton_Debouncer:debounceit1|comb~0                                                    ; LCCOMB_X56_Y7_N30  ; 16      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; PushButton_Debouncer:debounceit3|PB_state                                                  ; LCFF_X28_Y14_N13   ; 36      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; PushButton_Debouncer:debounceit3|comb~0                                                    ; LCCOMB_X28_Y14_N4  ; 16      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
 ; clk_27                                                                                     ; PIN_D13            ; 58      ; Clock        ; yes    ; Global Clock         ; GCLK11           ; --                        ;
 +--------------------------------------------------------------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 
@@ -1425,10 +1425,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------------------------------------------------+--------------------+---------+----------------------+------------------+---------------------------+
 ; Name                                                                                       ; Location           ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +--------------------------------------------------------------------------------------------+--------------------+---------+----------------------+------------------+---------------------------+
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~1      ; LCCOMB_X30_Y23_N30 ; 2       ; Global Clock         ; GCLK12           ; --                        ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1 ; LCCOMB_X30_Y26_N6  ; 5       ; Global Clock         ; GCLK8            ; --                        ;
-; Processor:aProcessor|Muxn:MuxMA|ShiftRight0~0                                              ; LCCOMB_X38_Y26_N30 ; 64      ; Global Clock         ; GCLK10           ; --                        ;
-; PushButton_Debouncer:debounceit0|PB_state                                                  ; LCFF_X40_Y25_N1    ; 1238    ; Global Clock         ; GCLK9            ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~1      ; LCCOMB_X23_Y16_N4  ; 2       ; Global Clock         ; GCLK0            ; --                        ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1 ; LCCOMB_X24_Y19_N12 ; 4       ; Global Clock         ; GCLK3            ; --                        ;
+; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]                          ; LCFF_X27_Y15_N1    ; 64      ; Global Clock         ; GCLK1            ; --                        ;
+; PushButton_Debouncer:debounceit0|PB_state                                                  ; LCFF_X45_Y16_N5    ; 1238    ; Global Clock         ; GCLK6            ; --                        ;
 ; clk_27                                                                                     ; PIN_D13            ; 58      ; Global Clock         ; GCLK11           ; --                        ;
 +--------------------------------------------------------------------------------------------+--------------------+---------+----------------------+------------------+---------------------------+
 
@@ -1446,30 +1446,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|reg_32b:IR|Q[29]                                                                 ; 242     ;
 ; Processor:aProcessor|reg_32b:IR|Q[28]                                                                 ; 242     ;
 ; Processor:aProcessor|reg_32b:IR|Q[27]                                                                 ; 242     ;
-; switch[0]                                                                                             ; 125     ;
-; switch[1]                                                                                             ; 125     ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]              ; 87      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|B_Select               ; 79      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[1]              ; 68      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RZ_Enable~0                ; 66      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RA_Enable~0                ; 65      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[2]              ; 58      ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector23~1                                           ; 58      ;
-; switch[4]                                                                                             ; 57      ;
+; switch[0]                                                                                             ; 121     ;
+; switch[1]                                                                                             ; 120     ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|B_Select               ; 101     ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]              ; 89      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[1]              ; 73      ;
+; Processor:aProcessor|reg_32b:IR|Q[26]                                                                 ; 67      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RA_Enable~0                ; 64      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RZ_Enable~1                ; 64      ;
+; switch[4]                                                                                             ; 59      ;
 ; switch[2]                                                                                             ; 57      ;
-; switch[3]                                                                                             ; 48      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~1                 ; 41      ;
-; Processor:aProcessor|Decoder0~0                                                                       ; 37      ;
+; switch[3]                                                                                             ; 52      ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector26~3                                           ; 45      ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector26~2                                           ; 45      ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector26~0                                           ; 45      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|C_Select[0]            ; 39      ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector26~1                                           ; 38      ;
 ; PushButton_Debouncer:debounceit3|PB_state                                                             ; 36      ;
-; Processor:aProcessor|reg_32b:IR|Q[26]                                                                 ; 35      ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector4~0                                            ; 35      ;
 ; PushButton_Debouncer:debounceit1|PB_state                                                             ; 35      ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector23~3                                           ; 34      ;
+; Processor:aProcessor|Decoder0~1                                                                       ; 35      ;
+; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]                                     ; 35      ;
 ; Processor:aProcessor|reg_32b:IR|Q[31]                                                                 ; 34      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RF_WRITE                   ; 33      ;
 ; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Y_Select[0]            ; 33      ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector4~0                                            ; 33      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RY_Enable~0                ; 33      ;
-; Processor:aProcessor|Muxn:MuxC|ShiftRight0~3                                                          ; 33      ;
-; Processor:aProcessor|Decoder0~1                                                                       ; 33      ;
 ; Processor:aProcessor|reg_32b:RY|Q[31]                                                                 ; 33      ;
 ; Processor:aProcessor|reg_32b:RY|Q[30]                                                                 ; 33      ;
 ; Processor:aProcessor|reg_32b:RY|Q[29]                                                                 ; 33      ;
@@ -1502,222 +1502,231 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|reg_32b:RY|Q[2]                                                                  ; 33      ;
 ; Processor:aProcessor|reg_32b:RY|Q[1]                                                                  ; 33      ;
 ; Processor:aProcessor|reg_32b:RY|Q[0]                                                                  ; 33      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2415                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2414                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2413                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2412                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2411                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2410                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2409                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2408                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2407                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2406                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2405                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2404                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2403                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2402                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2401                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2400                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2399                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2397                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2395                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2393                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2391                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2389                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2387                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2385                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2383                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2381                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2379                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2377                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2375                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2373                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2371                                                      ; 32      ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2369                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2509                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2508                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2507                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2506                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2505                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2504                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2503                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2502                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2501                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2500                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2499                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2498                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2497                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2496                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2495                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2494                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2493                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2492                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2491                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2490                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2489                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2488                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2487                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2486                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2485                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2484                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2483                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2482                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2481                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2480                                                      ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R                                                           ; 32      ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2479                                                      ; 32      ;
 ; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC~34                                     ; 32      ;
-; Processor:aProcessor|Muxn:MuxMA|ShiftRight0~0                                                         ; 32      ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector23~2                                           ; 29      ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector23~0                                           ; 29      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[3]              ; 28      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RY_Enable~0                ; 32      ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector26~4                                           ; 31      ;
 ; Processor:aProcessor|reg_32b:IR|Q[21]                                                                 ; 27      ;
 ; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Extend[0]              ; 24      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[2]              ; 23      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Decoder1~0               ; 21      ;
 ; PushButton_Debouncer:debounceit0|PB_state                                                             ; 21      ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~37                                    ; 17      ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~36                                    ; 17      ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~30                                    ; 17      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|ClockCounter:StageGenerator|ClockCount[0]             ; 18      ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~10                                    ; 17      ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~9                                     ; 17      ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~3                                     ; 17      ;
 ; Processor:aProcessor|Muxn:MuxC|ShiftRight0~2                                                          ; 17      ;
 ; Processor:aProcessor|Muxn:MuxC|ShiftRight0~1                                                          ; 17      ;
 ; Processor:aProcessor|Muxn:MuxC|ShiftRight0~0                                                          ; 17      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|ClockCounter:StageGenerator|ClockCount[2]             ; 17      ;
 ; PushButton_Debouncer:debounceit3|comb~0                                                               ; 16      ;
 ; PushButton_Debouncer:debounceit0|comb~0                                                               ; 16      ;
 ; PushButton_Debouncer:debounceit1|comb~0                                                               ; 16      ;
 ; Processor:aProcessor|Muxn:MuxC|ShiftRight0~4                                                          ; 16      ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~33                                    ; 13      ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~32                                    ; 13      ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux29~10                                                   ; 13      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|ClockCounter:StageGenerator|ClockCount[0]             ; 13      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|ClockCounter:StageGenerator|ClockCount[2]             ; 13      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|ClockCounter:StageGenerator|ClockCount[1]             ; 13      ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~108                                   ; 12      ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~40                                    ; 12      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Decoder1~3               ; 11      ;
-; Processor:aProcessor|reg_32b:IR|Q[9]                                                                  ; 11      ;
-; Processor:aProcessor|reg_32b:RA|Q[31]                                                                 ; 10      ;
-; Processor:aProcessor|reg_32b:RA|Q[30]                                                                 ; 10      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|ClockCounter:StageGenerator|ClockCount[1]             ; 16      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[3]              ; 14      ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux29~10                                                   ; 14      ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~6                                     ; 13      ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~5                                     ; 13      ;
+; Processor:aProcessor|reg_32b:IR|Q[9]                                                                  ; 13      ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~85                                    ; 12      ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~13                                    ; 12      ;
+; Processor:aProcessor|reg_32b:IR|Q[10]                                                                 ; 12      ;
+; Processor:aProcessor|reg_32b:RA|Q[1]                                                                  ; 12      ;
+; Processor:aProcessor|reg_32b:IR|Q[6]                                                                  ; 12      ;
+; Processor:aProcessor|reg_32b:RA|Q[31]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[30]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[29]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[27]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[25]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[23]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[21]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[19]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[17]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[15]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[13]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[11]                                                                 ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[9]                                                                  ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[7]                                                                  ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[5]                                                                  ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[3]                                                                  ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[0]                                                                  ; 11      ;
+; Processor:aProcessor|reg_32b:RA|Q[28]                                                                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[26]                                                                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[24]                                                                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[22]                                                                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[20]                                                                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[18]                                                                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[16]                                                                 ; 10      ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~1                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[14]                                                                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[12]                                                                 ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[10]                                                                 ; 10      ;
 ; Processor:aProcessor|reg_32b:RA|Q[8]                                                                  ; 10      ;
-; Processor:aProcessor|reg_32b:RA|Q[7]                                                                  ; 10      ;
 ; Processor:aProcessor|reg_32b:RA|Q[6]                                                                  ; 10      ;
-; Processor:aProcessor|reg_32b:RA|Q[1]                                                                  ; 10      ;
-; Processor:aProcessor|reg_32b:RA|Q[0]                                                                  ; 10      ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Instruction_OP_Code[6]~1 ; 9       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Instruction_OP_Code[7]~0 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[28]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[26]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[24]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[22]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[20]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[18]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[16]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[14]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[12]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[10]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[5]                                                                  ; 9       ;
-; Processor:aProcessor|reg_32b:IR|Q[10]                                                                 ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[4]                                                                  ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[3]                                                                  ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[2]                                                                  ; 9       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Instruction_Format[0]~0  ; 9       ;
-; Processor:aProcessor|reg_32b:RA|Q[25]                                                                 ; 8       ;
-; Processor:aProcessor|reg_32b:RA|Q[23]                                                                 ; 8       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~110                                   ; 8       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~109                                   ; 8       ;
-; Processor:aProcessor|reg_32b:RA|Q[15]                                                                 ; 8       ;
-; Processor:aProcessor|reg_32b:RA|Q[13]                                                                 ; 8       ;
-; Processor:aProcessor|reg_32b:RA|Q[11]                                                                 ; 8       ;
-; Processor:aProcessor|reg_32b:RA|Q[9]                                                                  ; 8       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|C_Select[0]            ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[31]~203                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[30]~194                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[29]~185                                   ; 7       ;
-; Processor:aProcessor|reg_32b:RA|Q[29]                                                                 ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux3~5                                                     ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[27]~176                                   ; 7       ;
-; Processor:aProcessor|reg_32b:RA|Q[27]                                                                 ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[26]~168                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[25]~160                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux7~4                                                     ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[23]~151                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[22]~142                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux10~16                                                   ; 7       ;
-; Processor:aProcessor|reg_32b:RA|Q[21]                                                                 ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux11~3                                                    ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[19]~133                                   ; 7       ;
-; Processor:aProcessor|reg_32b:RA|Q[19]                                                                 ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[18]~126                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~119                                   ; 7       ;
-; Processor:aProcessor|reg_32b:RA|Q[17]                                                                 ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux15~4                                                    ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~106                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux17~8                                                    ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~99                                    ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[12]~91                                    ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[11]~81                                    ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[10]~73                                    ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[9]~66                                     ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[8]~58                                     ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[7]~43                                     ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux25~15                                                   ; 7       ;
+; Processor:aProcessor|reg_32b:RA|Q[4]                                                                  ; 10      ;
+; Processor:aProcessor|reg_32b:RA|Q[2]                                                                  ; 10      ;
+; Processor:aProcessor|reg_32b:IR|Q[7]                                                                  ; 10      ;
+; Processor:aProcessor|reg_32b:IR|Q[4]                                                                  ; 9       ;
+; Processor:aProcessor|reg_32b:IR|Q[3]                                                                  ; 9       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector34~8                                           ; 8       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~88                                    ; 8       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~87                                    ; 8       ;
+; Processor:aProcessor|reg_32b:IR|Q[0]                                                                  ; 8       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[31]~188                                   ; 7       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~25                                                         ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[30]~179                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[29]~170                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux3~4                                                     ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[27]~161                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[26]~152                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[25]~143                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux7~6                                                     ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[23]~133                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[22]~124                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux10~14                                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux11~4                                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[19]~113                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[18]~105                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~97                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux15~6                                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~83                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux17~4                                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~76                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[12]~67                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[11]~57                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[10]~48                                    ; 7       ;
+; Processor:aProcessor|reg_32b:IR|Q[16]                                                                 ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[9]~41                                     ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[8]~32                                     ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[7]~16                                     ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux25~12                                                   ; 7       ;
 ; Processor:aProcessor|DisplayMux:displayAll|Mux26~5                                                    ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux27~12                                                   ; 7       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux28~38                                                   ; 7       ;
+; Processor:aProcessor|reg_32b:IR|Q[11]                                                                 ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux27~4                                                    ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux28~31                                                   ; 7       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux28~29                                                   ; 7       ;
 ; Processor:aProcessor|DisplayMux:displayAll|Mux29~9                                                    ; 7       ;
+; Processor:aProcessor|reg_32b:IR|Q[8]                                                                  ; 7       ;
 ; Processor:aProcessor|DisplayMux:displayAll|Mux30~3                                                    ; 7       ;
 ; Processor:aProcessor|DisplayMux:displayAll|Mux31~6                                                    ; 7       ;
-; Processor:aProcessor|reg_32b:IR|Q[6]                                                                  ; 7       ;
-; Processor:aProcessor|reg_32b:IR|Q[2]                                                                  ; 7       ;
-; Processor:aProcessor|reg_32b:IR|Q[5]                                                                  ; 7       ;
-; Processor:aProcessor|reg_32b:IR|Q[1]                                                                  ; 7       ;
-; Processor:aProcessor|reg_32b:IR|Q[4]                                                                  ; 7       ;
-; Processor:aProcessor|reg_32b:IR|Q[3]                                                                  ; 7       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~28                                                         ; 6       ;
 ; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Decoder0~0               ; 6       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|WideOr0~2                ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~25                                                         ; 6       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Instruction_OP_Code[6]~1 ; 6       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Instruction_OP_Code[7]~0 ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~24                                                         ; 6       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~23                                                         ; 6       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~22                                                         ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~21                                                         ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~20                                                         ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~19                                                         ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~18                                                         ; 6       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~17                                                         ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~16                                                         ; 6       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~116                                   ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~13                                                         ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~12                                                         ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~11                                                         ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~9                                                          ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~8                                                          ; 6       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[8]~45                                     ; 6       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~29                                    ; 6       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~94                                    ; 6       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~15                                                         ; 6       ;
+; Processor:aProcessor|reg_32b:RB|Q[14]                                                                 ; 6       ;
+; Processor:aProcessor|reg_32b:IR|Q[20]                                                                 ; 6       ;
+; Processor:aProcessor|reg_32b:RB|Q[12]                                                                 ; 6       ;
+; Processor:aProcessor|reg_32b:IR|Q[18]                                                                 ; 6       ;
+; Processor:aProcessor|reg_32b:RB|Q[10]                                                                 ; 6       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[8]~18                                     ; 6       ;
+; Processor:aProcessor|reg_32b:RB|Q[8]                                                                  ; 6       ;
+; Processor:aProcessor|reg_32b:IR|Q[14]                                                                 ; 6       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[13]~2                                     ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~6                                                          ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~5                                                          ; 6       ;
-; Processor:aProcessor|reg_32b:IR|Q[11]                                                                 ; 6       ;
+; Processor:aProcessor|reg_32b:IR|Q[12]                                                                 ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~4                                                          ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~3                                                          ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~2                                                          ; 6       ;
-; Processor:aProcessor|reg_32b:IR|Q[8]                                                                  ; 6       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~1                                                          ; 6       ;
-; Processor:aProcessor|reg_32b:IR|Q[0]                                                                  ; 6       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[29]~211                                   ; 5       ;
+; Processor:aProcessor|reg_32b:IR|Q[5]                                                                  ; 6       ;
+; Processor:aProcessor|reg_32b:IR|Q[1]                                                                  ; 6       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~31                                                         ; 5       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~30                                                         ; 5       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~29                                                         ; 5       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~28                                                         ; 5       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~27                                                         ; 5       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~26                                                         ; 5       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal1~23              ; 5       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|WideOr0~1                ; 5       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~23                                                         ; 5       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~22                                                         ; 5       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux28~65                                                   ; 5       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~17                                                         ; 5       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~15                                                         ; 5       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[8]~107                                    ; 5       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[5]~0            ; 5       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[31]~115                                   ; 5       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~114                                   ; 5       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[8]~84                                     ; 5       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~14                                                         ; 5       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~12                                                         ; 5       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~10                                                         ; 5       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~8                                                          ; 5       ;
 ; Processor:aProcessor|Muxn:MuxB|ShiftRight0~7                                                          ; 5       ;
-; Processor:aProcessor|reg_32b:IR|Q[7]                                                                  ; 5       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux28~18                                                   ; 5       ;
+; Processor:aProcessor|reg_32b:RB|Q[6]                                                                  ; 5       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~5                                                          ; 5       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux28~36                                                   ; 5       ;
+; Processor:aProcessor|reg_32b:RB|Q[4]                                                                  ; 5       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~3                                                          ; 5       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~1                                                          ; 5       ;
+; Processor:aProcessor|reg_32b:IR|Q[2]                                                                  ; 5       ;
+; Processor:aProcessor|reg_32b:RB|Q[0]                                                                  ; 5       ;
 ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|CARRY_FLAG                                             ; 4       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector4~3                                            ; 4       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~29                                                         ; 4       ;
 ; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1            ; 4       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal3~0               ; 4       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal3~8               ; 4       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal2~0               ; 4       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal1~23              ; 4       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal1~22              ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[28]                                                                 ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[24]                                                                 ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[21]                                                                 ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[20]                                                                 ; 4       ;
+; Processor:aProcessor|DisplayMux:displayAll|Mux10~3                                                    ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[16]                                                                 ; 4       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux10~1                                                    ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[15]                                                                 ; 4       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~13                                                         ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[13]                                                                 ; 4       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~11                                                         ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[11]                                                                 ; 4       ;
-; Processor:aProcessor|reg_32b:IR|Q[16]                                                                 ; 4       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~9                                                          ; 4       ;
 ; Processor:aProcessor|reg_32b:RB|Q[9]                                                                  ; 4       ;
 ; Processor:aProcessor|reg_32b:IR|Q[15]                                                                 ; 4       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[8]~51                                     ; 4       ;
-; Processor:aProcessor|reg_32b:RB|Q[8]                                                                  ; 4       ;
-; Processor:aProcessor|reg_32b:IR|Q[14]                                                                 ; 4       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[12]~25                                    ; 4       ;
+; Processor:aProcessor|reg_32b:RB|Q[7]                                                                  ; 4       ;
 ; Processor:aProcessor|reg_32b:IR|Q[13]                                                                 ; 4       ;
-; Processor:aProcessor|reg_32b:IR|Q[12]                                                                 ; 4       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux26~2                                                    ; 4       ;
-; Processor:aProcessor|Muxn:MuxB|ShiftRight0~0                                                          ; 4       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|WideOr0~0                ; 4       ;
-; Processor:aProcessor|reg_32b:RB|Q[0]                                                                  ; 4       ;
-; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]                                     ; 4       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal1~25              ; 3       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector35~4                                           ; 3       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal15~0              ; 3       ;
+; Processor:aProcessor|reg_32b:RB|Q[5]                                                                  ; 4       ;
+; Processor:aProcessor|reg_32b:RB|Q[3]                                                                  ; 4       ;
+; Processor:aProcessor|reg_32b:RB|Q[2]                                                                  ; 4       ;
+; Processor:aProcessor|reg_32b:RB|Q[1]                                                                  ; 4       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Instruction_Format[0]~1  ; 4       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector4~3                                            ; 3       ;
 ; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal14~0              ; 3       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal15~0              ; 3       ;
 ; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal13~0              ; 3       ;
 ; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal10~0              ; 3       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal1~24              ; 3       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|WideOr0~0                ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[31]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RB|Q[31]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[30]                                                                 ; 3       ;
@@ -1730,7 +1739,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|reg_32b:RM|Q[26]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RB|Q[26]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[25]                                                                 ; 3       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[27]~153                                   ; 3       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[25]~136                                   ; 3       ;
 ; Processor:aProcessor|reg_32b:RB|Q[25]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[24]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[23]                                                                 ; 3       ;
@@ -1744,48 +1753,35 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|reg_32b:RM|Q[18]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RB|Q[18]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[17]                                                                 ; 3       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~111                                   ; 3       ;
+; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[17]~89                                    ; 3       ;
 ; Processor:aProcessor|reg_32b:RB|Q[17]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[16]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[15]                                                                 ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[14]                                                                 ; 3       ;
-; Processor:aProcessor|reg_32b:IR|Q[20]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[14]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[13]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:IR|Q[19]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[12]                                                                 ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[12]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[11]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:IR|Q[17]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[10]                                                                 ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[10]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[9]                                                                  ; 3       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux10~0                                                    ; 3       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|DecodeInstruction:DecodeInst|Equal0~0                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[8]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[7]                                                                  ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[7]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[6]                                                                  ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[6]                                                                  ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[5]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[5]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:CCR|Q[5]                                                                 ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[4]                                                                  ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[4]                                                                  ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[3]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[3]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:CCR|Q[3]                                                                 ; 3       ;
-; Processor:aProcessor|DisplayMux:displayAll|Mux25~5                                                    ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[2]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:CCR|Q[2]                                                                 ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[2]                                                                  ; 3       ;
-; Processor:aProcessor|reg_32b:RB|Q[1]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[1]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:CCR|Q[1]                                                                 ; 3       ;
-; Processor:aProcessor|DisplayMux:displayAll|HexDisplay32Bits[15]~28                                    ; 3       ;
-; Processor:aProcessor|reg_32b:RZ|Q[0]                                                                  ; 3       ;
+; Processor:aProcessor|Muxn:MuxB|ShiftRight0~0                                                          ; 3       ;
 ; Processor:aProcessor|reg_32b:RM|Q[0]                                                                  ; 3       ;
 ; Processor:aProcessor|reg_32b:CCR|Q[0]                                                                 ; 3       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Add0~0                                                 ; 3       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Add1~0                                                 ; 3       ;
 ; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[5]                                     ; 3       ;
 ; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[4]                                     ; 3       ;
 ; Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[3]                                     ; 3       ;
@@ -1856,29 +1852,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; MemoryInterface:Memory|RAM:RAM1|mem_bank~33                                                           ; 2       ;
 ; MemoryInterface:Memory|RAM:RAM1|mem_bank~1                                                            ; 2       ;
 ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|NEGATIVE_FLAG                                          ; 2       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|MA_Select              ; 2       ;
 ; MemoryInterface:Memory|RAM:RAM1|mem_bank~32                                                           ; 2       ;
 ; MemoryInterface:Memory|RAM:RAM1|mem_bank~0                                                            ; 2       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal1~24              ; 2       ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|Equal5~8               ; 2       ;
 ; PushButton_Debouncer:debounceit3|PB_sync_1                                                            ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2398                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2396                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2394                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2392                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2390                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2388                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2386                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2384                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2382                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2380                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2378                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2376                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2374                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2372                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2370                                                      ; 2       ;
-; Processor:aProcessor|RegisterFile:RegFile|R~2368                                                      ; 2       ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|MA_Select~0            ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2447                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2446                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2445                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2444                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2443                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2442                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2441                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2440                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2439                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2438                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2437                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2436                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2435                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2434                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2433                                                      ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~2432                                                      ; 2       ;
 ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector1~0                                            ; 2       ;
 ; PushButton_Debouncer:debounceit0|PB_sync_1                                                            ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector4~2                                            ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~511                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~415                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~447                                                       ; 2       ;
@@ -1911,7 +1908,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~575                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~831                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~703                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector5~6                                            ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector5~8                                            ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~510                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~414                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~478                                                       ; 2       ;
@@ -1944,8 +1941,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~606                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~862                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~734                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector6~8                                            ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector6~2                                            ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector6~7                                            ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~509                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~413                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~445                                                       ; 2       ;
@@ -1978,7 +1974,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~573                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~829                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~701                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector7~6                                            ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector7~8                                            ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~508                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~412                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~476                                                       ; 2       ;
@@ -2011,8 +2007,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~604                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~860                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~732                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector8~8                                            ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector8~2                                            ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector8~7                                            ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~507                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~411                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~443                                                       ; 2       ;
@@ -2045,7 +2040,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~571                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~827                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~699                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector9~6                                            ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector9~8                                            ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~506                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~410                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~474                                                       ; 2       ;
@@ -2078,7 +2073,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~602                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~858                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~730                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector10~6                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector10~7                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~505                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~409                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~441                                                       ; 2       ;
@@ -2111,7 +2106,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~569                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~825                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~697                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector11~6                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector11~8                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~504                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~408                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~472                                                       ; 2       ;
@@ -2144,7 +2139,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~600                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~856                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~728                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector12~6                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector12~7                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~503                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~407                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~439                                                       ; 2       ;
@@ -2177,7 +2172,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~567                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~823                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~695                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector13~6                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector13~7                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~502                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~406                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~470                                                       ; 2       ;
@@ -2242,8 +2237,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~565                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~821                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~693                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector14~10                                          ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector15~5                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector14~7                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector15~7                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~500                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~404                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~468                                                       ; 2       ;
@@ -2276,7 +2271,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~596                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~852                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~724                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector16~10                                          ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector16~7                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~499                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~403                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~435                                                       ; 2       ;
@@ -2309,7 +2304,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~563                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~819                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~691                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector17~6                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector17~7                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~498                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~402                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~466                                                       ; 2       ;
@@ -2342,7 +2337,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~594                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~850                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~722                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector18~10                                          ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector18~7                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~497                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~401                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~433                                                       ; 2       ;
@@ -2375,7 +2370,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~561                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~817                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~689                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector19~6                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector19~8                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~496                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~400                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~464                                                       ; 2       ;
@@ -2408,7 +2403,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~592                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~848                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~720                                                       ; 2       ;
-; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector20~9                                           ; 2       ;
+; Processor:aProcessor|ArithmeticLogicalUnit:ALU|Selector20~7                                           ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~495                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~399                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~431                                                       ; 2       ;
@@ -2438,6 +2433,11 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Processor:aProcessor|RegisterFile:RegFile|R~719                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~847                                                       ; 2       ;
 ; Processor:aProcessor|RegisterFile:RegFile|R~943                                                       ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~559                                                       ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~815                                                       ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~687                                                       ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~494                                                       ; 2       ;
+; Processor:aProcessor|RegisterFile:RegFile|R~398                                                       ; 2       ;
 +-------------------------------------------------------------------------------------------------------+---------+
 
 
@@ -2446,7 +2446,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+----------------------------------+-------------+----------------------+-----------------+-----------------+
 ; Name                                                                                                      ; Type ; Mode ; Clock Mode   ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF                              ; Location    ; Mixed Width RDW Mode ; Port A RDW Mode ; Port B RDW Mode ;
 +-----------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+----------------------------------+-------------+----------------------+-----------------+-----------------+
-; MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; Single Clock ; 64           ; 32           ; --           ; --           ; yes                    ; yes                     ; --                     ; --                      ; 2048 ; 64                          ; 32                          ; --                          ; --                          ; 2048                ; 1    ; InstructionTestSet(11062014).mif ; M4K_X26_Y23 ; Don't care           ; Don't care      ; Don't care      ;
+; MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; Single Clock ; 64           ; 32           ; --           ; --           ; yes                    ; yes                     ; --                     ; --                      ; 2048 ; 64                          ; 32                          ; --                          ; --                          ; 2048                ; 1    ; InstructionTestSet(11062014).mif ; M4K_X26_Y15 ; Don't care           ; Don't care      ; Don't care      ;
 +-----------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+----------------------------------+-------------+----------------------+-----------------+-----------------+
 Note: Fitter may spread logical memories into multiple blocks to improve timing. The actual required RAM blocks can be found in the Fitter Resource Usage section.
 
@@ -2456,37 +2456,37 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +-----------------------------+------------------------+
 ; Other Routing Resource Type ; Usage                  ;
 +-----------------------------+------------------------+
-; Block interconnects         ; 4,871 / 94,460 ( 5 % ) ;
-; C16 interconnects           ; 55 / 3,315 ( 2 % )     ;
-; C4 interconnects            ; 2,913 / 60,840 ( 5 % ) ;
-; Direct links                ; 673 / 94,460 ( < 1 % ) ;
+; Block interconnects         ; 5,253 / 94,460 ( 6 % ) ;
+; C16 interconnects           ; 69 / 3,315 ( 2 % )     ;
+; C4 interconnects            ; 3,343 / 60,840 ( 5 % ) ;
+; Direct links                ; 490 / 94,460 ( < 1 % ) ;
 ; Global clocks               ; 5 / 16 ( 31 % )        ;
-; Local interconnects         ; 1,694 / 33,216 ( 5 % ) ;
-; R24 interconnects           ; 117 / 3,091 ( 4 % )    ;
-; R4 interconnects            ; 3,500 / 81,294 ( 4 % ) ;
+; Local interconnects         ; 1,611 / 33,216 ( 5 % ) ;
+; R24 interconnects           ; 130 / 3,091 ( 4 % )    ;
+; R4 interconnects            ; 4,286 / 81,294 ( 5 % ) ;
 +-----------------------------+------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                          ;
 +---------------------------------------------+-------------------------------+
-; Number of Logic Elements  (Average = 14.21) ; Number of LABs  (Total = 196) ;
+; Number of Logic Elements  (Average = 13.67) ; Number of LABs  (Total = 212) ;
 +---------------------------------------------+-------------------------------+
-; 1                                           ; 4                             ;
-; 2                                           ; 2                             ;
+; 1                                           ; 3                             ;
+; 2                                           ; 5                             ;
 ; 3                                           ; 1                             ;
-; 4                                           ; 2                             ;
-; 5                                           ; 0                             ;
-; 6                                           ; 3                             ;
-; 7                                           ; 5                             ;
-; 8                                           ; 3                             ;
-; 9                                           ; 3                             ;
-; 10                                          ; 4                             ;
-; 11                                          ; 3                             ;
-; 12                                          ; 4                             ;
-; 13                                          ; 5                             ;
-; 14                                          ; 9                             ;
-; 15                                          ; 18                            ;
+; 4                                           ; 6                             ;
+; 5                                           ; 4                             ;
+; 6                                           ; 0                             ;
+; 7                                           ; 3                             ;
+; 8                                           ; 4                             ;
+; 9                                           ; 2                             ;
+; 10                                          ; 9                             ;
+; 11                                          ; 8                             ;
+; 12                                          ; 3                             ;
+; 13                                          ; 14                            ;
+; 14                                          ; 10                            ;
+; 15                                          ; 10                            ;
 ; 16                                          ; 130                           ;
 +---------------------------------------------+-------------------------------+
 
@@ -2494,132 +2494,134 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +--------------------------------------------------------------------+
 ; LAB-wide Signals                                                   ;
 +------------------------------------+-------------------------------+
-; LAB-wide Signals  (Average = 1.76) ; Number of LABs  (Total = 196) ;
+; LAB-wide Signals  (Average = 1.75) ; Number of LABs  (Total = 212) ;
 +------------------------------------+-------------------------------+
-; 1 Clock                            ; 159                           ;
-; 1 Clock enable                     ; 29                            ;
+; 1 Clock                            ; 175                           ;
+; 1 Clock enable                     ; 46                            ;
 ; 1 Sync. clear                      ; 5                             ;
-; 1 Sync. load                       ; 16                            ;
-; 2 Clock enables                    ; 128                           ;
-; 2 Clocks                           ; 7                             ;
+; 1 Sync. load                       ; 19                            ;
+; 2 Clock enables                    ; 122                           ;
+; 2 Clocks                           ; 4                             ;
 +------------------------------------+-------------------------------+
 
 
 +------------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                          ;
 +----------------------------------------------+-------------------------------+
-; Number of Signals Sourced  (Average = 20.19) ; Number of LABs  (Total = 196) ;
+; Number of Signals Sourced  (Average = 19.14) ; Number of LABs  (Total = 212) ;
 +----------------------------------------------+-------------------------------+
 ; 0                                            ; 0                             ;
 ; 1                                            ; 2                             ;
-; 2                                            ; 3                             ;
-; 3                                            ; 2                             ;
-; 4                                            ; 0                             ;
-; 5                                            ; 0                             ;
-; 6                                            ; 5                             ;
+; 2                                            ; 6                             ;
+; 3                                            ; 0                             ;
+; 4                                            ; 3                             ;
+; 5                                            ; 2                             ;
+; 6                                            ; 4                             ;
 ; 7                                            ; 4                             ;
-; 8                                            ; 0                             ;
-; 9                                            ; 0                             ;
-; 10                                           ; 5                             ;
+; 8                                            ; 2                             ;
+; 9                                            ; 1                             ;
+; 10                                           ; 2                             ;
 ; 11                                           ; 5                             ;
-; 12                                           ; 3                             ;
-; 13                                           ; 6                             ;
-; 14                                           ; 0                             ;
-; 15                                           ; 9                             ;
-; 16                                           ; 14                            ;
-; 17                                           ; 12                            ;
-; 18                                           ; 10                            ;
-; 19                                           ; 21                            ;
+; 12                                           ; 7                             ;
+; 13                                           ; 4                             ;
+; 14                                           ; 4                             ;
+; 15                                           ; 12                            ;
+; 16                                           ; 20                            ;
+; 17                                           ; 18                            ;
+; 18                                           ; 13                            ;
+; 19                                           ; 11                            ;
 ; 20                                           ; 10                            ;
-; 21                                           ; 8                             ;
-; 22                                           ; 5                             ;
-; 23                                           ; 7                             ;
-; 24                                           ; 4                             ;
-; 25                                           ; 5                             ;
-; 26                                           ; 4                             ;
-; 27                                           ; 7                             ;
-; 28                                           ; 9                             ;
-; 29                                           ; 6                             ;
-; 30                                           ; 5                             ;
-; 31                                           ; 5                             ;
-; 32                                           ; 20                            ;
+; 21                                           ; 3                             ;
+; 22                                           ; 3                             ;
+; 23                                           ; 11                            ;
+; 24                                           ; 5                             ;
+; 25                                           ; 6                             ;
+; 26                                           ; 5                             ;
+; 27                                           ; 8                             ;
+; 28                                           ; 11                            ;
+; 29                                           ; 5                             ;
+; 30                                           ; 7                             ;
+; 31                                           ; 8                             ;
+; 32                                           ; 10                            ;
 +----------------------------------------------+-------------------------------+
 
 
 +----------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                          ;
 +--------------------------------------------------+-------------------------------+
-; Number of Signals Sourced Out  (Average = 11.18) ; Number of LABs  (Total = 196) ;
+; Number of Signals Sourced Out  (Average = 11.14) ; Number of LABs  (Total = 212) ;
 +--------------------------------------------------+-------------------------------+
 ; 0                                                ; 0                             ;
 ; 1                                                ; 3                             ;
-; 2                                                ; 7                             ;
-; 3                                                ; 3                             ;
-; 4                                                ; 4                             ;
-; 5                                                ; 7                             ;
-; 6                                                ; 12                            ;
-; 7                                                ; 23                            ;
-; 8                                                ; 16                            ;
+; 2                                                ; 11                            ;
+; 3                                                ; 6                             ;
+; 4                                                ; 8                             ;
+; 5                                                ; 9                             ;
+; 6                                                ; 13                            ;
+; 7                                                ; 17                            ;
+; 8                                                ; 20                            ;
 ; 9                                                ; 11                            ;
-; 10                                               ; 7                             ;
-; 11                                               ; 10                            ;
-; 12                                               ; 12                            ;
-; 13                                               ; 9                             ;
-; 14                                               ; 8                             ;
-; 15                                               ; 12                            ;
-; 16                                               ; 19                            ;
-; 17                                               ; 12                            ;
-; 18                                               ; 7                             ;
-; 19                                               ; 7                             ;
-; 20                                               ; 2                             ;
+; 10                                               ; 14                            ;
+; 11                                               ; 6                             ;
+; 12                                               ; 5                             ;
+; 13                                               ; 5                             ;
+; 14                                               ; 6                             ;
+; 15                                               ; 11                            ;
+; 16                                               ; 21                            ;
+; 17                                               ; 13                            ;
+; 18                                               ; 13                            ;
+; 19                                               ; 6                             ;
+; 20                                               ; 7                             ;
 ; 21                                               ; 1                             ;
-; 22                                               ; 1                             ;
-; 23                                               ; 1                             ;
-; 24                                               ; 1                             ;
+; 22                                               ; 4                             ;
+; 23                                               ; 0                             ;
+; 24                                               ; 0                             ;
 ; 25                                               ; 1                             ;
+; 26                                               ; 0                             ;
+; 27                                               ; 1                             ;
 +--------------------------------------------------+-------------------------------+
 
 
 +------------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                          ;
 +----------------------------------------------+-------------------------------+
-; Number of Distinct Inputs  (Average = 23.34) ; Number of LABs  (Total = 196) ;
+; Number of Distinct Inputs  (Average = 23.55) ; Number of LABs  (Total = 212) ;
 +----------------------------------------------+-------------------------------+
 ; 0                                            ; 0                             ;
 ; 1                                            ; 0                             ;
 ; 2                                            ; 4                             ;
-; 3                                            ; 0                             ;
-; 4                                            ; 7                             ;
-; 5                                            ; 1                             ;
-; 6                                            ; 2                             ;
+; 3                                            ; 3                             ;
+; 4                                            ; 4                             ;
+; 5                                            ; 0                             ;
+; 6                                            ; 6                             ;
 ; 7                                            ; 2                             ;
 ; 8                                            ; 3                             ;
-; 9                                            ; 5                             ;
+; 9                                            ; 1                             ;
 ; 10                                           ; 1                             ;
-; 11                                           ; 0                             ;
-; 12                                           ; 0                             ;
-; 13                                           ; 1                             ;
+; 11                                           ; 2                             ;
+; 12                                           ; 2                             ;
+; 13                                           ; 2                             ;
 ; 14                                           ; 1                             ;
-; 15                                           ; 5                             ;
-; 16                                           ; 7                             ;
-; 17                                           ; 5                             ;
-; 18                                           ; 4                             ;
-; 19                                           ; 4                             ;
-; 20                                           ; 7                             ;
-; 21                                           ; 7                             ;
-; 22                                           ; 2                             ;
+; 15                                           ; 4                             ;
+; 16                                           ; 2                             ;
+; 17                                           ; 7                             ;
+; 18                                           ; 3                             ;
+; 19                                           ; 7                             ;
+; 20                                           ; 9                             ;
+; 21                                           ; 5                             ;
+; 22                                           ; 6                             ;
 ; 23                                           ; 5                             ;
-; 24                                           ; 7                             ;
-; 25                                           ; 5                             ;
+; 24                                           ; 6                             ;
+; 25                                           ; 6                             ;
 ; 26                                           ; 10                            ;
-; 27                                           ; 11                            ;
-; 28                                           ; 13                            ;
-; 29                                           ; 23                            ;
-; 30                                           ; 32                            ;
-; 31                                           ; 19                            ;
-; 32                                           ; 0                             ;
+; 27                                           ; 9                             ;
+; 28                                           ; 16                            ;
+; 29                                           ; 22                            ;
+; 30                                           ; 28                            ;
+; 31                                           ; 33                            ;
+; 32                                           ; 1                             ;
 ; 33                                           ; 0                             ;
-; 34                                           ; 1                             ;
+; 34                                           ; 0                             ;
 ; 35                                           ; 0                             ;
 ; 36                                           ; 2                             ;
 +----------------------------------------------+-------------------------------+
@@ -2654,14 +2656,13 @@ Note: Fitter may spread logical memories into multiple blocks to improve timing.
 +---------------------------+--------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Estimated Delay Added for Hold Timing Summary                                                                                                            ;
-+-------------------------------------------+------------------------------------------------------------------------------------------+-------------------+
-; Source Clock(s)                           ; Destination Clock(s)                                                                     ; Delay Added in ns ;
-+-------------------------------------------+------------------------------------------------------------------------------------------+-------------------+
-; PushButton_Debouncer:debounceit0|PB_state ; Processor:aProcessor|reg_32b:IR|Q[0]                                                     ; 3.4               ;
-; Processor:aProcessor|reg_32b:IR|Q[0]      ; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0] ; 3.4               ;
-+-------------------------------------------+------------------------------------------------------------------------------------------+-------------------+
++------------------------------------------------------------------------------------------------------+
+; Estimated Delay Added for Hold Timing Summary                                                        ;
++-------------------------------------------+--------------------------------------+-------------------+
+; Source Clock(s)                           ; Destination Clock(s)                 ; Delay Added in ns ;
++-------------------------------------------+--------------------------------------+-------------------+
+; PushButton_Debouncer:debounceit0|PB_state ; Processor:aProcessor|reg_32b:IR|Q[0] ; 4.6               ;
++-------------------------------------------+--------------------------------------+-------------------+
 Note: For more information on problematic transfers, consider running the Fitter again with the Optimize hold timing option (Settings Menu) turned off.
 This will disable optimization of problematic paths and expose them for further analysis using either the TimeQuest Timing Analyzer or the Classic Timing Analyzer.
 
@@ -2671,19 +2672,18 @@ This will disable optimization of problematic paths and expose them for further 
 +------------------------------------------------------------------------------------------+--------------------------------------------------------------+-------------------+
 ; Source Register                                                                          ; Destination Register                                         ; Delay Added in ns ;
 +------------------------------------------------------------------------------------------+--------------------------------------------------------------+-------------------+
-; Processor:aProcessor|reg_32b:IR|Q[3]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 3.404             ;
-; Processor:aProcessor|reg_32b:IR|Q[4]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 3.404             ;
-; Processor:aProcessor|reg_32b:IR|Q[0]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 3.404             ;
-; Processor:aProcessor|reg_32b:IR|Q[2]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 3.404             ;
-; Processor:aProcessor|reg_32b:IR|Q[1]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 3.404             ;
-; Processor:aProcessor|reg_32b:IR|Q[5]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 3.404             ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|B_Select  ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 1.411             ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0] ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 1.012             ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[2] ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 1.012             ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[3] ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 0.525             ;
-; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[1] ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 0.525             ;
+; Processor:aProcessor|reg_32b:IR|Q[3]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 4.612             ;
+; Processor:aProcessor|reg_32b:IR|Q[4]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 4.612             ;
+; Processor:aProcessor|reg_32b:IR|Q[0]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 4.612             ;
+; Processor:aProcessor|reg_32b:IR|Q[2]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 4.612             ;
+; Processor:aProcessor|reg_32b:IR|Q[1]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 4.612             ;
+; Processor:aProcessor|reg_32b:IR|Q[5]                                                     ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|ZERO_FLAG     ; 4.612             ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|B_Select  ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 0.532             ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[2] ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 0.141             ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[1] ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 0.141             ;
+; Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[3] ; Processor:aProcessor|ArithmeticLogicalUnit:ALU|OVERFLOW_FLAG ; 0.134             ;
 +------------------------------------------------------------------------------------------+--------------------------------------------------------------+-------------------+
-Note: This table only shows the top 11 path(s) that have the largest delay added for hold.
+Note: This table only shows the top 10 path(s) that have the largest delay added for hold.
 
 
 +-----------------+
@@ -2708,9 +2708,7 @@ Critical Warning (332012): Synopsys Design Constraints File file not found: 'Mas
 Info (332144): No user constrained base clocks found in the design
 Info (332097): The following timing edges are non-unate.  TimeQuest will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: aProcessor|ALU|WideOr6~0  from: datad  to: combout
-    Info (332098): Cell: aProcessor|CSG|SelectSignals|ALU_Op[0]~1  from: datac  to: combout
-    Info (332098): Cell: aProcessor|CSG|SelectSignals|WideOr5~0  from: datab  to: combout
-    Info (332098): Cell: aProcessor|MuxMA|ShiftRight0~0  from: datad  to: combout
+    Info (332098): Cell: aProcessor|CSG|SelectSignals|ALU_Op[0]~1  from: datad  to: combout
 Info (332130): Timing requirements not specified -- quality metrics such as performance may be sacrificed to reduce compilation time.
 Info (176353): Automatically promoted node clk_27 (placed in PIN D13 (CLK11, LVDSCLK5p, Input))
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G11
@@ -2728,19 +2726,19 @@ Info (176353): Automatically promoted node PushButton_Debouncer:debounceit0|PB_s
         Info (176357): Destination node Processor:aProcessor|reg_32b:IR|Q[9]
         Info (176357): Destination node Processor:aProcessor|reg_32b:IR|Q[10]
         Info (176358): Non-global destination nodes limited to 10 nodes
-Info (176353): Automatically promoted node Processor:aProcessor|Muxn:MuxMA|ShiftRight0~0 
+Info (176353): Automatically promoted node Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0] 
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock
     Info (176356): Following destination nodes may be non-global or may not use global or regional clocks
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[0]~0
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[1]~1
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[2]~2
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[3]~3
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[4]~4
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[5]~5
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[6]~6
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[7]~7
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[8]~8
-        Info (176357): Destination node Processor:aProcessor|reg_32b:RY|Q[9]~9
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a0
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a1
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a2
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a3
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a4
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a5
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a6
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a7
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a8
+        Info (176357): Destination node MemoryInterface:Memory|ROM:ROM1|altsyncram:altsyncram_component|altsyncram_pl91:auto_generated|ram_block1a9
         Info (176358): Non-global destination nodes limited to 10 nodes
 Info (176353): Automatically promoted node Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1 
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock
@@ -2757,28 +2755,27 @@ Info (176353): Automatically promoted node Processor:aProcessor|ControlSignalGen
         Info (176357): Destination node Processor:aProcessor|reg_32b:CCR|Q[2]
         Info (176357): Destination node Processor:aProcessor|reg_32b:CCR|Q[3]
         Info (176357): Destination node Processor:aProcessor|reg_32b:CCR|Q[5]
-        Info (176357): Destination node Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RA_Enable~0
         Info (176357): Destination node Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RZ_Enable~0
         Info (176357): Destination node Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RY_Enable~0
-        Info (176357): Destination node Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~0
-        Info (176357): Destination node Processor:aProcessor|RegisterFile:RegFile|R~2369
-        Info (176358): Non-global destination nodes limited to 10 nodes
+        Info (176357): Destination node Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RZ_Enable~1
+        Info (176357): Destination node Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]~1
+        Info (176357): Destination node Processor:aProcessor|ControlSignalGenerator:CSG|StageTracker:EnableSignals|RF_WRITE
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:03
 Info (170189): Fitter placement preparation operations beginning
-Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:01
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:02
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:00:09
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:12
 Info (170193): Fitter routing operations beginning
-Info (170195): Router estimated average interconnect usage is 3% of the available device resources
-    Info (170196): Router estimated peak interconnect usage is 21% of the available device resources in the region that extends from location X22_Y12 to location X32_Y23
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:09
+Info (170195): Router estimated average interconnect usage is 4% of the available device resources
+    Info (170196): Router estimated peak interconnect usage is 30% of the available device resources in the region that extends from location X22_Y12 to location X32_Y23
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:10
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
-Info (11888): Total time spent on timing analysis during the Fitter is 4.29 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 5.52 seconds.
 Info (306004): Started post-fitting delay annotation
 Warning (306006): Found 83 output pins without output pin load capacitance assignment
     Info (306007): Pin "green[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
@@ -2870,17 +2867,17 @@ Info (306005): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:03
 Info (176045): Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
-Info (144001): Generated suppressed messages file C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-06-2014)d/ProcessorProjectCSC317/Project 1 V Files/MasterVerilog And MIF PROJECT/MasterVerilog.fit.smsg
+Info (144001): Generated suppressed messages file C:/Users/Patrick/Documents/GitHub/CSC317-Project-1/ProcessorProjectCSC317/Project 1 V Files/MasterVerilog And MIF PROJECT/MasterVerilog.fit.smsg
 Info: Quartus II 64-Bit Fitter was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 694 megabytes
-    Info: Processing ended: Fri Nov 07 17:13:20 2014
-    Info: Elapsed time: 00:00:30
-    Info: Total CPU time (on all processors): 00:00:30
+    Info: Peak virtual memory: 699 megabytes
+    Info: Processing ended: Fri Nov 07 22:35:23 2014
+    Info: Elapsed time: 00:00:38
+    Info: Total CPU time (on all processors): 00:00:36
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/Users/DIGITLAB1/Desktop/CSC317-Project-1(11-06-2014)d/ProcessorProjectCSC317/Project 1 V Files/MasterVerilog And MIF PROJECT/MasterVerilog.fit.smsg.
+The suppressed messages can be found in C:/Users/Patrick/Documents/GitHub/CSC317-Project-1/ProcessorProjectCSC317/Project 1 V Files/MasterVerilog And MIF PROJECT/MasterVerilog.fit.smsg.
 
 

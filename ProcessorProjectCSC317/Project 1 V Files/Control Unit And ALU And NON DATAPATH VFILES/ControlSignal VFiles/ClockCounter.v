@@ -12,12 +12,11 @@ module ClockCounter(Clock,ClockCount);
 	always @(posedge Clock)
 	begin 
 	
-//	ClockCount <= (ClockCount[2:0] % 5) + 1;// Reset at five 0,1,2,3,4,0,1,2....
-		if(ClockCount==5)begin
-			ClockCount <= 1;
-		end
+		if(ClockCount==5)begin 	//reset at 5
+			ClockCount <= 1;		//start at 1	
+		end							//1,2,3,4,5,1,2,3...
 		else begin
-			ClockCount[2:0] <= ClockCount[2:0] + 1;// Reset at five 0,1,2,3,4,0,1,2....
+			ClockCount[2:0] <= ClockCount[2:0] + 1'b1; //
 		end
 	end
 

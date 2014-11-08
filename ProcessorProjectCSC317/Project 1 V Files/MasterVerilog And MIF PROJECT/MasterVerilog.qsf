@@ -172,6 +172,7 @@ set_global_assignment -name VERILOG_FILE "../Formal Datapath VFILES/RegisterFile
 set_global_assignment -name VERILOG_FILE "../Formal Datapath VFILES/reg_32b.v"
 set_global_assignment -name VERILOG_FILE "../Formal Datapath VFILES/RAM.v"
 set_global_assignment -name VERILOG_FILE "../Formal Datapath VFILES/ImmediateBlock.v"
+set_global_assignment -name MIF_FILE MemoryInitializationFile.mif
 set_global_assignment -name VERILOG_FILE MasterVerilog.v
 set_global_assignment -name VERILOG_FILE "../Control Unit And ALU And NON DATAPATH VFILES/PushButton_Debouncer.v"
 set_global_assignment -name VERILOG_FILE "../Control Unit And ALU And NON DATAPATH VFILES/Processor.v"

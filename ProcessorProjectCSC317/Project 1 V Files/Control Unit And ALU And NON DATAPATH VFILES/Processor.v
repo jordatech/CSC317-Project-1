@@ -164,6 +164,7 @@ module Processor (
 				3: GreenLEDs=6'b111;
 				4: GreenLEDs=6'b1111;
 				5: GreenLEDs=6'b11111;
+				6: GreenLEDs=6'b111111;
 				default: GreenLEDs=6'b101010;
 			endcase
 		end

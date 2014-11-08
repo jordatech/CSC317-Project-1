@@ -54,7 +54,7 @@ wire [31:0] ControlSignals_Enables;
 		assign ControlSignals_Enables[11:8] = {3'b0,RA_Enable}; 	// RA
 		assign ControlSignals_Enables[15:12] = {3'b0,RB_Enable}; // RB
 		assign ControlSignals_Enables[19:16] = {3'b0,RZ_Enable}; // RZ
-		assign ControlSignals_Enables[23:20] = {3'b0,RM_Enable}; // RM
+		assign ControlSignals_Enables[23:20] = {3'b0,RM_Enable}; 	// RM
 		assign ControlSignals_Enables[27:24] = {3'b0,RY_Enable}; // RY	
 		assign ControlSignals_Enables[31:28] = {3'b0,ROM1_Read};	// ROM
 			
@@ -72,7 +72,7 @@ wire [31:0] ConditionControlFlags;
 		assign ConditionControlFlags[27:24] = {3'b0,CCR_Out[6]}; // No Operation		
 		assign ConditionControlFlags[31:28] = 0;	
 		
-always @(*)//Update the Display_Selected contents when anything changes
+always @(Display_Enable)//Update the Display_Selected contents when anything changes
 	begin
 	//pushbuttons are active low but this is the only way I'll know that it was the clock which triggered this statement
 		if	(Display_Enable) //Could use to have something else drive the display...

@@ -56,7 +56,7 @@ module SelectController(
 //				//MuxY
 //				Y_Select = ;// (Y_Select) [2,1,0] = {Return_Address,RAM1_Data_Out,RZ_Out}
 
-always @(OP_Code,Instruction_Format)
+always @(OP_Code)
 	begin
 
 		//Instruction Format (a)		 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA						
@@ -448,7 +448,7 @@ always @(OP_Code,Instruction_Format)
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
 					ALU_Op =  14;	// LBI 
-					MA_Select = 0;			// MEM_Address <- RZ_Out, used for writing back? // 1 => MEM_Address <- PC		
+					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
 					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
 					
@@ -475,7 +475,7 @@ always @(OP_Code,Instruction_Format)
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
 					ALU_Op =  15;	// LDRi 
-					MA_Select = 0;			// MEM_Address <- RZ_Out, used for writing back? // 1 => MEM_Address <- PC		
+					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
 					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
 					
@@ -485,7 +485,7 @@ always @(OP_Code,Instruction_Format)
 						(1.) Load Register Indirect
 					____________________________________________________	
 					(LDRI)RTL EQUIVELENT:
-						(1.) RZ<-(RA) // EA=[RA]
+						(1.) RZ<-(RA) // EA=[RB]
 						//!!!!!!!// Have To Fetch From Memory
 						//???????// AGAIN DO WE NEED AN "IS ADDRESS" CONTROL SIGNAL IN THE CCR
 					____________________________________________________
@@ -548,7 +548,7 @@ always @(OP_Code,Instruction_Format)
 					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 0;	// Rdst <- IR_26-22		// Used in format (b)
-					B_Select = 1;			// MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.) // 0 => MuxB_Out <- RB_Out
+					B_Select = 1;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
 					ALU_Op =  32;		// LD# 
 					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
@@ -572,7 +572,7 @@ always @(OP_Code,Instruction_Format)
 					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 0;	// Rdst <- IR_26-22		// Used in format (b)
-					B_Select = 1;			// MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.) // 0 => MuxB_Out <- RB_Out
+					B_Select = 1;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
 					ALU_Op =  33;		// LDU# 
 					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)

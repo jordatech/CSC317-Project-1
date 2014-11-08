@@ -35,7 +35,7 @@ module MasterVerilog(
 			wire[31:0] 	ROM1_Address; // WORD ADDRESSABLE
 			wire 			ROM1_Read;
 		// Outputs
-			wire[31:0]  ROM1_Data_Out;
+			wire[31:0] ROM1_Data_Out;
 
 	// RAM Wires
 		// Inputs
@@ -43,7 +43,7 @@ module MasterVerilog(
 			wire 			RAM1_Read_H_Write_L, RAM1_MFC,RAM1_Out_Enable;
 			wire[31:0]  RAM1_Data_In;
 		// Outputs
-			wire[31:0]  RAM1_Data_Out;
+			wire[31:0] RAM1_Data_Out;
 
 MemoryInterface Memory(
 	// ROM 
@@ -89,8 +89,7 @@ assign red[16] = 0;
 assign red[17] = 0;
 //assign green[6:0] = 0;
 //assign green[7] = 0;
-//assign green[8]=0; 	
-
+//assign green[8]=0; 
 /////// 			FINISH		LED Output
 //-----------------------------------------------------------------------------------------------------------------------
 

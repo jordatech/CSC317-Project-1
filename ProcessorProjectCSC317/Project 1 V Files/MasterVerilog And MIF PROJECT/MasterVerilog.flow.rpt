@@ -1,5 +1,5 @@
 Flow report for MasterVerilog
-Fri Nov 07 17:13:31 2014
+Fri Nov 07 22:35:34 2014
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,15 +40,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Fri Nov 07 17:13:31 2014           ;
+; Flow Status                        ; Successful - Fri Nov 07 22:35:34 2014           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; MasterVerilog                                   ;
 ; Top-level Entity Name              ; MasterVerilog                                   ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 2,785 / 33,216 ( 8 % )                          ;
-;     Total combinational functions  ; 2,499 / 33,216 ( 8 % )                          ;
+; Total logic elements               ; 2,897 / 33,216 ( 9 % )                          ;
+;     Total combinational functions  ; 2,598 / 33,216 ( 8 % )                          ;
 ;     Dedicated logic registers      ; 1,313 / 33,216 ( 4 % )                          ;
 ; Total registers                    ; 1313                                            ;
 ; Total pins                         ; 107 / 475 ( 23 % )                              ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/07/2014 17:12:37 ;
+; Start date & time ; 11/07/2014 22:34:30 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; MasterVerilog       ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 154127758921729.141540195604316       ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 105564164029988.141542126903680       ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                  ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                ; <None>        ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --             ;
@@ -93,12 +93,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:13     ; 1.0                     ; 458 MB              ; 00:00:13                           ;
-; Fitter                    ; 00:00:29     ; 1.0                     ; 694 MB              ; 00:00:29                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 437 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 436 MB              ; 00:00:02                           ;
-; EDA Netlist Writer        ; 00:00:02     ; 1.0                     ; 414 MB              ; 00:00:02                           ;
-; Total                     ; 00:00:50     ; --                      ; --                  ; 00:00:48                           ;
+; Analysis & Synthesis      ; 00:00:14     ; 1.0                     ; 477 MB              ; 00:00:13                           ;
+; Fitter                    ; 00:00:37     ; 1.0                     ; 699 MB              ; 00:00:35                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 438 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 444 MB              ; 00:00:03                           ;
+; EDA Netlist Writer        ; 00:00:02     ; 1.0                     ; 415 MB              ; 00:00:02                           ;
+; Total                     ; 00:00:58     ; --                      ; --                  ; 00:00:55                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -107,11 +107,11 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; SDEH232-01c4dl   ; Windows 7 ; 6.1        ; x86_64         ;
-; Fitter                    ; SDEH232-01c4dl   ; Windows 7 ; 6.1        ; x86_64         ;
-; Assembler                 ; SDEH232-01c4dl   ; Windows 7 ; 6.1        ; x86_64         ;
-; TimeQuest Timing Analyzer ; SDEH232-01c4dl   ; Windows 7 ; 6.1        ; x86_64         ;
-; EDA Netlist Writer        ; SDEH232-01c4dl   ; Windows 7 ; 6.1        ; x86_64         ;
+; Analysis & Synthesis      ; Patrick          ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; Patrick          ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; Patrick          ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; Patrick          ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; Patrick          ; Windows 7 ; 6.2        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
