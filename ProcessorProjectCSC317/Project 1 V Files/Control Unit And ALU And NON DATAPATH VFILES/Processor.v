@@ -10,22 +10,13 @@ module Processor (
 	input wire Clock,
 	output wire [31:0] HexDisplay,
 	output reg  [6:0] GreenLEDs,
-	
-	// ROM Wires   // WHERE ALL OUR INSTRUCTIONS ARE STORED
-		// Inputs
-			input wire[31:0] 		ROM1_Data_Out,
-		// Outputs
-			output wire[31:0] 	ROM1_Address, // WORD ADDRESSABLE
-			output wire 			ROM1_Read,
-
-	// RAM Wires
-		// Inputs
-			input wire[31:0] 		RAM1_Data_Out, 
-			input wire				RAM1_MFC,RAM1_Out_Enable,
-		// Outputs
-			output wire[31:0] 	RAM1_Address, // WORD ADDRESSABLE
-			output wire 			RAM1_Read_H_Write_L, 
-			output wire[31:0]  	RAM1_Data_In
+		// Memory Wires
+			// Inputs
+				input wire[31:0]  MEM_Data_Out,
+				input wire			MEM_MFC, MEM_ANA_FLAG, //Address Not Assigned
+			// Outputs
+				output wire[31:0]	MEM_Address, MEM_Data_In, // WORD ADDRESSABLE
+				output wire 		MEM_Read, MEM_Write
 
 			
 );
@@ -97,12 +88,7 @@ module Processor (
 		// MuxMA // Memory Address
 			wire 				MA_Select;
 			wire [31:0] 	MA_Out;
-		// Random Access Memory
-	
-		// Read Only Memory
-			//wire 			ROM1_Read;
-			//wire [31:0]	ROM1_Data_Out;// We get our instructions from the ROM File
-			//wire [31:0] 	ROM1_Address;
+
 			
 	 //[Write Back]*************************************************
 		// Final Output Register
@@ -156,8 +142,12 @@ module Processor (
 				.INC_Select(INC_Select),.RF_WRITE(RF_WRITE),.Instruction_Rsrc1(Instruction_Rsrc1),.Instruction_Rsrc2(Instruction_Rsrc2),
 				.Instruction_Immediate(Instruction_Immediate),.Instruction_Rdst(Instruction_Rdst),.C_Select(C_Select),.RA_Enable(RA_Enable)
 				,.RB_Enable(RB_Enable),.B_Select(B_Select),.Instruction_Format(Instruction_Format),.Instruction_OP_Code(Instruction_OP_Code),
-				.ALU_Op(ALU_Op),.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.MA_Select(MA_Select),.RAM1_Write_L(RAM1_Read_H_Write_L),
-				.RAM1_Read(RAM1_Out_Enable),.ROM1_Read(ROM1_Read),.Y_Select(Y_Select),.RY_Enable(RY_Enable)
+				.ALU_Op(ALU_Op),.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.MA_Select(MA_Select),
+				.MEM_MFC(MEM_MFC),
+				.MEM_ANA_FLAG(MEM_ANA_FLAG),
+				.MEM_Read(MEM_Read),
+				.MEM_Write(MEM_Write),
+				.Y_Select(Y_Select),.RY_Enable(RY_Enable)
 				);
 	// Stage Progress Bar (What Stage Am I In?)
 		always@(Stage)begin
@@ -198,17 +188,13 @@ module Processor (
 		reg_32b RM (.R(RM_In), .Rin(RM_Enable), .Clock(Clock), .Q(RM_Out));// IN() -> OUT(MEMORY, Indirectly MuxY)  // Like RB_Temp..... but goes into memory
 	// MuxMA
 		Muxn #(.WidthOfInputs(32),.NumberOfInputs(2)) 
-		MuxMA(.Select(MA_Select),.Out(MuxMA_Out),.ConcatanatedInputs({PC_Out,RZ_Out}));// (MA_Select) [1,0] = {PC_Out,RZ_Out}
+		MuxMA(.Select(MA_Select),.Out(MuxMA_Out),.ConcatanatedInputs({PC_Out,RZ_Out}));// (MA_Select) [1,0] = {PC_Out,RZ_Out}//??????? MAY NEED TO CONCATINATE WITH CHOSE RAM OR ROM
 	// Memory Data
-		assign RM_In=RB_Out; // Memory Register is one cycle behind RB
+		assign RM_In = RB_Out; // Memory Register is one cycle behind RB
 	// Memory Interface
-		//Read Only Memory
-			assign ROM1_Address = PC_Out;
-			assign IR_In = ROM1_Data_Out;
-	
-		//Random Access Memory
-			assign RAM1_Address = MuxMA_Out;
-			assign RAM1_Data_In = RM_Out;
+		assign MEM_Address = MuxMA_Out;
+		assign MEM_Data_In = RM_Out; // WORD ADDRESSABLE
+		assign IR_In = MEM_Data_Out;
 	
 //-------------------------------------------------------------------------------------------------------------------------
 
@@ -218,7 +204,7 @@ module Processor (
 	
 	// MuxY
 		Muxn #(.WidthOfInputs(32),.NumberOfInputs(3)) 
-		MuxY(.Select(Y_Select),.Out(MuxY_Out),.ConcatanatedInputs({Return_Address,RAM1_Data_Out,RZ_Out}));// (Y_Select) [2,1,0] = {Return_Address,RAM1_Data_Out,RZ_Out}
+		MuxY(.Select(Y_Select),.Out(MuxY_Out),.ConcatanatedInputs({Return_Address,MEM_Data_Out,RZ_Out}));// (Y_Select) [2,1,0] = {Return_Address,MEM_Data_Out,RZ_Out}
 	// Final Output Register
 		reg_32b RY (.R(RY_In), .Rin(RY_Enable), .Clock(Clock), .Q(RY_Out));// IN(MuxY) -> OUT(REGFIL
 		assign RY_In=MuxY_Out;
@@ -244,7 +230,7 @@ DisplayMux displayAll(
 		.RF_a(IR_Out[31:27]),
 		.RF_b(IR_Out[26:22]),
 		.RF_c(MuxC_Out),
-		.ROM_Out(ROM1_Data_Out[31:0]),
+		.MEM_Data_Out(MEM_Data_Out[31:0]),
 		.PC_Select(PC_Select),
 		.IR_Enable(IR_Enable),
 		.PC_Enable(PC_Enable),
@@ -253,7 +239,7 @@ DisplayMux displayAll(
 		.RZ_Enable(RZ_Enable),
 		.RM_Enable(RM_Enable),
 		.RY_Enable(RY_Enable),
-		.ROM1_Read(ROM1_Read),
+		.MEM_Read(MEM_Read),
 		.INC_Select(INC_Select),
 		.CCR_Out(CCR_Out),
 		.OP_Code(OP_Code),

@@ -1,5 +1,5 @@
 Flow report for MasterVerilog
-Sat Nov 08 12:00:23 2014
+Sat Nov 08 13:27:32 2014
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,20 +40,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Sat Nov 08 12:00:23 2014           ;
+; Flow Status                        ; Successful - Sat Nov 08 13:27:32 2014           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; MasterVerilog                                   ;
 ; Top-level Entity Name              ; MasterVerilog                                   ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 2,523 / 33,216 ( 8 % )                          ;
-;     Total combinational functions  ; 1,994 / 33,216 ( 6 % )                          ;
+; Total logic elements               ; 2,380 / 33,216 ( 7 % )                          ;
+;     Total combinational functions  ; 1,859 / 33,216 ( 6 % )                          ;
 ;     Dedicated logic registers      ; 1,350 / 33,216 ( 4 % )                          ;
 ; Total registers                    ; 1350                                            ;
 ; Total pins                         ; 107 / 475 ( 23 % )                              ;
 ; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 4,096 / 483,840 ( < 1 % )                       ;
+; Total memory bits                  ; 2,112 / 483,840 ( < 1 % )                       ;
 ; Embedded Multiplier 9-bit elements ; 0 / 70 ( 0 % )                                  ;
 ; Total PLLs                         ; 0 / 4 ( 0 % )                                   ;
 +------------------------------------+-------------------------------------------------+
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/08/2014 11:59:36 ;
+; Start date & time ; 11/08/2014 13:26:47 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; MasterVerilog       ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+---------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 154127758921729.141546957601756       ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 154127758921729.141547480603040       ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                  ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                ; <None>        ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --             ;
@@ -93,12 +93,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:11     ; 1.0                     ; 475 MB              ; 00:00:10                           ;
-; Fitter                    ; 00:00:25     ; 1.0                     ; 689 MB              ; 00:00:25                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 426 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 448 MB              ; 00:00:02                           ;
-; EDA Netlist Writer        ; 00:00:02     ; 1.0                     ; 419 MB              ; 00:00:02                           ;
-; Total                     ; 00:00:43     ; --                      ; --                  ; 00:00:41                           ;
+; Analysis & Synthesis      ; 00:00:12     ; 1.0                     ; 474 MB              ; 00:00:11                           ;
+; Fitter                    ; 00:00:23     ; 1.0                     ; 693 MB              ; 00:00:23                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 422 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 445 MB              ; 00:00:02                           ;
+; EDA Netlist Writer        ; 00:00:02     ; 1.0                     ; 414 MB              ; 00:00:02                           ;
+; Total                     ; 00:00:41     ; --                      ; --                  ; 00:00:40                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

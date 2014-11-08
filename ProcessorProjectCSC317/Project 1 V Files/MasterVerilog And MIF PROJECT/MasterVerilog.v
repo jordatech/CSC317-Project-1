@@ -30,30 +30,26 @@ module MasterVerilog(
 	
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /////// 			START		Memory
-	// ROM Wires
+	// Memory Wires
 		// Inputs
-			wire[31:0] 	ROM1_Address; // WORD ADDRESSABLE
-			wire 			ROM1_Read;
+			wire[31:0] 	MEM_Address, MEM_Data_In; // WORD ADDRESSABLE
+			wire 			MEM_Read, MEM_Write, MEM_Clock;
 		// Outputs
-			wire[31:0] ROM1_Data_Out;
-
-	// RAM Wires
-		// Inputs
-			wire[31:0] 	RAM1_Address; // WORD ADDRESSABLE
-			wire 			RAM1_Read_H_Write_L, RAM1_MFC,RAM1_Out_Enable;
-			wire[31:0]  RAM1_Data_In;
-		// Outputs
-			wire[31:0] RAM1_Data_Out;
-
-MemoryInterface Memory(
-	// ROM 
-		.ROM1_Address(ROM1_Address),.ROM1_Read(ROM1_Read),.ROM1_Clock(clk_27),.ROM1_Data_Out(ROM1_Data_Out),
-	// RAM
-		.RAM1_Address(RAM1_Address),.RAM1_Read_H_Write_L(RAM1_Read_H_Write_L),.RAM1_Out_Enable(RAM1_Out_Enable),
-		.RAM1_MFC(RAM1_MFC),.RAM1_Data_In(RAM1_Data_In),.RAM1_Data_Out(RAM1_Data_Out)
+			wire[31:0]  MEM_Data_Out;
+			wire			MEM_MFC, MEM_ANA_FLAG; //Address Not Assigned FLAG
+			
+MemoryInterface MEMORY(
+		//Memory
+			// Inputs
+				.MEM_Address(MEM_Address),
+				.MEM_Data_In(MEM_Data_In), // WORD ADDRESSABLE
+				.MEM_Read(MEM_Read),.MEM_Write(MEM_Write),.MEM_Clock(MEM_Clock),
+			// Outputs
+				.MEM_Data_Out(MEM_Data_Out),.MEM_MFC(MEM_MFC),.MEM_ANA_FLAG(MEM_ANA_FLAG)//Address Not Assigned
 );
 
-	
+	assign MEM_Clock = clk_27;
+
 /////// 			FINISH	Memory
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -70,11 +66,13 @@ Processor aProcessor(
 	.Clock(pushBut_DB[0]),
 	.HexDisplay(HexDisplay32Bits_Wire),
 	.GreenLEDs(green[6:0]),//For Time Step
-	// ROM 
-		.ROM1_Address(ROM1_Address),.ROM1_Read(ROM1_Read),.ROM1_Data_Out(ROM1_Data_Out),
-	// RAM
-		.RAM1_Address(RAM1_Address),.RAM1_Read_H_Write_L(RAM1_Read_H_Write_L),.RAM1_Out_Enable(RAM1_Out_Enable),
-		.RAM1_MFC(RAM1_MFC),.RAM1_Data_In(RAM1_Data_In),.RAM1_Data_Out(RAM1_Data_Out)
+		//Memory
+			// Inputs
+				.MEM_Data_Out(MEM_Data_Out),.MEM_MFC(MEM_MFC),.MEM_ANA_FLAG(MEM_ANA_FLAG),//Address Not Assigned
+			// Outputs
+				.MEM_Address(MEM_Address),
+				.MEM_Data_In(MEM_Data_In), // WORD ADDRESSABLE
+				.MEM_Read(MEM_Read),.MEM_Write(MEM_Write)
 );
 
 /////// 			FINISH	Processor

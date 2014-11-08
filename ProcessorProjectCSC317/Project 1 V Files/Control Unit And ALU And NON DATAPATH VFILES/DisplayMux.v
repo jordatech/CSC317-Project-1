@@ -32,9 +32,9 @@ input wire Display_Enable,
 			input wire PC_Select, INC_Select,
 			input wire[31:0] PC_Temp,
 		// Enable Control Signals
-			input wire IR_Enable, PC_Enable, RA_Enable, RB_Enable, RZ_Enable, RM_Enable, RY_Enable, ROM1_Read,
-		//Read Only Memory
-			input wire [31:0] ROM_Out,
+			input wire IR_Enable, PC_Enable, RA_Enable, RB_Enable, RZ_Enable, RM_Enable, RY_Enable, MEM_Read,
+		// Memory
+			input wire [31:0] MEM_Data_Out,
 
 //END INPUT DATA---------------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ wire [31:0] ControlSignals_Enables;
 		assign ControlSignals_Enables[19:16] = {3'b0,RZ_Enable}; // RZ
 		assign ControlSignals_Enables[23:20] = {3'b0,RM_Enable}; 	// RM
 		assign ControlSignals_Enables[27:24] = {3'b0,RY_Enable}; // RY	
-		assign ControlSignals_Enables[31:28] = {3'b0,ROM1_Read};	// ROM
+		assign ControlSignals_Enables[31:28] = {3'b0,MEM_Read};	// MEMORY
 			
 			
 // Condition Control Register
@@ -98,7 +98,7 @@ always @(*)//Update the Display_Selected contents when anything changes
 				8:	 HexDisplay32Bits = RM[31:0];//RM = Written To After The (Compute) Stage And Is Used In The Memory Access Stage 
 				9:	 HexDisplay32Bits = RY[31:0];//RY = Written To After The (Memory Access) Stage 
 				10: HexDisplay32Bits = CCR_Out[31:0];// Condition Control Register
-				11: HexDisplay32Bits = ROM_Out[31:0];//ROM Output ...
+				11: HexDisplay32Bits = MEM_Data_Out[31:0];//ROM Output ...
 				12: HexDisplay32Bits = PC_Temp[31:0];// PC-1 or PC-BranchOffset or PC-RA // One Cycle Behind...
 				13: HexDisplay32Bits = PC_Select;// Increment PC "0"->jump to "RA" .... "1"->inc by MuxINC  // MuxPC = PC_select ? NextAdd: RA
 				14: HexDisplay32Bits = ControlSignals_Enables;//[ROM1_READ,RY,RM,RZ,RB,RA,PC,IR]

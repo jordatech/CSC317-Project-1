@@ -26,9 +26,9 @@ module StageTracker(
 			// Memory Data Register
 				output reg			RM_Enable,
 			// Read Only Memory					
-				output reg			ROM1_Read,
+				output reg			MEM_Read,
 			// Random Access Memory
-				output reg			RAM1_Write_L,
+				output reg			MEM_Write,
 				
 		 //[Write Back]********************
 			// Final Output Register
@@ -56,8 +56,8 @@ always@(Stage)begin
 					RZ_Enable 		<= 0 ;
 					RM_Enable 		<= 0 ;
 					RY_Enable 		<= 0 ;
-					ROM1_Read 		<= 1 ;// Enable ROM1_Read in cycle 1, Get instruction from ROM in cycle 2
-					RAM1_Write_L 	<= 0 ;
+					MEM_Read 		<= 1 ;// Enable MEM_Read in cycle 1, Get instruction from ROM in cycle 2
+					MEM_Write 		<= 0 ;
 					RF_WRITE 		<= 0 ;// Enable RF_WRITE in cycle 5, Write RY->R[Rdst] In Cycle 1
 					
 				end
@@ -71,8 +71,8 @@ always@(Stage)begin
 					RZ_Enable 		<= 0 ;
 					RM_Enable 		<= 0 ;
 					RY_Enable 		<= 0 ;
-					ROM1_Read 		<= 0 ;// Enable ROM1_Read in cycle 1, Get instruction from ROM in cycle 2
-					RAM1_Write_L 	<= 0 ;
+					MEM_Read 		<= 0 ;// Enable MEM_Read in cycle 1, Get instruction from ROM in cycle 2
+					MEM_Write 		<= 0 ;
 					RF_WRITE 		<= 0 ;
 				
 				end
@@ -86,8 +86,8 @@ always@(Stage)begin
 					RZ_Enable 		<= 1 ;// Enable RZ in cycle 3 Place ALU_Out In RZ in cycle 4 ...
 					RM_Enable 		<= 1 ;// Enable RM in cycle 3 Place RB_Out In RM in cycle 4 ...
 					RY_Enable 		<= 0 ;
-					ROM1_Read 		<= 0 ;
-					RAM1_Write_L 	<= 0 ;
+					MEM_Read 		<= 0 ;
+					MEM_Write 		<= 0 ;
 					RF_WRITE 		<= 0 ;
 
 				end
@@ -101,14 +101,14 @@ always@(Stage)begin
 					RZ_Enable 		<= 0 ;// Enable RZ in cycle 3 Place ALU_Out In RZ in cycle 4 ...
 					RM_Enable 		<= 0 ;// Enable RM in cycle 3 Place RB_Out In RM in cycle 4 ...
 					RY_Enable 		<= 1 ;// Enable RY in cycle 4 Place MuxY_Out In RY in cycle 5 ...
-					ROM1_Read 		<= 0 ;
+					MEM_Read 		<= 0 ;
 					case(WillWriteTo_Memory_H_RF_L)
 						0: begin 
-								RAM1_Write_L 	<= 0 ;
+								MEM_Write 		<= 0 ;
 								RF_WRITE       <= 0 ;
 							end
 						1: begin 
-								RAM1_Write_L 	<= 1 ;// Enable RAM1_Write_L 4, Write RZ->RAM[(RM)] or RM->RAM[(RZ)] In Cycle 5
+								MEM_Write 		<= 1 ;// Enable MEM_Write 4, Write RZ->RAM[(RM)] or RM->RAM[(RZ)] In Cycle 5
 								RF_WRITE  	   <= 0 ;
 							end
 					endcase
@@ -123,14 +123,14 @@ always@(Stage)begin
 					RZ_Enable 		<= 0 ;
 					RM_Enable 		<= 0 ;
 					RY_Enable 		<= 0 ;
-					ROM1_Read 		<= 0 ;
+					MEM_Read 		<= 0 ;
 					case(WillWriteTo_Memory_H_RF_L)
 						0: begin 
-								RAM1_Write_L 	<= 0 ;
+								MEM_Write 		<= 0 ;
 								RF_WRITE       <= 1 ;// Enable RF_WRITE in cycle 5, Write RY->R[Rdst] In Cycle 1 
 							end
 						1: begin 
-								RAM1_Write_L 	<= 0 ;// Enable RAM1_Write_L 4, Write RZ->RAM[(RM)] or RM->RAM[(RZ)] In Cycle 5
+								MEM_Write 		<= 0 ;// Enable MEM_Write 4, Write RZ->RAM[(RM)] or RM->RAM[(RZ)] In Cycle 5
 								RF_WRITE 		<= 0 ;
 							end
 						
@@ -147,8 +147,8 @@ always@(Stage)begin
 					RZ_Enable 		<= 0 ;
 					RM_Enable 		<= 0 ;
 					RY_Enable 		<= 0 ;
-					ROM1_Read 		<= 0 ;
-					RAM1_Write_L 	<= 0 ;
+					MEM_Read 		<= 0 ;
+					MEM_Write 		<= 0 ;
 					RF_WRITE 		<= 0 ;
 				end
 				
@@ -163,7 +163,7 @@ always@(Stage)begin
 				RZ_Enable 		<= 0 ;
 				RM_Enable 		<= 0 ;
 				RY_Enable 		<= 0 ;
-				RAM1_Write_L 	<= 0 ;
+				MEM_Write 		<= 0 ;
 				RF_WRITE 		<= 0 ;
 		case(Stage)
 		//[Fetch]********************
@@ -171,28 +171,28 @@ always@(Stage)begin
 				1:	begin
 						IR_Enable 		<= 1 ;// Enable IR in cycle 1, Get instruction in cycle 2
 						PC_Enable 		<= 1 ;// Increment PC after getting instruction... Enable PC in cycle 1, increment PC in cycle 2 ... Every opperation takes 5 cycles...
-						ROM1_Read 		<= 1 ;// Enable ROM1_Read in cycle 1, Get instruction from ROM in cycle 2
+						MEM_Read 		<= 1 ;// Enable MEM_Read in cycle 1, Get instruction from ROM in cycle 2
 					end
 		//[Decode]********************
 				//Stage(2) 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 				2:	begin
 						IR_Enable 		<= 0 ;// Enable IR in cycle 1, Get instruction in cycle 2
 						PC_Enable 		<= 0 ;// Increment PC after getting instruction... Enable PC in cycle 1, increment PC in cycle 2 ... Every opperation takes 5 cycles...
-						ROM1_Read 		<= 0 ;// Enable ROM1_Read in cycle 1, Get instruction from ROM in cycle 2				
+						MEM_Read 		<= 0 ;// Enable MEM_Read in cycle 1, Get instruction from ROM in cycle 2				
 					end
 		//[Execute]********************
 				//Stage(3) 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
 				3:	begin
 						IR_Enable 		<= 0 ;
 						PC_Enable 		<= 0 ;
-						ROM1_Read 		<= 0 ;
+						MEM_Read 		<= 0 ;
 					end
 		//[Memory]********************
 				//Stage(4) 444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
 				4:	begin
 						IR_Enable 		<= 0 ;
 						PC_Enable 		<= 0 ;
-						ROM1_Read 		<= 0 ;
+						MEM_Read 		<= 0 ;
 
 					end
 		//[Write Back]********************
@@ -200,14 +200,14 @@ always@(Stage)begin
 				5:	begin
 						IR_Enable 		<= 0 ;
 						PC_Enable 		<= 0 ;
-						ROM1_Read 		<= 0 ;
+						MEM_Read 		<= 0 ;
 					end
 								
 					
 		default:	begin  // DISABLE ALL
 						IR_Enable <= 0;
 						PC_Enable <= 0;
-						ROM1_Read <= 0;
+						MEM_Read <= 0;
 					end
 							
 			endcase // ENDCASE STAGE Stage

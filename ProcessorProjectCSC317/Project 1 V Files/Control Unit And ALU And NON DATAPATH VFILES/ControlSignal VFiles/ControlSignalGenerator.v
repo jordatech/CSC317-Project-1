@@ -48,10 +48,11 @@ module ControlSignalGenerator(
 					output wire			RM_Enable,
 				// MuxMA // Memory Address
 					output wire			MA_Select,
-				// Random Access Memory
-					output wire			RAM1_Read, RAM1_Write_L,
-				// Read Only Memory					
-					output wire			ROM1_Read,
+				// Memory Wires
+					// Inputs
+						input wire		MEM_MFC, MEM_ANA_FLAG, //Address Not Assigned
+					// Outputs
+						output wire 	MEM_Read, MEM_Write,
 
 			 //[Write Back]********************
 				//MuxY
@@ -68,7 +69,7 @@ module ControlSignalGenerator(
 		.Instruction_Rdst(Instruction_Rdst),.Instruction_Immediate(Instruction_Immediate),.Instruction_OP_Code(Instruction_OP_Code),
 		.IFNR_FLAG(IFNR_FLAG),.NOP_FLAG(NOP_FLAG)
 		);
-	
+
 	// Step Counter - What Stage Are We In?
 		ClockCounter StageGenerator(.Clock(Clock),.ClockCount(Stage));
 		
@@ -78,8 +79,8 @@ module ControlSignalGenerator(
 			.Stage(Stage[2:0]),.NOP_FLAG(NOP_FLAG),.WillWriteTo_Memory_H_RF_L(WillWriteTo_Memory_H_RF_L),
 			//Outputs
 			.IR_Enable(IR_Enable),.PC_Enable(PC_Enable),.RA_Enable(RA_Enable),.RB_Enable(RB_Enable),
-			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),.ROM1_Read(ROM1_Read),
-			.RF_WRITE(RF_WRITE),.RAM1_Write_L(RAM1_Write_L)
+			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),
+			.MEM_Read(MEM_Read),.RF_WRITE(RF_WRITE),.MEM_Write(MEM_Write)
 		);
 		
 	// Operation Dependent Control Signals
@@ -95,8 +96,11 @@ module ControlSignalGenerator(
 		
 		
 // Random Access Memory
-	assign RAM1_Read = 1;// Always Read From Memory, Just Do Not Always Select The Output at MUXY //(RAM1_Read) (0) Ouput is high impedance (1)Output is RAM1_Address
-	
+	//assign RAM1_Read = 1;// Always Read From Memory, Just Do Not Always Select The Output at MUXY //(RAM1_Read) (0) Ouput is high impedance (1)Output is RAM1_Address
+//						.MEM_MFC(MEM_MFC),
+//						.MEM_ANA_FLAG(MEM_ANA_FLAG),
+//						.MEM_Read(MEM_Read),
+//						.MEM_Write(MEM_Write),
 
 
 

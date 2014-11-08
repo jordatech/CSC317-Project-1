@@ -3,48 +3,40 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow Model Setup 'PushButton_Debouncer:debounceit0|PB_state'
-Slack : -11.666
-TNS   : -11129.830
+Slack : -12.186
+TNS   : -10944.832
 
 Type  : Slow Model Setup 'Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]'
-Slack : -11.297
-TNS   : -11.297
+Slack : -12.122
+TNS   : -12.122
 
 Type  : Slow Model Setup 'Processor:aProcessor|reg_32b:IR|Q[0]'
-Slack : -9.031
-TNS   : -64.088
+Slack : -9.583
+TNS   : -46.068
 
 Type  : Slow Model Setup 'clk_27'
 Slack : -2.164
-TNS   : -135.117
-
-Type  : Slow Model Setup 'Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]'
-Slack : -1.178
-TNS   : -56.331
+TNS   : -125.679
 
 Type  : Slow Model Hold 'Processor:aProcessor|reg_32b:IR|Q[0]'
-Slack : -6.231
-TNS   : -51.409
-
-Type  : Slow Model Hold 'PushButton_Debouncer:debounceit0|PB_state'
-Slack : -2.835
-TNS   : -130.361
+Slack : -6.734
+TNS   : -52.554
 
 Type  : Slow Model Hold 'clk_27'
-Slack : -2.493
-TNS   : -24.875
+Slack : -2.515
+TNS   : -22.963
+
+Type  : Slow Model Hold 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : -1.715
+TNS   : -24.064
 
 Type  : Slow Model Hold 'Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]'
-Slack : -0.682
-TNS   : -0.682
-
-Type  : Slow Model Hold 'Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]'
-Slack : 0.634
+Slack : 0.254
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'Processor:aProcessor|reg_32b:IR|Q[0]'
-Slack : -3.993
-TNS   : -360.624
+Slack : -3.925
+TNS   : -389.964
 
 Type  : Slow Model Minimum Pulse Width 'PushButton_Debouncer:debounceit0|PB_state'
 Slack : -1.627
@@ -52,54 +44,42 @@ TNS   : -1781.100
 
 Type  : Slow Model Minimum Pulse Width 'clk_27'
 Slack : -1.423
-TNS   : -166.528
+TNS   : -152.298
 
 Type  : Slow Model Minimum Pulse Width 'Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]'
 Slack : 0.500
 TNS   : 0.000
 
-Type  : Slow Model Minimum Pulse Width 'Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]'
-Slack : 0.500
-TNS   : 0.000
-
 Type  : Fast Model Setup 'Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]'
-Slack : -5.121
-TNS   : -5.121
+Slack : -5.476
+TNS   : -5.476
 
 Type  : Fast Model Setup 'PushButton_Debouncer:debounceit0|PB_state'
-Slack : -4.851
-TNS   : -4598.384
+Slack : -4.998
+TNS   : -4474.507
 
 Type  : Fast Model Setup 'Processor:aProcessor|reg_32b:IR|Q[0]'
-Slack : -3.714
-TNS   : -25.702
+Slack : -3.779
+TNS   : -17.056
 
 Type  : Fast Model Setup 'clk_27'
 Slack : -0.979
-TNS   : -35.748
-
-Type  : Fast Model Setup 'Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]'
-Slack : -0.270
-TNS   : -7.670
+TNS   : -33.317
 
 Type  : Fast Model Hold 'Processor:aProcessor|reg_32b:IR|Q[0]'
-Slack : -3.115
-TNS   : -25.397
-
-Type  : Fast Model Hold 'PushButton_Debouncer:debounceit0|PB_state'
-Slack : -1.706
-TNS   : -99.951
+Slack : -3.320
+TNS   : -25.688
 
 Type  : Fast Model Hold 'clk_27'
-Slack : -1.540
-TNS   : -18.198
+Slack : -1.560
+TNS   : -17.192
+
+Type  : Fast Model Hold 'PushButton_Debouncer:debounceit0|PB_state'
+Slack : -1.188
+TNS   : -37.922
 
 Type  : Fast Model Hold 'Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]'
-Slack : -0.278
-TNS   : -0.278
-
-Type  : Fast Model Hold 'Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]'
-Slack : 0.332
+Slack : 0.119
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'PushButton_Debouncer:debounceit0|PB_state'
@@ -107,18 +87,14 @@ Slack : -1.627
 TNS   : -1781.100
 
 Type  : Fast Model Minimum Pulse Width 'Processor:aProcessor|reg_32b:IR|Q[0]'
-Slack : -1.514
-TNS   : -124.340
+Slack : -1.459
+TNS   : -123.936
 
 Type  : Fast Model Minimum Pulse Width 'clk_27'
 Slack : -1.423
-TNS   : -166.528
+TNS   : -152.298
 
 Type  : Fast Model Minimum Pulse Width 'Processor:aProcessor|ControlSignalGenerator:CSG|SelectController:SelectSignals|ALU_Op[0]'
-Slack : 0.500
-TNS   : 0.000
-
-Type  : Fast Model Minimum Pulse Width 'Processor:aProcessor|InstructionAddressGenerator:InstAddGen|PC[0]'
 Slack : 0.500
 TNS   : 0.000
 
