@@ -65,6 +65,7 @@ MemoryInterface Memory(
 Processor aProcessor(
 	.PC_Reset(pushBut_DB[3]),
 	.Display_Select(switch[4:0]),
+	.RegFileView_Select(switch[17:13]),
 	.Display_Enable(pushBut_DB[1]),
 	.Clock(pushBut_DB[0]),
 	.HexDisplay(HexDisplay32Bits_Wire),

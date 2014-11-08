@@ -19,7 +19,7 @@ output reg CCR_Enable
 
 reg [32:0] R33; //33-bit register "CHEATING METHOD" used for determining the CARRY_FLAG
 
-always @(ALU_Op,RA,RB)
+always @(ALU_Op,RA,RB,RZ,Clock)
 	begin
 	
 		casex(ALU_Op)
@@ -150,12 +150,6 @@ always @(ALU_Op,RA,RB)
 				
 				5: begin/*NEG*/
 							RZ <= - RA ; // Negation 
-					if(RZ[31] != RA[31]) begin
-						OVERFLOW_FLAG <= 1;
-					end
-					else begin
-						OVERFLOW_FLAG <= 0;
-					end
 	
 					/*_____________________(NEG)________________________
 					(NEG)DESCRIPTION:
@@ -247,26 +241,9 @@ always @(ALU_Op,RA,RB)
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) CARRY_FLAG
 					____________________________________________________*/
-					end
-					
-				11: begin/*LSL_ASL*/
-							RZ <= RA << 1 ; // Divide By Two
-							CARRY_FLAG <= RA[31] ;
-					/*LSL_ASL*/;  // LSL Is The Same As ASL , Back Fills With Zeros
-					/*_____________________(LSL_ASL)________________________
-					(LSL_ASL)DESCRIPTION:
-						(1.) Logical/Arithmatical Shift Left  // Shift One Bit Position Only
-					____________________________________________________	
-					(LSL_ASL)RTL EQUIVELENT:
-						(1.) RZ<- [RA] << 1  //  RZ<- [RA] <<< 1
-						(2.) CARRY_FLAG<- [RA[31]] // Carry Flag From MSB On LHS [31]
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) CARRY_FLAG
-					____________________________________________________*/
 					end				
 					
-				12: begin/*ROR*/
+				11: begin/*ROR*/
 							RZ <= {CARRY_FLAG,RA[31:1]} ; // Rotate Right With Carry
 							CARRY_FLAG <= RA[0] ;
 					/*_____________________(ROR)________________________
@@ -284,7 +261,7 @@ always @(ALU_Op,RA,RB)
 					____________________________________________________*/
 					end
 
-				13: begin/*ROL*/
+				12: begin/*ROL*/
 							RZ <= {RA[30:0],CARRY_FLAG} ; // Rotate Right With Carry
 							CARRY_FLAG <= RA[31] ;
 					/*_____________________(ROL)________________________
@@ -302,7 +279,7 @@ always @(ALU_Op,RA,RB)
 					____________________________________________________*/
 					end		
 					
-				14: begin/*MOVE*/
+				13: begin/*MOVE*/
 							RZ <= RA ; // Pass RA through moving it to memory
 
 					/*_____________________(MOVE)________________________

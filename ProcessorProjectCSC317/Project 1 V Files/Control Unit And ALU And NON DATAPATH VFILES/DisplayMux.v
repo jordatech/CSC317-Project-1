@@ -12,9 +12,13 @@ module DisplayMux(
 input wire[4:0] Display_Select,
 input wire Display_Enable,
 		//Register File
-			input wire[4:0] RF_a, RF_b, RF_c, 
+			input wire[4:0] RF_a, RF_b, RF_c,
+			input wire RF_WRITE,
+			input wire [31:0] RegFileRegisterToView,
 		//Main Processor Datapath
 			input wire[31:0] PC, IR_Out, RA, RB, RZ, RM, RY,
+		//Select Lines
+			input wire[1:0] C_Select,
 		//Counter 0-5
 			input wire [2:0]Stage,
 		//Decoded Instruction Format (0,1,2) = (a,b,c)
@@ -72,7 +76,7 @@ wire [31:0] ConditionControlFlags;
 		assign ConditionControlFlags[27:24] = {3'b0,CCR_Out[6]}; // No Operation		
 		assign ConditionControlFlags[31:28] = 0;	
 		
-always @(Display_Enable)//Update the Display_Selected contents when anything changes
+always @(*)//Update the Display_Selected contents when anything changes
 	begin
 	//pushbuttons are active low but this is the only way I'll know that it was the clock which triggered this statement
 		if	(Display_Enable) //Could use to have something else drive the display...
@@ -99,12 +103,14 @@ always @(Display_Enable)//Update the Display_Selected contents when anything cha
 				13: HexDisplay32Bits = PC_Select;// Increment PC "0"->jump to "RA" .... "1"->inc by MuxINC  // MuxPC = PC_select ? NextAdd: RA
 				14: HexDisplay32Bits = ControlSignals_Enables;//[ROM1_READ,RY,RM,RZ,RB,RA,PC,IR]
 				15: HexDisplay32Bits = INC_Select;// Increment PC "0"->inc by "1" .... "1"->inc by "BranchOffset"  // MuxINC = INC_select ? BranchOffset: 32'd1
-				16: HexDisplay32Bits = CCR_Out[31:0];// Condition Control Register
+				16: HexDisplay32Bits = C_Select[1:0];// C_Select[2,1,0] = {LINK,IR_Out[21:17],IR_Out[26:22]}
 				17: HexDisplay32Bits = OP_Code[31:0];// Operation (ie: add, subtract...)
 				18: HexDisplay32Bits = ImmediateBlock_Out[31:0];// Immediate Value Muxed into ALU or other
 				19: HexDisplay32Bits = InstructionFormat[1:0];// Determined in Decode Stage (a,b,c)=(0,1,2)                                
 				20: HexDisplay32Bits = ALU_Op[31:0];// ALU Control Signal(ie: add, subtract...)
 				21: HexDisplay32Bits = MuxB_Out[31:0];// RB, and Immediates...
+				22: HexDisplay32Bits = RF_WRITE;// Write Back = 1
+				23: HexDisplay32Bits = RegFileRegisterToView;//Register In Register File Selected By "RegFileView_Select[4:0] " = "switch[17:13]"
 				
 				default: HexDisplay32Bits = 16'hDEDE;//"Display Error"
 			endcase

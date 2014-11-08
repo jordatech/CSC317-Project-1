@@ -6,7 +6,7 @@ module ClockCounter(Clock,ClockCount);
 	input wire Clock;
 	output reg [2:0] ClockCount;
 	initial begin 
-		ClockCount=1; 
+		ClockCount<=1; 
 	end
 
 	always @(posedge Clock)
