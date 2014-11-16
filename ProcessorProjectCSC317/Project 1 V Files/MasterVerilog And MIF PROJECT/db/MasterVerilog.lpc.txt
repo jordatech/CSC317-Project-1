@@ -11,7 +11,11 @@
 ; uHEX2                                           ; 4     ; 0              ; 0            ; 0              ; 7      ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; uHEX1                                           ; 4     ; 0              ; 0            ; 0              ; 7      ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; uHEX0                                           ; 4     ; 0              ; 0            ; 0              ; 7      ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+<<<<<<< HEAD
 ; aProcessor|displayAll                           ; 484   ; 63             ; 0            ; 63             ; 32     ; 63              ; 63            ; 63              ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+=======
+; aProcessor|displayAll                           ; 519   ; 63             ; 0            ; 63             ; 32     ; 63              ; 63            ; 63              ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+>>>>>>> origin/master
 ; aProcessor|RY                                   ; 34    ; 0              ; 0            ; 0              ; 32     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; aProcessor|MuxY                                 ; 99    ; 1              ; 0            ; 1              ; 32     ; 1               ; 1             ; 1               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; aProcessor|MuxMA                                ; 66    ; 32             ; 0            ; 32             ; 32     ; 32              ; 32            ; 32              ; 0     ; 0              ; 0            ; 0                ; 0                 ;
@@ -24,6 +28,7 @@
 ; aProcessor|CSG|StageGenerator                   ; 1     ; 0              ; 0            ; 0              ; 3      ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; aProcessor|CSG|DecodeInst                       ; 32    ; 21             ; 0            ; 21             ; 83     ; 21              ; 21            ; 21              ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; aProcessor|CSG                                  ; 33    ; 15             ; 0            ; 15             ; 139    ; 15              ; 15            ; 15              ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+<<<<<<< HEAD
 ; aProcessor|RegFile                              ; 49    ; 0              ; 0            ; 0              ; 64     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; aProcessor|MuxB                                 ; 66    ; 1              ; 0            ; 1              ; 32     ; 1               ; 1             ; 1               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; aProcessor|RB                                   ; 34    ; 0              ; 0            ; 0              ; 32     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
@@ -33,6 +38,17 @@
 ; aProcessor|ImmediateBlock1                      ; 35    ; 1              ; 7            ; 1              ; 32     ; 1               ; 1             ; 1               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; aProcessor|IR                                   ; 34    ; 0              ; 0            ; 0              ; 32     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; aProcessor                                      ; 74    ; 32             ; 1            ; 32             ; 137    ; 32              ; 32            ; 32              ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+=======
+; aProcessor|RegFile                              ; 54    ; 0              ; 0            ; 0              ; 96     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+; aProcessor|MuxB                                 ; 66    ; 1              ; 0            ; 1              ; 32     ; 1               ; 1             ; 1               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+; aProcessor|RB                                   ; 34    ; 0              ; 0            ; 0              ; 32     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+; aProcessor|RA                                   ; 34    ; 0              ; 0            ; 0              ; 32     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+; aProcessor|MuxC                                 ; 99    ; 109            ; 0            ; 109            ; 32     ; 109             ; 109           ; 109             ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+; aProcessor|InstAddGen                           ; 69    ; 0              ; 0            ; 0              ; 64     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+; aProcessor|ImmediateBlock1                      ; 35    ; 1              ; 7            ; 1              ; 32     ; 1               ; 1             ; 1               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+; aProcessor|IR                                   ; 34    ; 0              ; 0            ; 0              ; 32     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+; aProcessor                                      ; 79    ; 32             ; 1            ; 32             ; 137    ; 32              ; 32            ; 32              ; 0     ; 0              ; 0            ; 0                ; 0                 ;
+>>>>>>> origin/master
 ; Memory|RAM1                                     ; 40    ; 1              ; 0            ; 1              ; 33     ; 1               ; 1             ; 1               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; Memory|ROM1|altsyncram_component|auto_generated ; 8     ; 0              ; 0            ; 0              ; 32     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;
 ; Memory|ROM1                                     ; 8     ; 0              ; 0            ; 0              ; 32     ; 0               ; 0             ; 0               ; 0     ; 0              ; 0            ; 0                ; 0                 ;

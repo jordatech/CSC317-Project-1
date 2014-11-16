@@ -5,7 +5,11 @@
 					Jeremy Laird
 */
 //Edited By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
+<<<<<<< HEAD
 //11/01/2014
+=======
+//11/07/2014
+>>>>>>> origin/master
 	//Added RF_WRITE Control Signal
 
 /******BRIEF DESCRIPTION****************
@@ -24,14 +28,30 @@
  
 /********************BEGIN MODULE*****************/
 
+<<<<<<< HEAD
 module RegisterFile(Rdst,Rsrc1,Rsrc2,RA,RB,RY,clk,RF_WRITE);
+=======
+module RegisterFile(Rdst,Rsrc1,Rsrc2,RA,RB,RY,clk,RF_WRITE,RegFileView_Select,RegFileRegisterToView);
+>>>>>>> origin/master
 	input wire [4:0]Rdst,Rsrc1,Rsrc2;
 	input wire clk, RF_WRITE;
 	input wire [31:0]RY;
 	output wire [31:0]RA,RB;
+<<<<<<< HEAD
 	
 	//Initialize 32 32-bit registers
 		reg[31:0]R[31:0]; 												
+=======
+	//Debugging Tool (11-07-2014)
+	input wire [4:0] RegFileView_Select;
+	output wire [31:0]RegFileRegisterToView;
+	// View Any Register In The Register File
+		assign RegFileRegisterToView = R[RegFileView_Select[4:0]][31:0];
+
+	//Initialize 32 32-bit registers
+		reg[31:0]R[31:0]; 
+
+>>>>>>> origin/master
 	
 	//RA and RB are assigned the contents of the general purpose registers specified by Rsrc1(5 bits) and Rsrc2 
 		assign RA[31:0]=R[Rsrc1][31:0];									

@@ -5,6 +5,10 @@
 module Processor (
 	input wire PC_Reset,
 	input wire [4:0] Display_Select,// switch[4:0]
+<<<<<<< HEAD
+=======
+	input wire [4:0] RegFileView_Select,// switch[17:13]
+>>>>>>> origin/master
 	input wire Display_Enable,
 	input wire Clock,
 	output wire [31:0] HexDisplay,
@@ -59,6 +63,10 @@ module Processor (
 		// Register File
 			wire 				RF_WRITE; 
 			wire [4:0] 		Rsrc1, Rsrc2;
+<<<<<<< HEAD
+=======
+			wire [31:0]		RegFileRegisterToView; //Debugging Tool
+>>>>>>> origin/master
 
 		
 	 //[Decode]*************************************************
@@ -120,16 +128,27 @@ module Processor (
 	
 	// Instruction Register
 		reg_32b IR (.R(IR_In), .Rin(IR_Enable), .Clock(Clock), .Q(IR_Out));// Instruction Register
+<<<<<<< HEAD
 		assign Instruction=IR_Out;// We get our instructions from the ROM File// Rename wire for convenience
 	// Immediate Block
 		ImmediateBlock ImmediateBlock1(.IR(Instruction), .clk(Clock), .Extend(Extend), .ImmediateBlock_Out(ImmediateBlock_Out));
+=======
+		//assign Instruction = IR_Out;// We get our instructions from the ROM File// Rename wire for convenience
+	// Immediate Block
+		ImmediateBlock ImmediateBlock1(.IR(IR_Out), .clk(Clock), .Extend(Extend), .ImmediateBlock_Out(ImmediateBlock_Out));
+>>>>>>> origin/master
 	// Program Counter
 		InstructionAddressGenerator InstAddGen(.BranchOff(ImmediateBlock_Out),.RA(RA_Out),.PC_select(PC_Select),.PC_enable(PC_Enable)
 		,.INC_select(INC_Select),.Clock(Clock),.PC_temp(Return_Address),.PC(PC_Out),.PC_Reset(PC_Reset));
 		//InstAddGen(BranchOff,RA,PC_select,PC_enable,INC_select,Clock,PC_temp,PC)// Just Added PC_Reset
 	// MuxC
+<<<<<<< HEAD
 		Muxn #(.WidthOfInputs(32),.NumberOfInputs(2)) 
 		MuxC(.Select(C_Select[1:0]),.Out(MuxC_Out),.ConcatanatedInputs({LINK,Instruction[21:17],Instruction[26:22]}));// C_Select[2,1,0] = {LINK,Instruction[21:17],Instruction[26:22]}
+=======
+		Muxn #(.WidthOfInputs(32),.NumberOfInputs(3)) 
+		MuxC(.Select(C_Select[1:0]),.Out(MuxC_Out),.ConcatanatedInputs({LINK,{27'b0,IR_Out[21:17]},{27'b0,IR_Out[26:22]}}));// C_Select[2,1,0] = {LINK,{27'b0,IR_Out[21:17]},{27'b0,IR_Out[26:22]}}
+>>>>>>> origin/master
 		
 //-------------------------------------------------------------------------------------------------------------------------
 
@@ -143,11 +162,20 @@ module Processor (
 		Muxn #(.WidthOfInputs(32),.NumberOfInputs(2)) 
 		MuxB(.Select(B_Select),.Out(MuxB_Out),.ConcatanatedInputs({ImmediateBlock_Out,RB_Out}));// B_Select[1,0] = {ImmediateBlock_Out,RB_Out}
 	// Register File
+<<<<<<< HEAD
 		RegisterFile RegFile(.Rsrc1(Instruction[31:27]),.Rsrc2(Instruction[26:22]),.Rdst(MuxC_Out),.RA(RA_In),.RB(RB_In),.RY(RY_Out),.clk(Clock),.RF_WRITE(RF_WRITE));
 	// Control Signal Generator
 		ControlSignalGenerator CSG(
 			//Inputs
 				.Instruction(Instruction),.Clock(Clock),
+=======
+		RegisterFile RegFile(.Rsrc1(IR_Out[31:27]),.Rsrc2(IR_Out[26:22]),.Rdst(MuxC_Out),.RA(RA_In),.RB(RB_In),
+		.RY(RY_Out),.clk(Clock),.RF_WRITE(RF_WRITE),.RegFileView_Select(RegFileView_Select[4:0]),.RegFileRegisterToView(RegFileRegisterToView[31:0]));
+	// Control Signal Generator
+		ControlSignalGenerator CSG(
+			//Inputs
+				.Instruction(IR_Out),.Clock(Clock),
+>>>>>>> origin/master
 			//Outputs
 				.Stage(Stage),.IR_Enable(IR_Enable),.Extend(Extend),.NOP_FLAG(NOP_FLAG),.IFNR_FLAG(IFNR_FLAG),.PC_Enable(PC_Enable),.PC_Select(PC_Select),
 				.INC_Select(INC_Select),.RF_WRITE(RF_WRITE),.Instruction_Rsrc1(Instruction_Rsrc1),.Instruction_Rsrc2(Instruction_Rsrc2),
@@ -164,7 +192,10 @@ module Processor (
 				3: GreenLEDs=6'b111;
 				4: GreenLEDs=6'b1111;
 				5: GreenLEDs=6'b11111;
+<<<<<<< HEAD
 				6: GreenLEDs=6'b111111;
+=======
+>>>>>>> origin/master
 				default: GreenLEDs=6'b101010;
 			endcase
 		end
@@ -233,14 +264,23 @@ DisplayMux displayAll(
 		.Display_Enable(Display_Enable),
 		.PC(PC_Out[31:0]),
 		.PC_Temp(PC_Temp),
+<<<<<<< HEAD
 		.IR_Out(Instruction),
+=======
+		.IR_Out(IR_Out),
+>>>>>>> origin/master
 		.RA(RA_Out[31:0]),
 		.RB(RB_Out[31:0]),
 		.RZ(RZ_Out[31:0]),
 		.RM(RM_Out[31:0]),
 		.RY(RY_Out[31:0]),
+<<<<<<< HEAD
 		.RF_a(Instruction[31:27]),
 		.RF_b(Instruction[26:22]),
+=======
+		.RF_a(IR_Out[31:27]),
+		.RF_b(IR_Out[26:22]),
+>>>>>>> origin/master
 		.RF_c(MuxC_Out),
 		.ROM_Out(ROM1_Data_Out[31:0]),
 		.PC_Select(PC_Select),
@@ -260,6 +300,12 @@ DisplayMux displayAll(
 		.ImmediateBlock_Out(ImmediateBlock_Out),
 		.Stage(Stage),
 		.InstructionFormat(Instruction_Format),
+<<<<<<< HEAD
+=======
+		.C_Select(C_Select),
+		.RF_WRITE(RF_WRITE),
+		.RegFileRegisterToView(RegFileRegisterToView),
+>>>>>>> origin/master
 		
 	//OUTPUT DATA++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		.HexDisplay32Bits(HexDisplay)

@@ -19,11 +19,16 @@ output reg CCR_Enable
 
 reg [32:0] R33; //33-bit register "CHEATING METHOD" used for determining the CARRY_FLAG
 
+<<<<<<< HEAD
 always @(ALU_Op,RA,RB)
+=======
+always @(ALU_Op,RA,RB,RZ,Clock)
+>>>>>>> origin/master
 	begin
 	
 		casex(ALU_Op)
 			0: begin/*NOP*/
+<<<<<<< HEAD
 					RZ <= RA + 1 ; // Assign Null Value to RZ_In  but do not enable RZ....
 					
 			  			// Don't enable CCR
@@ -39,6 +44,23 @@ always @(ALU_Op,RA,RB)
 //					FLAGS TO UPDATE FOR THIS OPPERATION:
 //						(1.) NONE
 //					____________________________________________________
+=======
+					RZ <= 0; // Assign Null Value to RZ_In  but do not enable RZ....
+					
+			  			// Don't enable CCR
+					/*_____________________(NOP)________________________	
+					(NOP)DESCRIPTION:
+						(1.) No Operation  // Stall but take 5 cycles to do it...
+					____________________________________________________	
+					(NOP)RTL EQUIVELENT:
+						(1.) "Do Nothing"
+						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
+						//??????// Do we need a "NOP" flag in the condition control register
+					____________________________________________________
+					FLAGS TO UPDATE FOR THIS OPPERATION:
+						(1.) NONE
+					____________________________________________________*/
+>>>>>>> origin/master
 				end // END No Operation
 
 			1,15: begin/*ADD*/  //Adding is the same as Load Base With Index from the ALU's Prospective
@@ -150,12 +172,15 @@ always @(ALU_Op,RA,RB)
 				
 				5: begin/*NEG*/
 							RZ <= - RA ; // Negation 
+<<<<<<< HEAD
 					if(RZ[31] != RA[31]) begin
 						OVERFLOW_FLAG <= 1;
 					end
 					else begin
 						OVERFLOW_FLAG <= 0;
 					end
+=======
+>>>>>>> origin/master
 	
 					/*_____________________(NEG)________________________
 					(NEG)DESCRIPTION:
@@ -247,6 +272,7 @@ always @(ALU_Op,RA,RB)
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) CARRY_FLAG
 					____________________________________________________*/
+<<<<<<< HEAD
 					end
 					
 				11: begin/*LSL_ASL*/
@@ -267,6 +293,11 @@ always @(ALU_Op,RA,RB)
 					end				
 					
 				12: begin/*ROR*/
+=======
+					end				
+					
+				11: begin/*ROR*/
+>>>>>>> origin/master
 							RZ <= {CARRY_FLAG,RA[31:1]} ; // Rotate Right With Carry
 							CARRY_FLAG <= RA[0] ;
 					/*_____________________(ROR)________________________
@@ -284,7 +315,11 @@ always @(ALU_Op,RA,RB)
 					____________________________________________________*/
 					end
 
+<<<<<<< HEAD
 				13: begin/*ROL*/
+=======
+				12: begin/*ROL*/
+>>>>>>> origin/master
 							RZ <= {RA[30:0],CARRY_FLAG} ; // Rotate Right With Carry
 							CARRY_FLAG <= RA[31] ;
 					/*_____________________(ROL)________________________
@@ -302,7 +337,11 @@ always @(ALU_Op,RA,RB)
 					____________________________________________________*/
 					end		
 					
+<<<<<<< HEAD
 				14: begin/*MOVE*/
+=======
+				13: begin/*MOVE*/
+>>>>>>> origin/master
 							RZ <= RA ; // Pass RA through moving it to memory
 
 					/*_____________________(MOVE)________________________
