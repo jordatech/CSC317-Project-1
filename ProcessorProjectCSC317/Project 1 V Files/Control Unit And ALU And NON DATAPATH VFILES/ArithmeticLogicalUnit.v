@@ -29,6 +29,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 		casex(ALU_Op)
 			0: begin/*NOP*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 					RZ <= RA + 1 ; // Assign Null Value to RZ_In  but do not enable RZ....
 					
 			  			// Don't enable CCR
@@ -61,6 +62,23 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 						(1.) NONE
 					____________________________________________________*/
 >>>>>>> origin/master
+=======
+					RZ <= RA + 1 ; // Assign Null Value to RZ_In  but do not enable RZ....
+					
+			  			// Don't enable CCR
+//					_____________________(NOP)________________________	
+//					(NOP)DESCRIPTION:
+//						(1.) No Operation  // Stall but take 5 cycles to do it...
+//					____________________________________________________	
+//					(NOP)RTL EQUIVELENT:
+//						(1.) "Do Nothing"
+//						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
+//						//??????// Do we need a "NOP" flag in the condition control register
+//					____________________________________________________
+//					FLAGS TO UPDATE FOR THIS OPPERATION:
+//						(1.) NONE
+//					____________________________________________________
+>>>>>>> parent of c246018... Need Memory Interface, And More Control Lines...
 				end // END No Operation
 
 			1,15: begin/*ADD*/  //Adding is the same as Load Base With Index from the ALU's Prospective

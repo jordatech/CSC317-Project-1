@@ -74,18 +74,18 @@ always @(OP_Code)
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
 					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
 					
-					/*_____________________(NOP)________________________	
-					(NOP)DESCRIPTION:
-						(1.) No Operation  // Stall but take 5 cycles to do it...
-					____________________________________________________	
-					(NOP)RTL EQUIVELENT:
-						(1.) "Do Nothing"
-						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
-						//??????// Do we need a "NOP" flag in the condition control register
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
+//					_____________________(NOP)________________________	
+//					(NOP)DESCRIPTION:
+//						(1.) No Operation  // Stall but take 5 cycles to do it...
+//					____________________________________________________	
+//					(NOP)RTL EQUIVELENT:
+//						(1.) "Do Nothing"
+//						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
+//						//??????// Do we need a "NOP" flag in the condition control register
+//					____________________________________________________
+//					FLAGS TO UPDATE FOR THIS OPPERATION:
+//						(1.) NONE
+//					____________________________________________________
 					end
 					
 				17'b0000_0000001_000000:	begin
@@ -99,27 +99,29 @@ always @(OP_Code)
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
 					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
 					
-					/*_____________________(ADD)________________________
-					(ADD)DESCRIPTION:
-						(1.) Addition
-					____________________________________________________	
-					(ADD)RTL EQUIVELENT:
-						(1.) RZ<- [RA]+[RB]
-						(2.) if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))
-								OVERFLOW_FLAG<- 1
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) OVERFLOW_FLAG
-							// if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0)) //Overflow Occurs When (Adding) Two (Positives) And Get A (Negative) or (Adding) Two (Negatives) And Get A (Positive)
-								// OVERFLOW_FLAG=1;
-						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
-							//ZERO_FLAG=(RZ==0);
-						(3.) NEGATIVE_FLAG
-							//NEGATIVE_FLAG=RZ[31];
-						(4.) CARRY_FLAG
-							//CARRY_FLAG = (RA+RB)[32];
-					____________________________________________________*/
-
+//					_____________________(ADD)________________________
+//					(ADD)DESCRIPTION:
+//						(1.) Addition
+//					____________________________________________________	
+//					(ADD)RTL EQUIVELENT:
+//						(1.) RZ<- [RA]+[RB]
+//						(2.) if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))
+//								OVERFLOW_FLAG<- 1
+//					____________________________________________________
+//					FLAGS TO UPDATE FOR THIS OPPERATION:
+//						(1.) OVERFLOW_FLAG
+//							// if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0)) //Overflow Occurs When (Adding) Two (Positives) And Get A (Negative) or (Adding) Two (Negatives) And Get A (Positive)
+//								// OVERFLOW_FLAG=1;
+//						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
+//							//ZERO_FLAG=(RZ==0);
+//						(3.) NEGATIVE_FLAG
+//							//NEGATIVE_FLAG=RZ[31];
+//						(4.) CARRY_FLAG
+//							//CARRY_FLAG = (RA+RB)[32];
+//					____________________________________________________
+//					RZ <= RB+RA;
+//					if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))begin
+//					OVERFLOW_FLAG <= 1;
 					end			
 				
 				17'b0000_0000100_000000: begin
@@ -133,6 +135,12 @@ always @(OP_Code)
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
 					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
 					
+//													RZ=RA-RB;
+//												 	if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0))begin
+//														OVERFLOW_FLAG=1;
+//												 	end
+//												 	ZERO_FLAG=(RZ==0);
+//												 	NEGATIVE_FLAG=RZ[31];
 
 					/*_____________________(SUB)________________________
 					(SUB)DESCRIPTION:
@@ -197,7 +205,7 @@ always @(OP_Code)
 					(OR)DESCRIPTION:
 						(1.) Bitwise OR
 					____________________________________________________	
-					(OR)RTL EQUIVELENT:
+					(ADD)RTL EQUIVELENT:
 						(1.) RZ<- [RA]|[RB]
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
@@ -486,98 +494,6 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 				
-				17'b0000_1000000_000000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  0;	// JMP // NOP 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*JMP*/
-					/*_____________________(JMP)________________________
-					(JMP)DESCRIPTION:
-						(1.) Jump //Place the contents of Rsrc1 into the PC
-					____________________________________________________	
-					(JMP)RTL EQUIVELENT:
-						(1.) RZ<-0 //Treat as NOP in ALU
-							//DO NOT WRITE BACK... // ADD CONTROL SIGNAL RF_WILL_WRITE and send to StageTracker
-						(2.) PC<-Rsrc1	
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
-				17'b0000_1000001_000000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  0;	// JSR // NOP 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*JSR*/
-					/*_____________________(JSR)________________________
-					(JSR)DESCRIPTION:
-						(1.) Jump to Subroutine //Address of subroutine in Register Rsrc1, 
-														//store return address in LINK register, 
-														//which is always R30.
-					____________________________________________________	
-					(JSR)RTL EQUIVELENT:
-						(1.) RZ<-0 //Treat as NOP in ALU
-							//DO NOT WRITE BACK... // ADD CONTROL SIGNAL RF_WILL_WRITE and send to StageTracker
-							//But Write Return Address To Memory
-						(2.) PC<-Rsrc1	
-						(2.) R[30]<-Return_Address // Save PC_Temp
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
-				17'b0000_1000011_000000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  ????????????????????????????????????????????????? 0;	// RTS // NOP  
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*RTS*/
-					/*_____________________(RTS)________________________
-					(RTS)DESCRIPTION:
-						(1.) Return from Subroutine //Rsrc1 contains the register number
-															 // for the link register (R30).
-
-					____________________________________________________	
-					(RTS)RTL EQUIVELENT:
-						?????????????????????????????????????????????????
-						1.) Fetch
-						2.) RA<- 'd30 ; // Address of the Link Register...
-						3.) RZ<-RA // 'd30 // Treat as an Effective Address and load from Memory, back into RSRC1
-						4.) MuxY_In <-(RZ) // 'd30 // Again RA is the EA
-						5.) RY<-MuxY_Out// [LINK] // Return Address
-						6.) RDST<-[RY] // [LINK] // Return Address
-						...
-						Eventually) PC<-[RA]// [LINK] // Return Address
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-			
-				
-				
 				default:/*ERROR*/;
 					/*_____________________(ERROR)______________________
 					(ERROR)DESCRIPTION:
@@ -600,7 +516,8 @@ always @(OP_Code)
 		//(RSRC1[31:27])(RDST[26:22])(IMMEDIATE_OPPERAND[21:6])(OPCODE[5:0]) Instruction Format (b) Instruction Format (b) Instruction Format (b)
 		else if(Instruction_Format=='d1) begin//  BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 			casex(OP_Code[5:0])
-			
+				
+				
 				6'b111111: 	begin	// Debugging Purposes
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
@@ -612,18 +529,18 @@ always @(OP_Code)
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
 					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
 					
-					/*_____________________(NOP)________________________	
-					(NOP)DESCRIPTION:
-						(1.) No Operation  // Stall but take 5 cycles to do it...
-					____________________________________________________	
-					(NOP)RTL EQUIVELENT:
-						(1.) "Do Nothing"
-						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
-						//??????// Do we need a "NOP" flag in the condition control register
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
+//					_____________________(NOP)________________________	
+//					(NOP)DESCRIPTION:
+//						(1.) No Operation  // Stall but take 5 cycles to do it...
+//					____________________________________________________	
+//					(NOP)RTL EQUIVELENT:
+//						(1.) "Do Nothing"
+//						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
+//						//??????// Do we need a "NOP" flag in the condition control register
+//					____________________________________________________
+//					FLAGS TO UPDATE FOR THIS OPPERATION:
+//						(1.) NONE
+//					____________________________________________________
 					end
 				
 				6'b100010: begin
@@ -643,13 +560,13 @@ always @(OP_Code)
 						(1.) Load Immediate  //The value in the immediate field is sign extended and placed in the Rdst.
 					____________________________________________________	
 					(LD#)RTL EQUIVELENT:
-						(1.) RZ<- RB // {6{Instruction[31]},Instruction[31:6]}  // {n{m}} Replicate value m, n times For Sign Extending
+						(1.) RZ<-{6{Instruction[31]},Instruction[31:6]}  // {n{m}} Replicate value m, n times For Sign Extending
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) NONE
 					____________________________________________________*/
 					end
-
+							
 				6'b100011: begin
 					Extend[1:0] = 1; 		//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
@@ -668,397 +585,6 @@ always @(OP_Code)
 					____________________________________________________	
 					(LDU#)RTL EQUIVELENT:
 						(1.) RZ<-{6{0},Instruction[31:6]}  //The value in the immediate field is sign extended and placed in the Rdst.
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
-					
-				6'b000001: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  1;	// ADD
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*ADD #*/
-					/*_____________________(ADD #)________________________
-					(ADD #)DESCRIPTION:
-						(1.) Add Immediate //The immediate value is sign extended
-												 //and added to the contents of Rsrc.
-												 //The result is stored in Rdst
-					____________________________________________________	
-					(ADD #)RTL EQUIVELENT:
-						(1.) RZ<-RA+RB	//Treat as ALU Addition // Is a "2's comp addition" a subtraction ??????????????
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) OVERFLOW_FLAG
-							// if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0)) //Overflow Occurs When (Adding) Two (Positives) And Get A (Negative) or (Adding) Two (Negatives) And Get A (Positive)
-								// OVERFLOW_FLAG=1;
-						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
-							//ZERO_FLAG=(RZ==0);
-						(3.) NEGATIVE_FLAG
-							//NEGATIVE_FLAG=RZ[31];
-						(4.) CARRY_FLAG
-							//CARRY_FLAG = (RA+RB)[32];
-					____________________________________________________*/
-					end									
-				
-				6'b000100: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  2;	// SUB 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*SUB #*/
-					/*_____________________(SUB #)________________________
-					(SUB #)DESCRIPTION:
-						(1.) Subtract Immediate //The immediate value is sign extended
-														// and subtracted from the contents of Rsrc.
-														//The result is stored in Rdst
-					____________________________________________________	
-					(SUB #)RTL EQUIVELENT:
-						(1.) RZ<-RA-RB	//Treat as ALU Subtraction // Is a "2's comp addition" a subtraction ??????????????
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) OVERFLOW_FLAG
-							// if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0)) //Overflow Occurs When (Subtracting) A (Positive By A Negative) And Getting A (Negative) or (Subtracting) A (Negative By A Positive) And Getting A (Positive)
-								//Then// OVERFLOW_FLAG=1;
-						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
-							//ZERO_FLAG=(RZ==0);
-						(3.) NEGATIVE_FLAG
-							//NEGATIVE_FLAG=RZ[31];
-						(4.) CARRY_FLAG
-							//CARRY_FLAG = (RA-RB)[32];
-					____________________________________________________*/
-					end
-					
-				6'b001000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  3;	// AnD # // AnD
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*AnD #*/// Bitwise AnD Immediate "camel_backed" to keep seperate from ADDITION
-					/*_____________________(AnD #)________________________
-					(AnD #)DESCRIPTION:
-						(1.) Bitwise AnD Immediate //The immediate value is padded with zeros
-															//on the left and ANDed with the contents of Rsrc.
-															//The result is place in Rdst
-					____________________________________________________	
-					(AnD #)RTL EQUIVELENT:
-						(1.) RZ<- [RA]&[RB] //ALU Bitwise AnD
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) ZERO_FLAG // Continuously Assigned Using An Internal Register
-							//ZERO_FLAG=(RZ==0);
-					____________________________________________________*/
-					end
-					
-				6'b001001: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  4;	// OR # // OR 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*OR #*/
-					/*_____________________(OR #)________________________
-					(OR #)DESCRIPTION:
-						(1.) Bitwise OR Immediate 
-					____________________________________________________	
-					(OR #)RTL EQUIVELENT:
-						(1.) RZ<- [RA]|[RB] //ALU Bitwise OR
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
-				6'b001011: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  6;	// XOR # // XOR 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*XOR #*/
-					/*_____________________(XOR #)________________________
-					(XOR #)DESCRIPTION:
-						(1.) Bitwise Exclusive OR Immediate //Exclusive OR
-																		// is a logical operation
-																		// that outputs true whenever
-																		// both inputs differ ie:
-																		//(one is true, the other is false).
-					____________________________________________________	
-					(XOR #)RTL EQUIVELENT:
-						(1.) RZ<- [RA]^[RB]
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
-				6'b001100: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  2; // BEQ // SUB 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*BEQ*/
-					/*_____________________(BEQ)________________________
-					(BEQ)DESCRIPTION:
-						(1.) Branch if EQual //If the contents of the two registers 
-													// are equal, add the 2's complement
-													// immediate value to the PC
-
-					____________________________________________________	
-					(BEQ)RTL EQUIVELENT:
-						(1.) RZ<-RA-RB  //Treat As A Subtraction and Check The Zero Flag // ASSUMING UNSIGNED RA and RB...
-						(2.) if(ZERO_FLAG==1)//RA=RB then RA-RB=0...
-								PC<- PC+Immediate // Is a "2's comp addition" a subtraction ??????????????
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) OVERFLOW_FLAG
-							// if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0)) //Overflow Occurs When (Subtracting) A (Positive By A Negative) And Getting A (Negative) or (Subtracting) A (Negative By A Positive) And Getting A (Positive)
-								//Then// OVERFLOW_FLAG=1;
-						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
-							//ZERO_FLAG=(RZ==0);
-						(3.) NEGATIVE_FLAG
-							//NEGATIVE_FLAG=RZ[31];
-						(4.) CARRY_FLAG
-							//CARRY_FLAG = (RA-RB)[32];
-					____________________________________________________*/
-					end
-					
-				6'b001010: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  2; // BNE // SUB 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*BNE*/
-					/*_____________________(BNE)________________________
-					(BNE)DESCRIPTION:
-						(1.) Branch if Not Equal //If the contents of the two registers 
-														 // are NOT equal, add the 2's complement
-														 // immediate value to the PC
-
-					____________________________________________________	
-					(BNE)RTL EQUIVELENT:
-						(1.) RZ<-RA-RB  //Treat As A Subtraction and Check The Zero Flag // ASSUMING UNSIGNED RA and RB...
-						(2.) if(ZERO_FLAG==0)//RA!=RB then RA-RB!=0...
-								PC<- PC+Immediate // Is a "2's comp addition" a subtraction ??????????????
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) OVERFLOW_FLAG
-							// if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0)) //Overflow Occurs When (Subtracting) A (Positive By A Negative) And Getting A (Negative) or (Subtracting) A (Negative By A Positive) And Getting A (Positive)
-								//Then// OVERFLOW_FLAG=1;
-						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
-							//ZERO_FLAG=(RZ==0);
-						(3.) NEGATIVE_FLAG
-							//NEGATIVE_FLAG=RZ[31];
-						(4.) CARRY_FLAG
-							//CARRY_FLAG = (RA-RB)[32];
-					____________________________________________________*/
-					end
-					
-				6'b001111: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  2; // BLT // SUB 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*BLT*/
-					/*_____________________(BLT)________________________
-					(BLT)DESCRIPTION:
-						(1.) Bacon Lettuce Tomato // If the unsigned contents of
-							  Branch if Less Than  // Rsrc is less than the contents of Rdst,
-														  //add the 2's complement immediate value to the PC
-					____________________________________________________	
-					(BLT)RTL EQUIVELENT:
-						(1.) RA<-RSRC1
-						(2.) RB<-RSRC2
-						(3.) RZ<-RA-RB //Treat As A Subtraction and Check The Zero Flag // ASSUMING UNSIGNED RA and RB...
-						(4.) if(NEGATIVE_FLAG==1) //RA<RB then RA-RB=(-)|x|
-								PC<-PC+IMMEDIATE_BLOCK_OUT // Is a "2's comp addition" a subtraction ??????????????
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) OVERFLOW_FLAG
-							// if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0)) //Overflow Occurs When (Subtracting) A (Positive By A Negative) And Getting A (Negative) or (Subtracting) A (Negative By A Positive) And Getting A (Positive)
-								//Then// OVERFLOW_FLAG=1;
-						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
-							//ZERO_FLAG=(RZ==0);
-						(3.) NEGATIVE_FLAG
-							//NEGATIVE_FLAG=RZ[31];
-						(4.) CARRY_FLAG
-							//CARRY_FLAG = (RA-RB)[32];
-					____________________________________________________*/
-					end
-				
-									
-				6'b100000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  0;	// LDA // NOP 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*LDA*/
-					/*_____________________(LDA)________________________
-					(LDA)DESCRIPTION:
-						(1.) Load Absolute // The immediate value is zero-filled
-												 // to the left and used as an address. 
-												 // Rdst is then loaded from this address.
-												 // This requires the adder in Figure 5.10
-												 // to be able to just pass the immediate value
-												 // through (without adding to the PC),
-												 // which requires an additional control line
-												 // that is not implied by Figure 5.10
-
-					____________________________________________________	
-					(LDA)RTL EQUIVELENT:
-						(1.) RZ<-0 //Treat as NOP in ALU
-							//DO NOT WRITE BACK... // ADD CONTROL SIGNAL RF_WILL_WRITE and send to StageTracker
-						(1.) PC<-{6'b000000,Instruction[31:6]} // Via MuxPC
-						//!!!!!!!!!!!!!!!// Fix the Instruction Address Generator ; 
-						//!!!!!!!!!!!!!!!// by placing the Immediate_Block_Out as an input on MuxPC,
-						//!!!!!!!!!!!!!!!// also making the control line PC_Select, 2-bits wide...
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
-				6'b010000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  32;	// STA // LD  
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*STA*/
-					/*_____________________(STA)________________________
-					(STA)DESCRIPTION:
-						(1.) STore Absolute // The immediate value is zero-filled
-												  // to the left and used as an address.
-												  // Rdst (yes, Rdst!) is then stored to
-												  // this address. Requires modifications
-												  // similar to the LDA instruction
-
-					____________________________________________________	
-					(STA)RTL EQUIVELENT:
-						(1.) RZ<- RB // {6'b0,Instruction[31:6]} // ALU Pass RB just Like other Loads...
-						(2.) (RZ) <-[RM] // RDST...
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
-				6'b100001: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  1;	// LDIX // ADD 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*LDIX*/
-					/*_____________________(LDIX)________________________
-					(LDIX)DESCRIPTION:
-						(1.) LoaD IndeXed // The unsigned immediate value is added
-												// to the contents of Rsrc to obtain the EA.
-												// Rdst is then loaded from the memory location EA
-					____________________________________________________	
-					(LDIX)RTL EQUIVELENT:
-						(1.) RZ<-RA+RB //Treat like an ADD //{6'b000000,Instruction[31:6]}
-						(2.) RY<-MEMORY //EA=[RZ]
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) OVERFLOW_FLAG
-							// if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0)) //Overflow Occurs When (Adding) Two (Positives) And Get A (Negative) or (Adding) Two (Negatives) And Get A (Positive)
-								// OVERFLOW_FLAG=1;
-						(2.) ZERO_FLAG // Continuously Assigned Using An Internal Register
-							//ZERO_FLAG=(RZ==0);
-						(3.) NEGATIVE_FLAG
-							//NEGATIVE_FLAG=RZ[31];
-						(4.) CARRY_FLAG
-							//CARRY_FLAG = (RA+RB)[32];
-					____________________________________________________*/
-					end
-					
-									
-				6'b010001: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  32;	// STIX // LD 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*STIX*/
-					/*_____________________(STIX)________________________
-					(STIX)DESCRIPTION:
-						(1.) STore IndeXed // The unsigned immediate value is added
-											    // to the contents of Rsrc to obtain the EA.
-												 // Rdst is then stored to the memory location EA
-					____________________________________________________	
-					(STIX)RTL EQUIVELENT:
-						(1.) RZ<- RB // {6{Instruction[31]},Instruction[31:6]} // ALU Pass RB just Like other Loads...
-						(2.) (RZ)<-[RM] // RDST...
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) NONE
@@ -1100,78 +626,20 @@ always @(OP_Code)
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
 					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
 					
-					/*_____________________(NOP)________________________	
-					(NOP)DESCRIPTION:
-						(1.) No Operation  // Stall but take 5 cycles to do it...
-					____________________________________________________	
-					(NOP)RTL EQUIVELENT:
-						(1.) "Do Nothing"
-						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
-						//??????// Do we need a "NOP" flag in the condition control register
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
+//					_____________________(NOP)________________________	
+//					(NOP)DESCRIPTION:
+//						(1.) No Operation  // Stall but take 5 cycles to do it...
+//					____________________________________________________	
+//					(NOP)RTL EQUIVELENT:
+//						(1.) "Do Nothing"
+//						//??????// Do we want to do an addative identity ie:(RZ<- 0+[RA])
+//						//??????// Do we need a "NOP" flag in the condition control register
+//					____________________________________________________
+//					FLAGS TO UPDATE FOR THIS OPPERATION:
+//						(1.) NONE
+//					____________________________________________________
 					end
-	
-				6'b110000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  0;	// BRA // NOP 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*BRA*/
-					/*_____________________(BRA)________________________
-					(BRA)DESCRIPTION:
-						(1.) Unconditional Branch // Add the 2's complement immediate value to the PC.
-														  // (wider address range than Bxx, probably more than
-														  // we'll actually be able to test)
-															
-					____________________________________________________	
-					(BRA)RTL EQUIVELENT:
-						(1.) RZ<- 0 //Treat as NOP
-						(2.) PC<- PC+IMMEDIATE_BLOCK_OUT // Is a "2's comp addition" a subtraction ??????????????
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
-				6'b110000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			// PC <- Adder_Out		// 0 => PC <- RA_Out, used to jump to a specific instruction 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  15;	// LDRi 
-					MA_Select = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_Memory_H_RF_L = 0;  //Not Writing To Memory
-					*/
-					/*BSR*/
-					/*_____________________(BSR)________________________
-					(BSR)DESCRIPTION:
-						(1.) Unconditional Branch to SubRoutine // Add the 2's complement immediate value to the PC
-																			 // and store return address in the LINK register,
-																			 // which is always R30.
-																			
-					____________________________________________________	
-					(BSR)RTL EQUIVELENT:
-						(1.) RZ<- 0 // ALU NOP 
-							//But Still Write Back LINK REGISTER To Reg File RF_WRITE 
-						(2.) PC<- PC+IMMEDIATE_BLOCK_OUT // Is a "2's comp addition" a subtraction ??????????????
-						(3.) RY<- Return_Address //Via Y_Select // PC_Temp // LINK REGISTER = RDST = 30;
-					____________________________________________________
-					FLAGS TO UPDATE FOR THIS OPPERATION:
-						(1.) NONE
-					____________________________________________________*/
-					end
-					
+								
 				default:/*ERROR*/;
 					/*_____________________(ERROR)______________________
 					(ERROR)DESCRIPTION:
