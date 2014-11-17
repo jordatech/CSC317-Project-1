@@ -3,11 +3,12 @@
 //Project 1 datapath
 //
 //Edited By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
-//10/25/2014
+//11/16/2014
 
 module InstructionAddressGenerator(BranchOff,RA,PC_select,PC_enable,INC_select,Clock,PC_temp,PC,PC_Reset);
-	input PC_select,PC_enable,INC_select,Clock,PC_Reset;
-	input [31:0]BranchOff, RA;
+	input wire PC_enable,INC_select,Clock,PC_Reset;
+	input wire [1:0]		PC_select;
+	input wire [31:0] BranchOff, RA;
 	output reg [31:0]PC, PC_temp;
 	wire [31:0]MuxINC, MuxPC;
 	wire [31:0]NextAdd;
@@ -20,7 +21,8 @@ module InstructionAddressGenerator(BranchOff,RA,PC_select,PC_enable,INC_select,C
 	assign NextAdd	= PC + MuxINC; //Adder unit
 	
 	//(PC_select) Increment PC "0"->jump to "RA" .... "1"->inc by MuxINC  // MuxPC = PC_select ? NextAdd: RA
-	assign MuxPC = PC_select ? NextAdd: RA;			// Multiplexer to select between a return address from the
+	//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff
+	assign MuxPC = PC_select[1] ? (PC_select[0] ? BranchOff: BranchOff):(PC_select[0] ? NextAdd: RA);			// Multiplexer to select between a return address from the
 																	// register file or the incremented address from the adder unit
 	
 

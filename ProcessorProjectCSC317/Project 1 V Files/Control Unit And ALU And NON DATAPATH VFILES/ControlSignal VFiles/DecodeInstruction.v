@@ -18,7 +18,7 @@ module DecodeInstruction(
 	);
 
 
-always@(Instruction)begin
+always@(*)begin
 
 	if(Instruction[5:0]==6'b111111)begin// No Operation = 111111
 		NOP_FLAG=1;

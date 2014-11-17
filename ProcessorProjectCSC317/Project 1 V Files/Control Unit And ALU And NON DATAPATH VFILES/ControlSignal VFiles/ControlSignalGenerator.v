@@ -18,7 +18,8 @@ module ControlSignalGenerator(
 					output wire 		NOP_FLAG, IFNR_FLAG,
 				// Instruction Address Generator
 					output wire			PC_Enable,
-					output wire 		PC_Select, INC_Select,
+					output wire 		INC_Select,
+					output wire [1:0] PC_Select,
 
 				// Register File
 					output wire			RF_WRITE, 
@@ -48,11 +49,8 @@ module ControlSignalGenerator(
 					output wire			RM_Enable,
 				// MuxMA // Memory Address
 					output wire			MA_Select,
-				// Random Access Memory
-					output wire			RAM1_Read, RAM1_Write_L,
-				// Read Only Memory					
-					output wire			ROM1_Read,
-
+				// Memory
+					output wire[1:0]  MEM_r_w_z_z,
 			 //[Write Back]********************
 				//MuxY
 					output wire [1:0]	Y_Select,
@@ -60,7 +58,7 @@ module ControlSignalGenerator(
 					output wire			RY_Enable
 
 	);	// End Of Argument Delcaration------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+	
 	
 	// DecodeInstruction
 		DecodeInstruction DecodeInst(.Instruction(Instruction),
@@ -73,13 +71,16 @@ module ControlSignalGenerator(
 		ClockCounter StageGenerator(.Clock(Clock),.ClockCount(Stage));
 		
 	// Enable Controller
+	wire [1:0] WillWriteTo_RF_M_Z_Z;
+	wire MA_Select_Memory_Stage;
 		StageTracker EnableSignals(
 			//Inputs
-			.Stage(Stage[2:0]),.NOP_FLAG(NOP_FLAG),.WillWriteTo_Memory_H_RF_L(WillWriteTo_Memory_H_RF_L),
+			.Stage(Stage[2:0]),.NOP_FLAG(NOP_FLAG),.WillWriteTo_RF_M_Z_Z(WillWriteTo_RF_M_Z_Z),.MA_Select_Memory_Stage(MA_Select_Memory_Stage),
 			//Outputs
 			.IR_Enable(IR_Enable),.PC_Enable(PC_Enable),.RA_Enable(RA_Enable),.RB_Enable(RB_Enable),
-			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),.ROM1_Read(ROM1_Read),
-			.RF_WRITE(RF_WRITE),.RAM1_Write_L(RAM1_Write_L)
+			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),.RF_WRITE(RF_WRITE),
+			.MA_Select(MA_Select),.MEM_r_w_z_z(MEM_r_w_z_z)
+			
 		);
 		
 	// Operation Dependent Control Signals
@@ -88,16 +89,10 @@ module ControlSignalGenerator(
 			.OP_Code(Instruction_OP_Code),.Instruction_Format(Instruction_Format),
 			//Outputs
 			.ALU_Op(ALU_Op[31:0]),.Extend(Extend[1:0]),.C_Select(C_Select[1:0]),.Y_Select(Y_Select[1:0]),			
-			.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.MA_Select(MA_Select),.WillWriteTo_Memory_H_RF_L(WillWriteTo_Memory_H_RF_L),
+			.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.WillWriteTo_RF_M_Z_Z(WillWriteTo_RF_M_Z_Z),.MA_Select_Memory_Stage(MA_Select_Memory_Stage)
 		);
 
 
 		
-		
-// Random Access Memory
-	assign RAM1_Read = 1;// Always Read From Memory, Just Do Not Always Select The Output at MUXY //(RAM1_Read) (0) Ouput is high impedance (1)Output is RAM1_Address
-	
-
-
 
 endmodule

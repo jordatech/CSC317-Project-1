@@ -1,5 +1,5 @@
 //Edited By TEAM GAMMA - Jordan D. Ulmer And Patrick Schroeder
-//11/01/2014
+//11/16/2014
 // megafunction wizard: %ROM: 1-PORT%
 // GENERATION: STANDARD
 // VERSION: WM1.0
@@ -58,7 +58,7 @@ module ROM(
 `endif
 
 	wire [31:0] sub_wire0;
-	wire [31:0] q = sub_wire0[31:0];
+	wire [31:0] q = (clken) ? sub_wire0[31:0] : 32'bz;
 
 	altsyncram	altsyncram_component (
 				.address_a (address),

@@ -18,20 +18,20 @@ input 		[6:0]	 address;		  	//0-63 + enable
 input	 		[31:0] dataIn;				//from RM
 output tri	[31:0] dataOut;			//to MUX-Y/RY
 reg 			[31:0] mem_bank [0:63];	//64 32bit registers
-	
+	wire enable;
 	assign	enable = ~address[6];
 	assign	write = ~read_w;							//write if not read
 	assign	MFC = 1;										//temp tied to 1
 
 	// if enable, assign data out to memory contents, else assign high impedence
-	assign dataOut = (enable) ? mem_bank[address[5:0]] : 1'bz;
+	assign dataOut = (enable) ? mem_bank[address[5:0]] : 32'bz;
 
-	always @(address, dataIn, write)
-//	if(enable) //if enable, write to memory  // THIS WAS INCORRECT,(WITH THE OLD IMPLEMENTATION WE COULD ONLY WRITE WHEN WE WERE READING) AND SO IT WAS REMOVED
-//	begin
+	always @(address, dataIn, write, enable)
+if(enable) //if enable, write to memory  // THIS WAS INCORRECT,(WITH THE OLD IMPLEMENTATION WE COULD ONLY WRITE WHEN WE WERE READING) AND SO IT WAS REMOVED
+	begin
 		if(write)							
 			begin
 					mem_bank[address[5:0]]	= dataIn;
 			end
-//	end 
+	end 
 endmodule
