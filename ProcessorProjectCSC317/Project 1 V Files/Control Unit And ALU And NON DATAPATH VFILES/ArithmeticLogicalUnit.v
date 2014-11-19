@@ -23,7 +23,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 	begin
 	
 		casex(ALU_Op)
-			0,65: begin/*NOP*/
+			0,42,64,65: begin/*NOP*/
 					RZ <= 0; // Assign Null Value to RZ_In  but do not enable RZ....
 					
 			  			// Don't enable CCR
@@ -41,7 +41,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 					____________________________________________________*/
 				end // END No Operation
 
-			1,15: begin/*ADD*/  //Adding is the same as Load Base With Index from the ALU's Prospective
+			1,15,34,44: begin/*ADD*/  //Adding is the same as Load Base With Index from the ALU's Prospective
 					{CARRY_FLAG,RZ} <= RA + RB; // Addition //33-bit register "CHEATING METHOD" used for determining the CARRY_FLAG // CARRY_FLAG <= (( RA | RB ) == 2^32-1 ) && ( RA&RB != 0 ) ;//if RA+RB > 32 Bits
 					if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))begin
 						OVERFLOW_FLAG <= 1 ;
@@ -85,7 +85,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 					____________________________________________________*/
 					 end //END ADD
 
-				2: begin/*SUB*/
+				2,35,39,40,41: begin/*SUB*/
 						RZ <= RA - RB ; // Subtraction
 						
 						if((RA>0 && RB<0 && RZ<0)||(RA<0 && RB>0 && RZ>0))begin
@@ -117,7 +117,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 					____________________________________________________*/
 					end
 					
-				3: begin/*AnD*/
+				3,36: begin/*AnD*/
 							RZ <= RA & RB ; // Bitwise AnD
 				
 					/*_____________________(AnD)________________________// Bitwise AnD "camel_backed" to keep seperate from ADDITION
@@ -133,7 +133,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 					____________________________________________________*/
 					end
 				
-				4: begin/*OR*/
+				4,37: begin/*OR*/
 							RZ <= RA | RB ; // Bitwise OR
 				
 					/*_____________________(OR)________________________
@@ -163,7 +163,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 					____________________________________________________*/
 					end					
 					
-				6: begin/*XOR*/
+				6,38: begin/*XOR*/
 							RZ <= RA ^ RB ; //Exclusive OR
 					
 					/*_____________________(XOR)________________________
@@ -314,7 +314,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 					
 					
 					
-				32,33: begin // Load Immediate Is the Same As a Load Unsigned Immediate From The ALU's Prospective
+				32,33,43,45: begin // Load Immediate Is the Same As a Load Unsigned Immediate From The ALU's Prospective
 						RZ<=RB;//Load Immediate Oprand From MUXC_Out=RB... to Rdst
 					 
 					/*_____________________(LD#)________________________

@@ -9,9 +9,9 @@ module SelectController(
 	output reg [1:0]	Extend,
 							C_Select,
 							Y_Select,
+							PC_Select,
 							WillWriteTo_RF_M_Z_Z,			
-	output reg			PC_Select,
-							INC_Select,
+	output reg			INC_Select,
 							B_Select,
 							MA_Select_Memory_Stage
 							
@@ -35,7 +35,7 @@ module SelectController(
 //					Extend= ; //Not used in format (a)	//(Extend) [3,2,1,0] = [(format (b) zero extend),(format (b) sign extend),(format (a) zero extend),(format (a) sign extend)]
 //					NOP_FLAG = ; //(NOP_FLAG) No Operation
 //				// Instruction Address Generator
-//					PC_Select = ; //(PC_select) Increment PC "0"->jump to "RA" .... "1"->inc by MuxINC  // MuxPC = PC_select ? NextAdd: RA
+//					PC_Select = ; //(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 //					INC_Select = ; //(INC_select) Increment PC "0"->inc by "1" .... "1"->inc by "BranchOffset"  // MuxINC = INC_select ? BranchOffset: 32'd1
 //				
 //				// MUXC
@@ -66,7 +66,7 @@ always @(OP_Code)
 			casex(OP_Code[16:0])
 				17'bxxxx_xxxxxxx_111111: 	begin	// Debugging Purposes
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -91,7 +91,7 @@ always @(OP_Code)
 					
 				17'b0000_0000001_000000:	begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (b) zero extend),(format (b) sign extend),(format (a) zero extend),(format (a) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -125,7 +125,7 @@ always @(OP_Code)
 				
 				17'b0000_0000100_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (b) zero extend),(format (b) sign extend),(format (a) zero extend),(format (a) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -159,7 +159,7 @@ always @(OP_Code)
 					
 				17'b0000_0001000_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (b) zero extend),(format (b) sign extend),(format (a) zero extend),(format (a) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -184,7 +184,7 @@ always @(OP_Code)
 				
 				17'b0000_0001001_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -208,7 +208,7 @@ always @(OP_Code)
 					
 				17'b0000_0001010_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -233,7 +233,7 @@ always @(OP_Code)
 					
 				17'b0000_0001011_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -257,7 +257,7 @@ always @(OP_Code)
 					
 				17'b0000_0001100_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -282,7 +282,7 @@ always @(OP_Code)
 				
 				17'b0000_0010000_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -307,7 +307,7 @@ always @(OP_Code)
 					
 				17'b0000_0010001_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -332,7 +332,7 @@ always @(OP_Code)
 				
 				17'b0000_0010011_000000: begin
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -357,7 +357,7 @@ always @(OP_Code)
 				
 				17'b0000_0011001_000000: begin				 
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -384,7 +384,7 @@ always @(OP_Code)
 		
 				17'b0000_0011010_000000: begin				 
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -411,7 +411,7 @@ always @(OP_Code)
 						
 				17'b0000_0100000_000000: begin				 
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -436,7 +436,7 @@ always @(OP_Code)
 				
 				17'b0000_0100001_000000: begin				 
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -463,7 +463,7 @@ always @(OP_Code)
 					
 				17'b0000_0100010_000000: begin				 
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -489,7 +489,7 @@ always @(OP_Code)
 				
 				17'b0000_1000000_000000: begin				 
 					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -515,7 +515,7 @@ always @(OP_Code)
 					
 				17'b0000_1000001_000000: begin				 
 					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -545,7 +545,7 @@ always @(OP_Code)
 					
 				17'b0000_1000011_000000: begin				 
 					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -605,7 +605,7 @@ always @(OP_Code)
 			
 				6'b111111: 	begin	// Debugging Purposes
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -630,7 +630,7 @@ always @(OP_Code)
 				
 				6'b100010: begin
 					Extend[1:0] = 0; 		//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 0;	// Rdst <- IR_26-22		// Used in format (b)
 					B_Select = 1;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -654,7 +654,7 @@ always @(OP_Code)
 
 				6'b100011: begin
 					Extend[1:0] = 1; 		//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 0;	// Rdst <- IR_26-22		// Used in format (b)
 					B_Select = 1;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -678,20 +678,20 @@ always @(OP_Code)
 					
 					
 				6'b000001: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  1;	// ADD
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  34;					// ADD#
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*ADD #*/
 					/*_____________________(ADD #)________________________
 					(ADD #)DESCRIPTION:
-						(1.) Add Immediate //The immediate value is sign extended
+						(1.) Add Immediate //The immediate value is sign extended	//format (b)
 												 //and added to the contents of Rsrc.
 												 //The result is stored in Rdst
 					____________________________________________________	
@@ -712,16 +712,16 @@ always @(OP_Code)
 					end									
 				
 				6'b000100: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  2;	// SUB 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  35;					// SUB#
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*SUB #*/
 					/*_____________________(SUB #)________________________
 					(SUB #)DESCRIPTION:
@@ -746,16 +746,16 @@ always @(OP_Code)
 					end
 					
 				6'b001000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  3;	// AnD # // AnD
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  36;					// AnD#
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*AnD #*/// Bitwise AnD Immediate "camel_backed" to keep seperate from ADDITION
 					/*_____________________(AnD #)________________________
 					(AnD #)DESCRIPTION:
@@ -773,16 +773,16 @@ always @(OP_Code)
 					end
 					
 				6'b001001: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  4;	// OR # // OR 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  37;					// OR#
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*OR #*/
 					/*_____________________(OR #)________________________
 					(OR #)DESCRIPTION:
@@ -797,16 +797,16 @@ always @(OP_Code)
 					end
 					
 				6'b001011: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  6;	// XOR # // XOR 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  38;					// XOR#
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*XOR #*/
 					/*_____________________(XOR #)________________________
 					(XOR #)DESCRIPTION:
@@ -824,17 +824,17 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b001100: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  2; // BEQ // SUB 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b001100: begin	//check			 
+					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  39;					// BEQ
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*BEQ*/
 					/*_____________________(BEQ)________________________
 					(BEQ)DESCRIPTION:
@@ -861,17 +861,17 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b001010: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  2; // BNE // SUB 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b001010: begin	//check				 
+					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  40;					// BNE
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*BNE*/
 					/*_____________________(BNE)________________________
 					(BNE)DESCRIPTION:
@@ -898,17 +898,17 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b001111: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  2; // BLT // SUB 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b001111: begin	//check				 
+					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  41;					// BLT
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*BLT*/
 					/*_____________________(BLT)________________________
 					(BLT)DESCRIPTION:
@@ -937,17 +937,17 @@ always @(OP_Code)
 					end
 				
 									
-				6'b100000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  0;	// LDA // NOP 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b100000: begin	//check			 
+					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  42;					// LDA
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 2;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*LDA*/
 					/*_____________________(LDA)________________________
 					(LDA)DESCRIPTION:
@@ -974,17 +974,17 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b010000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  32;	// STA // LD  
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b010000: begin	//check			 
+					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  43;					// STA
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 2;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*STA*/
 					/*_____________________(STA)________________________
 					(STA)DESCRIPTION:
@@ -1004,17 +1004,17 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b100001: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  1;	// LDIX // ADD 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b100001: begin	//check				 
+					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  44;					// LDIX
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 1;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 2;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*LDIX*/
 					/*_____________________(LDIX)________________________
 					(LDIX)DESCRIPTION:
@@ -1040,17 +1040,17 @@ always @(OP_Code)
 					end
 					
 									
-				6'b010001: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  32;	// STIX // LD 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b010001: begin	//check			 
+					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  45;					// SDIX
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 1;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 2;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*STIX*/
 					/*_____________________(STIX)________________________
 					(STIX)DESCRIPTION:
@@ -1093,7 +1093,7 @@ always @(OP_Code)
 			
 				6'b111111: 	begin	// Debugging Purposes
 					Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
+					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
 					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
 					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
@@ -1116,17 +1116,17 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 	
-				6'b110000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  0;	// BRA // NOP 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b110000: begin	//check				 
+					Extend[1:0] = 2; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  64;					// BRA
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*BRA*/
 					/*_____________________(BRA)________________________
 					(BRA)DESCRIPTION:
@@ -1144,17 +1144,17 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b110000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 1;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  65;	// BSR // NOP 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+				6'b110000: begin	//check				 
+					Extend[1:0] = 2; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 2;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  65;					// BRA
+					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					
 					/*BSR*/
 					/*_____________________(BSR)________________________
 					(BSR)DESCRIPTION:
