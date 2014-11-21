@@ -10,17 +10,15 @@ module SelectController(
 							C_Select,
 							Y_Select,
 							PC_Select,
-							WillWriteTo_RF_M_Z_Z,			
+							Memory_Z_RM_WM_RF_Memory_Stage,
+							Memory_Z_RM_WM_RF_WriteBack_Stage,			
 	output reg			INC_Select,
 							B_Select,
-							MA_Select_Memory_Stage
-							
+							MA_Select_Memory_Stage,
+							PC_Enable_Execute_Stage
 					
 );
 // What should we select for each Operational Code?
-			// Condition Control Register
-			//	(!!!!!!)output reg			CCR_Enable, // DISABLE IF NOP
-			
 			
 // (RTL) Register Transfer Language Description References:
 //	(1.)http://www.ece.uprm.edu/~nayda/Courses/Inel4215F03/Lectures/LectureSept22.pdf
@@ -73,7 +71,9 @@ always @(OP_Code)
 					ALU_Op =  0;	// NOP
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 2'b00;  // [00]->RegisterFile ,[01]->Memory ,[1x]->Do Not Write Back
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*_____________________(NOP)________________________	
 					(NOP)DESCRIPTION:
@@ -98,7 +98,9 @@ always @(OP_Code)
 					ALU_Op =  1;	// ADD 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*_____________________(ADD)________________________
 					(ADD)DESCRIPTION:
@@ -132,7 +134,9 @@ always @(OP_Code)
 					ALU_Op =  2; 	// SUB
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 
 					/*_____________________(SUB)________________________
@@ -166,7 +170,9 @@ always @(OP_Code)
 					ALU_Op =  3;	// AND 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 				/*AnD*/;// Bitwise AnD "camel_backed" to keep seperate from ADDITION
 					/*_____________________(AnD)________________________
@@ -191,7 +197,9 @@ always @(OP_Code)
 					ALU_Op =  4;	// OR
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 										
 					/*OR*/;
 					/*_____________________(OR)________________________
@@ -215,7 +223,9 @@ always @(OP_Code)
 					ALU_Op =  5;	// NEG 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*NEG*/
 					/*_____________________(NEG)________________________
@@ -240,7 +250,9 @@ always @(OP_Code)
 					ALU_Op =  6;	// XOR 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*XOR*/
 					/*_____________________(XOR)________________________
@@ -264,7 +276,9 @@ always @(OP_Code)
 					ALU_Op =  7;	// COMP 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*COMP*/;
 					/*_____________________(COMP)________________________
@@ -289,7 +303,9 @@ always @(OP_Code)
 					ALU_Op =  8;	// LSR 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*LSR*/;
 					/*_____________________(LSR)________________________
@@ -314,7 +330,9 @@ always @(OP_Code)
 					ALU_Op =  9;	// ASR 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*ASR*/;
 					/*_____________________(ASR)________________________
@@ -339,7 +357,9 @@ always @(OP_Code)
 					ALU_Op =  10;	// LSL_ASL 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*LSL_ASL*/  // LSL Is The Same As ASL , Back Fills With Zeros
 					/*_____________________(LSL_ASL)________________________
@@ -363,8 +383,10 @@ always @(OP_Code)
 					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
 					ALU_Op =  11;	// ROR
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*ROR*/
 					/*_____________________(ROR)________________________
@@ -391,7 +413,9 @@ always @(OP_Code)
 					ALU_Op =  12;	// ROL 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*ROL*/
 					/*_____________________(ROL)________________________
@@ -418,7 +442,9 @@ always @(OP_Code)
 					ALU_Op =  13;	// MOVE 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// EA = (RZ)// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*MOVE*/
 					/*_____________________(MOVE)________________________
@@ -443,7 +469,9 @@ always @(OP_Code)
 					ALU_Op =  14;	// LBI 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*LBI*/
 					/*_____________________(LBI)________________________
@@ -470,7 +498,9 @@ always @(OP_Code)
 					ALU_Op =  15;	// LDRi 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*LDRI*/
 					/*_____________________(LDRI)________________________
@@ -488,16 +518,18 @@ always @(OP_Code)
 					end
 				
 				17'b0000_1000000_000000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  0;	// JMP // NOP 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 0;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 0;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
+					B_Select = 0;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  16;					// JMP
+					MA_Select_Memory_Stage = 1;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					PC_Enable_Execute_Stage = 1;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+
 					/*JMP*/
 					/*_____________________(JMP)________________________
 					(JMP)DESCRIPTION:
@@ -514,16 +546,18 @@ always @(OP_Code)
 					end
 					
 				17'b0000_1000001_000000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  0;	// JSR // NOP 
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 0;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 2;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
+					B_Select = 0;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  17;					// JSR
+					MA_Select_Memory_Stage = 1;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					PC_Enable_Execute_Stage = 1;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+
 					/*JSR*/
 					/*_____________________(JSR)________________________
 					(JSR)DESCRIPTION:
@@ -544,16 +578,19 @@ always @(OP_Code)
 					end
 					
 				17'b0000_1000011_000000: begin				 
-					/*Extend[1:0] = 0; 		//Not used in format (a)	//(Extend) [3,2,1,0] = [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
-					PC_Select = 2'b01;			//(PC_select) [00]->RA, [01]->NextAdd, [1x]->BranchOff 
-					INC_Select = 0;			// PC <- PC + 1			// 1 => PC <- PC + Immediate, used for BranchOffset
-					C_Select[1:0] = 1;	// Rdst <- IR_21-17		// Used in format (a)
-					B_Select = 0;			// MuxB_Out <- RB_Out	// 1 => MuxB_Out <- Immediate, use when you have to use an immediate value (LD#, LDU#, ADD#, etc.)
-					ALU_Op =  ????????????????????????????????????????????????? 0;	// RTS // NOP  
-					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					Y_Select[1:0] = 1;	// MuxY_Out <- MEM_Data[RZ_Out] // 0 => MuxY_Out <- RZ_Out	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
-					*/
+					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
+					PC_Select[1:0] = 0;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
+					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
+					C_Select[1:0] = 2;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
+					B_Select = 0;	 					// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
+					ALU_Op =  18;					// JSR
+					MA_Select_Memory_Stage = 1;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					PC_Enable_Execute_Stage = 1;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					
+					
 					/*RTS*/
 					/*_____________________(RTS)________________________
 					(RTS)DESCRIPTION:
@@ -563,15 +600,8 @@ always @(OP_Code)
 
 					____________________________________________________	
 					(RTS)RTL EQUIVELENT:
-						?????????????????????????????????????????????????
-						1.) Fetch
-						2.) RA<- 'd30 ; // Address of the Link Register...
-						3.) RZ<-RA // 'd30 // Treat as an Effective Address and load from Memory, back into RSRC1
-						4.) MuxY_In <-(RZ) // 'd30 // Again RA is the EA
-						5.) RY<-MuxY_Out// [LINK] // Return Address
-						6.) RDST<-[RY] // [LINK] // Return Address
-						...
-						Eventually) PC<-[RA]// [LINK] // Return Address
+						(3.) RZ<-0//Treat as ALU NOP
+						(4.) PC<-[RA]// [LINK] // Return Address(Stage 4)
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) NONE
@@ -612,7 +642,9 @@ always @(OP_Code)
 					ALU_Op =  0;	// NOP
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*_____________________(NOP)________________________	
 					(NOP)DESCRIPTION:
@@ -637,7 +669,9 @@ always @(OP_Code)
 					ALU_Op =  32;		// LD# 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*LD#*/
 					/*_____________________(LD#)________________________
@@ -661,7 +695,9 @@ always @(OP_Code)
 					ALU_Op =  33;		// LDU# 
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*LDU#*/
 					/*_____________________(LDU#)________________________
@@ -681,13 +717,14 @@ always @(OP_Code)
 					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  34;					// ADD#
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*ADD #*/
 					/*_____________________(ADD #)________________________
 					(ADD #)DESCRIPTION:
@@ -715,13 +752,14 @@ always @(OP_Code)
 					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  35;					// SUB#
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*SUB #*/
 					/*_____________________(SUB #)________________________
 					(SUB #)DESCRIPTION:
@@ -749,13 +787,14 @@ always @(OP_Code)
 					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  36;					// AnD#
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*AnD #*/// Bitwise AnD Immediate "camel_backed" to keep seperate from ADDITION
 					/*_____________________(AnD #)________________________
 					(AnD #)DESCRIPTION:
@@ -776,13 +815,14 @@ always @(OP_Code)
 					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  37;					// OR#
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*OR #*/
 					/*_____________________(OR #)________________________
 					(OR #)DESCRIPTION:
@@ -800,13 +840,14 @@ always @(OP_Code)
 					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  38;					// XOR#
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*XOR #*/
 					/*_____________________(XOR #)________________________
 					(XOR #)DESCRIPTION:
@@ -824,17 +865,18 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b001100: begin	//check			 
+				6'b001100: begin		 
 					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  39;					// BEQ
-					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					MA_Select_Memory_Stage = 1;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*BEQ*/
 					/*_____________________(BEQ)________________________
 					(BEQ)DESCRIPTION:
@@ -844,7 +886,7 @@ always @(OP_Code)
 
 					____________________________________________________	
 					(BEQ)RTL EQUIVELENT:
-						(1.) RZ<-RA-RB  //Treat As A Subtraction and Check The Zero Flag // ASSUMING UNSIGNED RA and RB...
+						(1.) RZ<-RA-RB //RSRC-RDST //Treat As A Subtraction and Check The Zero Flag // ASSUMING UNSIGNED RA and RB...
 						(2.) if(ZERO_FLAG==1)//RA=RB then RA-RB=0...
 								PC<- PC+Immediate // Is a "2's comp addition" a subtraction ??????????????
 					____________________________________________________
@@ -861,17 +903,18 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b001010: begin	//check				 
+				6'b001010: begin				 
 					Extend[1:0] = 0; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  40;					// BNE
-					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					MA_Select_Memory_Stage = 1;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*BNE*/
 					/*_____________________(BNE)________________________
 					(BNE)DESCRIPTION:
@@ -898,17 +941,18 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b001111: begin	//check				 
+				6'b001111: begin			 
 					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  41;					// BLT
-					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
+					MA_Select_Memory_Stage = 1;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*BLT*/
 					/*_____________________(BLT)________________________
 					(BLT)DESCRIPTION:
@@ -937,16 +981,18 @@ always @(OP_Code)
 					end
 				
 									
-				6'b100000: begin	//check			 
+				6'b100000: begin			 
 					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  42;					// LDA
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
-					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 2;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					Y_Select[1:0] = 1;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 1;	  		//	(Memory_Z_RM_WM_RF_Memory_Stage)			[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface  
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*LDA*/
 					/*_____________________(LDA)________________________
@@ -962,28 +1008,29 @@ always @(OP_Code)
 
 					____________________________________________________	
 					(LDA)RTL EQUIVELENT:
-						(1.) RZ<-0 //Treat as NOP in ALU
+						(0.) NOTE We Used RZ as the address instead of loading PC with the immediate value.
+						(1.) RZ<-RB //Treat as LOAD in ALU
 							//DO NOT WRITE BACK... // ADD CONTROL SIGNAL RF_WILL_WRITE and send to StageTracker
-						(1.) PC<-{6'b000000,Instruction[31:6]} // Via MuxPC
-						//!!!!!!!!!!!!!!!// Fix the Instruction Address Generator ; 
-						//!!!!!!!!!!!!!!!// by placing the Immediate_Block_Out as an input on MuxPC,
-						//!!!!!!!!!!!!!!!// also making the control line PC_Select, 2-bits wide...
+						(2.) PC<-{6'b000000,Instruction[31:6]} // Via MuxPC
+
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
 						(1.) NONE
 					____________________________________________________*/
 					end
 					
-				6'b010000: begin	//check			 
+				6'b010000: begin			 
 					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  43;					// STA
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
-					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 2;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					Y_Select[1:0] = 1;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	 	 	//	(Memory_Z_RM_WM_RF_Memory_Stage)			[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface  
+					Memory_Z_RM_WM_RF_WriteBack_Stage= 0;	 	 	//	(Memory_Z_RM_WM_RF_Memory_Stage)			[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface  
 					
 					/*STA*/
 					/*_____________________(STA)________________________
@@ -1004,17 +1051,18 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b100001: begin	//check				 
+				6'b100001: begin			 
 					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  44;					// LDIX
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 1;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 2;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*LDIX*/
 					/*_____________________(LDIX)________________________
 					(LDIX)DESCRIPTION:
@@ -1040,17 +1088,18 @@ always @(OP_Code)
 					end
 					
 									
-				6'b010001: begin	//check			 
+				6'b010001: begin			 
 					Extend[1:0] = 1; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 0;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  45;					// SDIX
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 1;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 2;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
-					
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 2;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					/*STIX*/
 					/*_____________________(STIX)________________________
 					(STIX)DESCRIPTION:
@@ -1059,7 +1108,7 @@ always @(OP_Code)
 												 // Rdst is then stored to the memory location EA
 					____________________________________________________	
 					(STIX)RTL EQUIVELENT:
-						(1.) RZ<- RB // {6{Instruction[31]},Instruction[31:6]} // ALU Pass RB just Like other Loads...
+						(1.) RZ<- RA + RB // TREAT AS ADD // RA+{6{Instruction[31]},Instruction[31:6]} 
 						(2.) (RZ)<-[RM] // RDST...
 					____________________________________________________
 					FLAGS TO UPDATE FOR THIS OPPERATION:
@@ -1100,7 +1149,9 @@ always @(OP_Code)
 					ALU_Op =  0;	// NOP
 					MA_Select_Memory_Stage = 1;			// MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 					Y_Select[1:0] = 0;	// MuxY_Out <- RZ_Out	// 1 => MuxY_Out <- MEM_Data[RZ_Out]	// 2 => MuxY_Out <- Return Address(PC_Temp_Out) (PC_Temp_Out)
-					WillWriteTo_RF_M_Z_Z = 0;  //Not Writing To Memory
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*_____________________(NOP)________________________	
 					(NOP)DESCRIPTION:
@@ -1120,12 +1171,14 @@ always @(OP_Code)
 					Extend[1:0] = 2; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 1;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 2;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
 					ALU_Op =  64;					// BRA
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface  
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 0;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*BRA*/
 					/*_____________________(BRA)________________________
@@ -1144,23 +1197,25 @@ always @(OP_Code)
 					____________________________________________________*/
 					end
 					
-				6'b110000: begin	//check				 
+				6'b110000: begin			 
 					Extend[1:0] = 2; 					// (Extend) 						[3,2,1,0] 	= [(format (c) zero extend),(format (c) sign extend),(format (b) zero extend),(format (b) sign extend)]
 					PC_Select[1:0] = 1;				// (PC_Select) 					[3,2,1,0]	= [Immediate, Immediate, NextAdd, RA_Out]	// Value into PC
 					INC_Select = 1;					// (INC_Select) 					[1,0]			= [Immediate, 1]	// Increment PC by
-					C_Select[1:0] = 2;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (b) IR[26-22]]	//Rdst
+					C_Select[1:0] = 2;				// (C_Select)						[2,1,0]		= [format (c) LINK, format (b) IR[21-17], format (a) IR[26-22]]	//Rdst
 					B_Select = 1;						// (B_Select)						[1,0] 		= [Immediate, RB_Out]	//	Value into ALU for RB	
-					ALU_Op =  65;					// BRA
+					ALU_Op =  65;					// BSR
 					MA_Select_Memory_Stage = 0;	// (MA_Select_Memory_Stage)	[1,0]			= [PC, RZ_Out]	// Address to Writeback to in stage 4
 					Y_Select[1:0] = 0;				// (Y_Select)						[2,1,0] 		= [Return, MEM_Data_Out, RZ_Out]	// Value into RY
-					WillWriteTo_RF_M_Z_Z = 3;	  	//	(WillWriteTo_RF_M_Z_Z)		[3,2,1,0] 	= [RegisterFile, MEM_Data, High Impedence, High Impedence]	// Location to Writeback to 
+					PC_Enable_Execute_Stage = 0;	  	//	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
+					Memory_Z_RM_WM_RF_Memory_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_Memory_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface  
+					Memory_Z_RM_WM_RF_WriteBack_Stage = 3;	  	//	(Memory_Z_RM_WM_RF_WriteBack_Stage)		[3,2,1,0] 	= [RegisterFile, Write MEM_Data, Read MEM_Data, High Impedence]	// Memory Interface
 					
 					/*BSR*/
 					/*_____________________(BSR)________________________
 					(BSR)DESCRIPTION:
 						(1.) Unconditional Branch to SubRoutine // Add the 2's complement immediate value to the PC
 																			 // and store return address in the LINK register,
-																			 // which is always R30.
+																			 // which is always R30.// We HAVE TO REMEMBER R30 IN OUR INSTRUCTION!!!!!!!!!!!!!!!
 																			
 					____________________________________________________	
 					(BSR)RTL EQUIVELENT:

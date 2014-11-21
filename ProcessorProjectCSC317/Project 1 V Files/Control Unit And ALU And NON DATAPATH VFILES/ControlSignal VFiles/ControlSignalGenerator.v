@@ -71,11 +71,12 @@ module ControlSignalGenerator(
 		ClockCounter StageGenerator(.Clock(Clock),.ClockCount(Stage));
 		
 	// Enable Controller
-	wire [1:0] WillWriteTo_RF_M_Z_Z;
+	wire [1:0] Memory_Z_RM_WM_RF_Memory_Stage,Memory_Z_RM_WM_RF_WriteBack_Stage;
 	wire MA_Select_Memory_Stage;
 		StageTracker EnableSignals(
 			//Inputs
-			.Stage(Stage[2:0]),.NOP_FLAG(NOP_FLAG),.WillWriteTo_RF_M_Z_Z(WillWriteTo_RF_M_Z_Z),.MA_Select_Memory_Stage(MA_Select_Memory_Stage),
+			.Stage(Stage[2:0]),.NOP_FLAG(NOP_FLAG),.Memory_Z_RM_WM_RF_Memory_Stage(Memory_Z_RM_WM_RF_Memory_Stage),
+			.Memory_Z_RM_WM_RF_WriteBack_Stage(Memory_Z_RM_WM_RF_WriteBack_Stage),.MA_Select_Memory_Stage(MA_Select_Memory_Stage),
 			//Outputs
 			.IR_Enable(IR_Enable),.PC_Enable(PC_Enable),.RA_Enable(RA_Enable),.RB_Enable(RB_Enable),
 			.RZ_Enable(RZ_Enable),.RM_Enable(RM_Enable),.RY_Enable(RY_Enable),.RF_WRITE(RF_WRITE),
@@ -89,7 +90,8 @@ module ControlSignalGenerator(
 			.OP_Code(Instruction_OP_Code),.Instruction_Format(Instruction_Format),
 			//Outputs
 			.ALU_Op(ALU_Op[31:0]),.Extend(Extend[1:0]),.C_Select(C_Select[1:0]),.Y_Select(Y_Select[1:0]),			
-			.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.WillWriteTo_RF_M_Z_Z(WillWriteTo_RF_M_Z_Z),.MA_Select_Memory_Stage(MA_Select_Memory_Stage)
+			.PC_Select(PC_Select),.INC_Select(INC_Select),.B_Select(B_Select),.Memory_Z_RM_WM_RF_Memory_Stage(Memory_Z_RM_WM_RF_Memory_Stage),
+			.Memory_Z_RM_WM_RF_WriteBack_Stage(Memory_Z_RM_WM_RF_WriteBack_Stage),.MA_Select_Memory_Stage(MA_Select_Memory_Stage)
 		);
 
 

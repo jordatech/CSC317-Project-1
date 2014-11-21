@@ -47,7 +47,7 @@ module Processor (
 			wire [1:0]		C_Select;
 			wire [4:0] 		MuxC_Out;
 			// Link Register
-				reg [4:0] 	LINK;
+				wire [4:0] 	LINK; //The Address 30 points to R30 which is the LINK Register
 			// Destination Register
 				wire [4:0] 	Instruction_Rdst;
 		// Register File
@@ -124,6 +124,8 @@ module Processor (
 		,.INC_select(INC_Select),.Clock(Clock),.PC_temp(PC_Temp),.PC(PC_Out),.PC_Reset(PC_Reset));
 		//InstAddGen(BranchOff,RA,PC_select,PC_enable,INC_select,Clock,PC_temp,PC)// Just Added PC_Reset
 		assign	Return_Address = PC_Temp;
+	// Link Register
+		assign LINK = 30; //The Address 30 points to R30 which is the LINK Register
 	// MuxC
 		Muxn #(.WidthOfInputs(32),.NumberOfInputs(3)) 
 		MuxC(.Select(C_Select[1:0]),.Out(MuxC_Out),.ConcatanatedInputs({LINK,{27'b0,IR_Out[21:17]},{27'b0,IR_Out[26:22]}}));// C_Select[2,1,0] = {LINK,{27'b0,IR_Out[21:17]},{27'b0,IR_Out[26:22]}}
@@ -162,6 +164,7 @@ module Processor (
 				3: GreenLEDs=6'b111;
 				4: GreenLEDs=6'b1111;
 				5: GreenLEDs=6'b11111;
+				6: GreenLEDs=6'b111111;
 				default: GreenLEDs=6'b101010;
 			endcase
 		end

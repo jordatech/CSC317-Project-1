@@ -4,8 +4,8 @@
 
 module StageTracker(
 	input wire [2:0] Stage,
-	input wire NOP_FLAG, MA_Select_Memory_Stage,
-	input wire [1:0] WillWriteTo_RF_M_Z_Z,
+	input wire NOP_FLAG, MA_Select_Memory_Stage, PC_Enable_Execute_Stage,
+	input wire [1:0] Memory_Z_RM_WM_RF_Memory_Stage, Memory_Z_RM_WM_RF_WriteBack_Stage,
 	
 		 //[Fetch]********************
 			// Instruction Register
@@ -81,9 +81,9 @@ always@(Stage)begin
 			//Stage(3) 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
 			3:	begin
 					IR_Enable 		<= 0 ;
-					PC_Enable 		<= 0 ;
+					PC_Enable 		<= PC_Enable_Execute_Stage ; //	(PC_Enable_Execute_Stage)		[1,0] 	= [PC_Enable=1,PC_Enable=0]@ExecuteStage	// To Load PC Again In Execute Stage
 					RA_Enable 		<= 0 ; // Enable RA in cycle 2 Place Rsrc1 In RA in cycle 3 ...
-					RB_Enable 		<= 0 ; // Enable RA in cycle 2 Place Rsrc1 In RA in cycle 3 ...
+					RB_Enable 		<= 0 ; // Enable RB in cycle 2 Place Rsrc1 In RA in cycle 3 ...
 					RZ_Enable 		<= 1 ; // Enable RZ in cycle 3 Place ALU_Out In RZ in cycle 4 ...
 					RM_Enable 		<= 1 ; // Enable RM in cycle 3 Place RB_Out In RM in cycle 4 ...
 					RY_Enable 		<= 0 ;
@@ -104,27 +104,27 @@ always@(Stage)begin
 					RY_Enable 		<= 1 ; // Enable RY in cycle 4 Place MuxY_Out In RY in cycle 5 ...
 					MA_Select		<= MA_Select_Memory_Stage ; // MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 			
-					case(WillWriteTo_RF_M_Z_Z)
+					case(Memory_Z_RM_WM_RF_Memory_Stage)
 						
-						0: begin // Write Back To The Register File
+						0: begin // Do NOT Write Back
 								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
-								RF_WRITE       <= 0 ;
+								RF_WRITE  	   <= 0 ;
 							end
 							
-						1: begin // Write Back To Memory (RAM) // NOTE, IF YOU TRY TO WRITE TO ROM, MEMORY JUST READS FROM ROM...
+						1: begin // Read From Memory (RAM) // NOTE, IF YOU TRY TO WRITE TO ROM, MEMORY JUST READS FROM ROM...
+								MEM_r_w_z_z		<= 2'b00 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
+								RF_WRITE  	   <= 0 ;
+							end
+							
+						2: begin // Write Back To Memory (RAM) // NOTE, IF YOU TRY TO WRITE TO ROM, MEMORY JUST READS FROM ROM...
 								MEM_r_w_z_z		<= 2'b01 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance // Enable MEM_r_w_z_z in cycle 4, Write RZ->RAM[(RM)] or RM->RAM[(RZ)] In cycle 5
 								RF_WRITE  	   <= 0 ;
 							end
-							
-						2: begin // Do NOT Write Back
+
+						3: begin // Write Back To The Register File
 								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
-								RF_WRITE  	   <= 0 ;
-							end
-							
-						3: begin // Do NOT Write Back
-								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
-								RF_WRITE  	   <= 0 ;
-							end
+								RF_WRITE       <= 0 ;
+							end	
 							
 					endcase
 				end
@@ -139,29 +139,30 @@ always@(Stage)begin
 					RM_Enable 		<= 0 ;
 					RY_Enable 		<= 0 ;
 					MA_Select		<= MA_Select_Memory_Stage ; // MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					case(WillWriteTo_RF_M_Z_Z)
+					case(Memory_Z_RM_WM_RF_WriteBack_Stage)
 						
-						0: begin // Write Back To The Register File
+						0: begin // Do NOT Write Back
 								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
-								RF_WRITE       <= 1 ; // Enable RF_WRITE in cycle 5, Write RY->R[Rdst] In Cycle 1 
+								RF_WRITE  	   <= 0 ;
 							end
 							
-						1: begin // Write Back To Memory (RAM) // NOTE, IF YOU TRY TO WRITE TO ROM, MEMORY JUST READS FROM ROM...
+						1: begin // Read From Memory (RAM/ROM) // NOTE, IF YOU TRY TO WRITE TO ROM, MEMORY JUST READS FROM ROM...
+								MEM_r_w_z_z		<= 2'b00 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
+								RF_WRITE  	   <= 0 ;
+							end
+							
+						2: begin // Write Back To Memory (RAM) // NOTE, IF YOU TRY TO WRITE TO ROM, MEMORY JUST READS FROM ROM...
 								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance // Enable MEM_r_w_z_z in cycle 4, Write RZ->RAM[(RM)] or RM->RAM[(RZ)] In cycle 5
-								RF_WRITE 		<= 0 ;
-							end
-														
-						2: begin // Do NOT Write Back
-								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
 								RF_WRITE  	   <= 0 ;
 							end
+
+						3: begin // Write Back To The Register File
+								MEM_r_w_z_z		<= 2'b00 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance  //DEFAULT READ FROM MEMORY STILL FOR LOADS
+								RF_WRITE       <= 1 ;
+							end	
 							
-						3: begin // Do NOT Write Back
-								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
-								RF_WRITE  	   <= 0 ;
-							end
-						
 					endcase
+					
 				end
 				
 	default:	begin  // DISABLE ALL
