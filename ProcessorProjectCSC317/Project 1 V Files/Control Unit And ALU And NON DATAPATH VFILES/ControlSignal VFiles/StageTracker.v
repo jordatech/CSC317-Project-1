@@ -43,7 +43,7 @@ module StageTracker(
 			
 			
 // What should be enabled, at each stage?
-always@(Stage)begin
+always@(*)begin
 	if(NOP_FLAG==0)begin //Normal Operation
 
 	case(Stage)
@@ -104,7 +104,7 @@ always@(Stage)begin
 					RY_Enable 		<= 1 ; // Enable RY in cycle 4 Place MuxY_Out In RY in cycle 5 ...
 					MA_Select		<= MA_Select_Memory_Stage ; // MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
 			
-					case(Memory_Z_RM_WM_RF_Memory_Stage)
+					case(Memory_Z_RM_WM_RF_Memory_Stage) //check		// in origanal implementation only options were [00] high impedance and [01] write to mem
 						
 						0: begin // Do NOT Write Back
 								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
@@ -121,8 +121,8 @@ always@(Stage)begin
 								RF_WRITE  	   <= 0 ;
 							end
 
-						3: begin // Write Back To The Register File
-								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
+						3: begin // Read From Memory (RAM/ROM) and Write Back To The Register File
+								MEM_r_w_z_z		<= 2'b00 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance  //DEFAULT READ FROM MEMORY STILL FOR LOADS
 								RF_WRITE       <= 0 ;
 							end	
 							
@@ -139,7 +139,8 @@ always@(Stage)begin
 					RM_Enable 		<= 0 ;
 					RY_Enable 		<= 0 ;
 					MA_Select		<= MA_Select_Memory_Stage ; // MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
-					case(Memory_Z_RM_WM_RF_WriteBack_Stage)
+					
+					case(Memory_Z_RM_WM_RF_WriteBack_Stage) //check		// in origanal implementation only options were [00] write to rf and [01] high impedance
 						
 						0: begin // Do NOT Write Back
 								MEM_r_w_z_z		<= 2'b11 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance
@@ -156,7 +157,7 @@ always@(Stage)begin
 								RF_WRITE  	   <= 0 ;
 							end
 
-						3: begin // Write Back To The Register File
+						3: begin // Read From Memory (RAM/ROM) and Write Back To The Register File
 								MEM_r_w_z_z		<= 2'b00 ; // [00]->Read ,[01]->Write ,[1x]->Force High Impedance  //DEFAULT READ FROM MEMORY STILL FOR LOADS
 								RF_WRITE       <= 1 ;
 							end	
@@ -190,6 +191,7 @@ always@(Stage)begin
 				RM_Enable 		<= 0 ;
 				RY_Enable 		<= 0 ;
 				MA_Select		<= 1 ; // MEM_Address <- PC		// 0 => MEM_Address <- RZ_Out, used for writing back?
+				RF_WRITE 		<= 0 ;
 				
 		case(Stage)
 		//[Fetch]********************

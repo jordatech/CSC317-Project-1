@@ -55,28 +55,26 @@ wire [31:0] AddressRF;
 
 //Map ControlSignals_Enables
 wire [31:0] ControlSignals_Enables;
-		assign ControlSignals_Enables[3:0] = {3'b0,IR_Enable}; 	// IR
-		assign ControlSignals_Enables[7:4] = {3'b0,PC_Enable}; 	// PC
-		assign ControlSignals_Enables[11:8] = {3'b0,RA_Enable}; 	// RA
-		assign ControlSignals_Enables[15:12] = {3'b0,RB_Enable}; // RB
-		assign ControlSignals_Enables[19:16] = {3'b0,RZ_Enable}; // RZ
-		assign ControlSignals_Enables[23:20] = {3'b0,RM_Enable}; 	// RM
-		assign ControlSignals_Enables[27:24] = {3'b0,RY_Enable}; // RY	
-		assign ControlSignals_Enables[31:28] = {3'b0,MEM_r_w_z_z};	// ROM
-			
+		assign ControlSignals_Enables[3:0] 		= {3'b0,IR_Enable}; 	// IR
+		assign ControlSignals_Enables[7:4] 		= {3'b0,PC_Enable}; 	// PC
+		assign ControlSignals_Enables[11:8]		= {3'b0,RA_Enable}; 	// RA
+		assign ControlSignals_Enables[15:12]	= {3'b0,RB_Enable}; 	// RB
+		assign ControlSignals_Enables[19:16]	= {3'b0,RZ_Enable}; 	// RZ
+		assign ControlSignals_Enables[23:20]	= {3'b0,RY_Enable}; 	// RY
+		assign ControlSignals_Enables[27:24]	= {2'b0,MEM_r_w_z_z};// ROM	
 			
 // Condition Control Register
   //CCR 32-Bit Format [...NOP, IFNR, INR , N, Z, V, C]
   //CCR [... No Operation, Instruction Format Not Recognized, Instruction Not Recognized, Negative,Zero,Overflow,Carry]	
 wire [31:0] ConditionControlFlags;
-		assign ConditionControlFlags[3:0] = {3'b0,CCR_Out[0]}; // Carry
-		assign ConditionControlFlags[7:4] = {3'b0,CCR_Out[1]}; // Overflow
-		assign ConditionControlFlags[11:8] = {3'b0,CCR_Out[2]}; // Zero
-		assign ConditionControlFlags[15:12] = {3'b0,CCR_Out[3]}; // Negative
-		assign ConditionControlFlags[19:16] = {3'b0,CCR_Out[4]}; // Instruction Not Recognized
-		assign ConditionControlFlags[23:20] = {3'b0,CCR_Out[5]}; // Instruction Format Not Recognized		
-		assign ConditionControlFlags[27:24] = {3'b0,CCR_Out[6]}; // No Operation		
-		assign ConditionControlFlags[31:28] = 0;	
+		assign ConditionControlFlags[3:0]  	= {3'b0,CCR_Out[0]}; // Carry
+		assign ConditionControlFlags[7:4]  	= {3'b0,CCR_Out[1]}; // Overflow
+		assign ConditionControlFlags[11:8] 	= {3'b0,CCR_Out[2]}; // Zero
+		assign ConditionControlFlags[15:12]	= {3'b0,CCR_Out[3]}; // Negative
+		assign ConditionControlFlags[19:16]	= {3'b0,CCR_Out[4]}; // Instruction Not Recognized
+		assign ConditionControlFlags[23:20]	= {3'b0,CCR_Out[5]}; // Instruction Format Not Recognized		
+		assign ConditionControlFlags[27:24]	= {3'b0,CCR_Out[6]}; // No Operation		
+		assign ConditionControlFlags[31:28]	= 0;	
 		
 always @(*)//Update the Display_Selected contents when anything changes
 	begin
@@ -103,7 +101,7 @@ always @(*)//Update the Display_Selected contents when anything changes
 				11: HexDisplay32Bits = MEM_Data_Out[31:0];//ROM Output ...
 				12: HexDisplay32Bits = PC_Temp[31:0];// PC-1 or PC-BranchOffset or PC-RA // One Cycle Behind...
 				13: HexDisplay32Bits = PC_Select;// Increment PC "0"->jump to "RA" .... "1"->inc by MuxINC  // MuxPC = PC_select ? NextAdd: RA
-				14: HexDisplay32Bits = ControlSignals_Enables;//[MEM_r_w_z_z,RY,RM,RZ,RB,RA,PC,IR]
+				14: HexDisplay32Bits = ControlSignals_Enables;//[RF_WRITE,MEM_r_w_z_z,RY,RZ,RB,RA,PC,IR]
 				15: HexDisplay32Bits = INC_Select;// Increment PC "0"->inc by "1" .... "1"->inc by "BranchOffset"  // MuxINC = INC_select ? BranchOffset: 32'd1
 				16: HexDisplay32Bits = C_Select[1:0];// C_Select[2,1,0] = {LINK,IR_Out[21:17],IR_Out[26:22]}
 				17: HexDisplay32Bits = Instruction_OP_Code[31:0];// Operation (ie: add, subtract...)

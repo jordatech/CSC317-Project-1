@@ -157,14 +157,13 @@ module Processor (
 				.Y_Select(Y_Select),.RY_Enable(RY_Enable)
 				);
 	// Stage Progress Bar (What Stage Am I In?)
-		always@(Stage)begin
+		always@(*)begin
 			case(Stage)
 				1: GreenLEDs=6'b1;
 				2: GreenLEDs=6'b11;
 				3: GreenLEDs=6'b111;
 				4: GreenLEDs=6'b1111;
 				5: GreenLEDs=6'b11111;
-				6: GreenLEDs=6'b111111;
 				default: GreenLEDs=6'b101010;
 			endcase
 		end

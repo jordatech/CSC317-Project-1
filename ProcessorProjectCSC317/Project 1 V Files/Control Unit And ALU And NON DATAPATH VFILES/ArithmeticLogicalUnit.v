@@ -19,7 +19,7 @@ output reg CCR_Enable
 
 reg [32:0] R33; //33-bit register "CHEATING METHOD" used for determining the CARRY_FLAG
 
-always @(ALU_Op,RA,RB,RZ,Clock)
+always @(*)
 	begin
 	
 		casex(ALU_Op)
@@ -27,7 +27,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 					RZ <= 0; // Assign Null Value to RZ_In  but do not enable RZ....
 				end // END No Operation
 
-			1,15,34,44,45: begin//ADD(1),LDRI(15),ADD#(34),LDIX(44),STIX(45)
+			1,14,34,44,45: begin//ADD(1),LBI(14),ADD#(34),LDIX(44),STIX(45)
 						{CARRY_FLAG,RZ} <= RA + RB; // Addition //33-bit register "CHEATING METHOD" used for determining the CARRY_FLAG // CARRY_FLAG <= (( RA | RB ) == 2^32-1 ) && ( RA&RB != 0 ) ;//if RA+RB > 32 Bits
 						if((RA>0 && RB>0 && RZ<0)||(RA<0 && RB<0 && RZ>0))begin
 							OVERFLOW_FLAG <= 1 ;
@@ -45,7 +45,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 							OVERFLOW_FLAG <= 1 ;
 						end
 						else begin
-							OVERFLOW_FLAG <= 2 ;
+							OVERFLOW_FLAG <= 0 ;
 						end
 					
 					end //End Subtraction
@@ -107,7 +107,7 @@ always @(ALU_Op,RA,RB,RZ,Clock)
 							RZ <= RA ; // Pass RA through moving it to memory
 					end
 					
-				14,32,33,42,43: begin//LDI(14),LD#(32),LDU#(33),LDA(42),STA(43)
+				15,32,33,42,43: begin//LRDI(15),LD#(32),LDU#(33),LDA(42),STA(43)
 							RZ <= RB ; // Pass RB through moving it to memory
 					end
 
