@@ -1,0 +1,38 @@
+'6:22 AM 11/24/2014
+'Source:http://www.digitalinternals.com/software/bitwise-operations-excel-not-and-or-xor/281/
+Public Function BITWISE_XOR(x As Long, y As Long)
+    BITWISE_XOR = x Xor y
+End Function
+'Source:http://www.digitalinternals.com/software/bitwise-operations-excel-not-and-or-xor/281/
+Public Function BITWISE_NOT(x As Long)
+    BITWISE_NOT = Not x
+End Function
+'Source:http://www.digitalinternals.com/software/bitwise-operations-excel-not-and-or-xor/281/
+Public Function BITWISE_AND(x As Long, y As Long)
+    BITWISE_AND = x And y
+End Function
+'Source:http://www.digitalinternals.com/software/bitwise-operations-excel-not-and-or-xor/281/
+Public Function BITWISE_OR(x As Long, y As Long)
+    BITWISE_OR = x Or y
+End Function
+
+'Source: http://www.excelforum.com/excel-programming-vba-macros/496038-how-2-use-right-shift-and-left-shift-operator-in-excel.html
+Public Function LogicalShiftLeft(Num As Long, Places As Integer) As Long
+LogicalShiftLeft = Num * (2 ^ Places)
+End Function
+'Source: http://www.excelforum.com/excel-programming-vba-macros/496038-how-2-use-right-shift-and-left-shift-operator-in-excel.html
+Public Function LogicalShiftRight(Num As Long, Places As Integer) As Long
+LogicalShiftRight = Num \ (2 ^ Places)
+End Function
+
+'LSL, LSR Source: http://www.freevbcode.com/ShowCode.asp?ID=2045
+'Source: http://www.excelforum.com/excel-programming-vba-macros/496038-how-2-use-right-shift-and-left-shift-operator-in-excel.html
+Public Function ArithmeticalShiftLeft(Num As Long, Places As Integer) As Long
+ArithmeticalShiftLeft = LogicalShiftLeft(Num, Places)
+End Function
+'Source: http://www.excelforum.com/excel-programming-vba-macros/496038-how-2-use-right-shift-and-left-shift-operator-in-excel.html
+Public Function ArithmeticalShiftRight(Num As Long, Places As Integer) As Long
+If (abs(Num)>2^31) Then ArithmeticalShiftRight = Num \ (2 ^ Places) - (2 ^ 31)
+If (abs(Num)<2^31) Then ArithmeticalShiftRight = Num \ (2 ^ Places)
+End Function
+
