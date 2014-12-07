@@ -1,0 +1,37 @@
+b ldu  r1,  r0,  #14
+b ldu  r19, r0,  #31
+a ROL  r26, r19, r0
+b ld   r20, r0,  #43981
+a rol  r21, r20, r0
+a ror  r22, r26, r0
+a jsr  r0,  r1,  r0
+a NOP  r0,  r0,  r0
+c BSR  #9
+b LDIX r11, r0,  #61
+b or   r12, r11, #42400
+b and  r13, r11, #42400
+b xor  r9,  r20, #4660
+c bra  #-1
+b add  r25, r19, #29
+b sub  r0,  r25, #60
+b sta  r20, r0,  #118
+a jmp  r0,  r19, r0
+b ldix r28, r25, #3
+a comp r29, r28, r0
+a add  r27, r29, r28
+b bne  R0,  r28, #8
+b beq  r27, r28, #3
+b blt  r27, r28, #5
+b bne  r27, r28, #2
+a jsr  r0,  r1,  r0
+a rts  r0,  r30,  r0
+a move r27, r0,  r0
+c bra  #-7
+a move r28, r0,  r0
+c bra  #-9
+b and  r6,  r20, #63
+b or   r7,  r6,  #28
+b stix r20, r7,  #50
+b ldix r8,  r0,  #118
+b lda  r14, r0,  #79
+a rts  r0,  r30,  r0
