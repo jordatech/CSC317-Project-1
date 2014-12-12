@@ -1,0 +1,33 @@
+ADD	Add Two Registers
+SUB	Subtract Two Registers
+AND	And Two Registers
+OR	Or  Two Registers
+NEG	Twos Complement
+XOR	Exclusive Or  Two Registers
+COMP	Ones Complement
+LSR	Logical Shift Right (shift one bit position only)
+ASR	Arithmetic Shift Right (shift one bit position only)
+LSL	Logical Shift Left (shift one bit position only)
+ASL	Arithmetic Shift Left (shift one bit position only)
+ROR	Rotate Right (by one bit position)
+ROL	Rotate Left (by one bit position)
+MOVE	Copy One Register To Annother
+LBI	Load Base with Index
+LDRi	Load Register Indirect
+NOP	No OPeration (Buffer Instruction)
+JMP	Jump
+JSR	Jump To Subroutine
+RTS	Return From Subroutine
+ADD #	Add Immediate
+SUB #	Subtract Immediate
+AND #	And Immediate
+OR #	Or Immediate
+XOR #	Exclusive Or Immediate
+BNE	Branch if Not Equal
+BLT	Branch if Less Than
+LDA	Load Absolute
+STA	STore Absolute
+LDIX	LoaD IndeXed
+STIX	STore IndeXed
+BRA	Branch
+BSR	Branch To SubRoutine
